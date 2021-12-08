@@ -7,10 +7,13 @@ module.exports = (sequelize, DataTypes) => {
     cpf: { type: DataTypes.INTEGER, allowNull: false },
     mobileNumber: DataTypes.INTEGER,
     address: { type: DataTypes.STRING, allowNull: false },
+    addressNumber: DataTypes.INTEGER,
     district: { type: DataTypes.STRING, allowNull: false },
+    city: { type: DataTypes.STRING, allowNull: false },
+    state: { type: DataTypes.STRING, allowNull: false },
     country: { type: DataTypes.STRING, allowNull: false },
     cep: { type: DataTypes.INTEGER, allowNull: false },
-    role: DataTypes.STRING
+    role: { type: DataTypes.INTEGER, allowNull: false }
   }, {
     timestamps: false,
     tableName: 'user'

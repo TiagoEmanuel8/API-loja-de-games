@@ -4,17 +4,20 @@ CREATE DATABASE IF NOT EXISTS `app-storeGame`;
 USE `app-storeGame`;
 
 CREATE TABLE IF NOT EXISTS users (
-	id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(100) NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
+  name TEXT(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
-  password VARCHAR(64) NOT NULL,
-  cpf VARCHAR(11) NOT NULL,
-  mobile_number VARCHAR(15) NOT NULL,
+  password VARCHAR(160) NOT NULL,
+  cpf INT(11) NOT NULL,
+  mobile_number INT(15),
   address VARCHAR(100) NOT NULL,
-  district VARCHAR(50) NOT NULL,
-  country VARCHAR(50) NOT NULL,
-  cep VARCHAR(8) NOT NULL,
-  role VARCHAR(20) NOT NULL,
+  address_number INT(100),
+  district TEXT(100) NOT NULL,
+  city TEXT(50) NOT NULL,
+  state TEXT(20) NOT NULL,
+  country TEXT(3) NOT NULL,
+  cep INT(8) NOT NULL,
+  role TEXT(20) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY `email_un` (email)
 );

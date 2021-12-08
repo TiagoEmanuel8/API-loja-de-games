@@ -25,11 +25,16 @@ module.exports = {
         allowNull: false
       },
       mobileNumber: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        field: 'mobile_number',
       },
       address: {
         type: Sequelize.STRING,
         allowNull: false
+      },
+      addressNumber: {
+        type: Sequelize.STRING,
+        field: 'address_number',
       },
       district: {
         type: Sequelize.STRING,
