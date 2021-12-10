@@ -9,7 +9,6 @@ module.exports = {
         onDelete: 'CASCADE',
         field: 'sale_id',
         foreignKey: true,
-        allowNull: false,
       },
       productId: {
         type: Sequelize.INTEGER,
@@ -18,25 +17,23 @@ module.exports = {
         onDelete: 'CASCADE',
         field: 'product_id',
         foreignKey: true,
-        allowNull: false,
       },
       quantity: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
+        type: Sequelize.INTEGER
       },
       // createdAt: {
       //   allowNull: false,
       //   type: Sequelize.DATE,
-      //   defaultValue: Sequelize.NOW
+      //   defaultValue: Sequelize.fn('NOW'),
       // },
       // updatedAt: {
       //   allowNull: false,
       //   type: Sequelize.DATE,
-      //   defaultValue: Sequelize.NOW
+      //   defaultValue: Sequelize.fn('NOW'),
       // }
     });
   },
-  down: async (queryInterface, _Sequelize) => {
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('salesProducts');
   }
 };

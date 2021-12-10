@@ -15,7 +15,6 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         foreignKey: true,
-        allowNull: false
       },
       sellerId: {
         type: Sequelize.INTEGER,
@@ -24,7 +23,6 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         foreignKey: true,
-        allowNull: false
       },
       totalPrice: {
         type: Sequelize.DECIMAL(9,2),
@@ -42,19 +40,19 @@ module.exports = {
         field: 'status_sale',
         allowNull: false
       },
-      createdAt: {
-       allowNull: false,
-       type: Sequelize.DATE,
-       defaultValue: Sequelize.fn("NOW"),
-      },
-      updatedAt: {
-       allowNull: false,
-       type: Sequelize.DATE,
-       defaultValue: Sequelize.fn("NOW"),
-     }
+      // createdAt: {
+      //   allowNull: false,
+      //   type: Sequelize.DATE,
+      //   defaultValue: Sequelize.fn("NOW"),
+      //  },
+      //  updatedAt: {
+      //   allowNull: false,
+      //   type: Sequelize.DATE,
+      //   defaultValue: Sequelize.fn("NOW"),
+      // }
     });
   },
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface, _Sequelize) => {
     await queryInterface.dropTable('sales');
   }
 };

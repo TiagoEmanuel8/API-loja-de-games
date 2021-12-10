@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node .",
     "dev": "nodemon .",
-    "restartBD": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
+    "seed": "sequelize db:seed:all",
+    "restart": "sequelize db:drop && sequelize db:create && sequelize db:migrate"
   },
   "repository": {
     "type": "git",

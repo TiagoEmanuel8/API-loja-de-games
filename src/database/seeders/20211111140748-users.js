@@ -1,9 +1,9 @@
+// https://www.4devs.com.br/gerador_de_pessoas 
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, _Sequelize) => { 
+  up: async (queryInterface, Sequelize) => { 
     await queryInterface.bulkInsert('users',
-    // https://www.4devs.com.br/gerador_de_pessoas 
     [{
       id: 1,
       name: 'Filipe Bernardo Eduardo Costa',

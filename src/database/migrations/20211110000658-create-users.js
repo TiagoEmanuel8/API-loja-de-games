@@ -6,7 +6,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       name: {
         type: Sequelize.STRING,
@@ -21,11 +21,11 @@ module.exports = {
         allowNull: false
       },
       cpf: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false
       },
       mobileNumber: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         field: 'mobile_number',
       },
       address: {
@@ -40,6 +40,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      city: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      state: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       country: {
         type: Sequelize.STRING,
         allowNull: false
@@ -51,6 +59,16 @@ module.exports = {
       role: {
         type: Sequelize.STRING,
         defaultValue: 'client'
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       }
     });
   },

@@ -9,28 +9,30 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
+        type: Sequelize.STRING
+      },
+      type: {
         type: Sequelize.STRING,
         allowNull: false
       },
       price: {
-        type: Sequelize.DECIMAL(10,2),
-        allowNull: false
+        type: Sequelize.DECIMAL(10,2)
       },
       urlImage: {
         type: Sequelize.STRING,
         field: 'url_image',
         allowNull: false
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("NOW"),
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("NOW"),
-      }
+      // createdAt: {
+      //   allowNull: false,
+      //   type: Sequelize.DATE,
+      //   defaultValue: Sequelize.fn("NOW"),
+      // },
+      // updatedAt: {
+      //   allowNull: false,
+      //   type: Sequelize.DATE,
+      //   defaultValue: Sequelize.fn("NOW"),
+      // }
     });
   },
   down: async (queryInterface, _Sequelize) => {
