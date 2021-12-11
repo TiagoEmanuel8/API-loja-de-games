@@ -1,3 +1,4 @@
+const utils = require('../utils');
 const { User } = require('../database/models');
 
 const createUser = async (dataUser) => {
@@ -19,7 +20,12 @@ const createUser = async (dataUser) => {
   if(!verifyLengthPassword) {
     return { code: 409, message: 'password must contain between 6 and 10 characters' }
   }
+
+  const encryptPassword = await utils.createHashPassword(password)
+  await User.create({ name, email, password: encryptPassword, cpf, mobile_number, address, address_number, district, city, state, country, cep, role })
   
+  const messageRegister = 'successfully registered user';
+  return messageRegister;
 };
 
 module.exports = {
