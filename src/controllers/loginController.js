@@ -1,13 +1,13 @@
 const { loginServices } = require('../services')
 
-const login = (req, res) => {
+const login = async (req, res) => {
   try {
     const { email, password } = req.body
-    const tokenJwt = loginServices.login(email, password)
-    if (tokenJwt.message) {
-      return res.status(tokenJwt.code).json({ message: tokenJwt.message });
+    const token = await loginServices.login(email, password)
+    if (token.message) {
+      return res.status(token.code).json({ message: token.message });
     }
-    return res.status(200).json(tokenJwt);
+    return res.status(200).json({ token });
   } catch(error) {
     console.log(error);
     return res.status(500).json({ message: error.message });

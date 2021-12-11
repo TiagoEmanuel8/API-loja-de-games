@@ -17,10 +17,10 @@ const login = async (email, password) => {
     return { code: 400, message: 'invalid "email" or "password"' }
   }
   
-  // const payload = { id: user.id, email: user.email };
-  // const token = jwtFunctions.createJwt(payload);
-  // return token;
+  const payload = { id: user.id, email: user.email };
+  const token = await jwtFunctions.createJwt(payload);
 
+  return token;
 };
 
 module.exports = { login };
