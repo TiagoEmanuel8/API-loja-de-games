@@ -1,9 +1,9 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 const bodyParser = require('body-parser');
-const { resolve } = require('path');
-// const router = require('../routes');
+// const { resolve } = require('path');
+const router = require('../routes');
 
 // const uploadPath = resolve(__dirname, '..', 'images');
 
@@ -16,6 +16,6 @@ app.use(bodyParser.json());
 //   }),
 // );
 
-app.get('/coffee', (_req, res) => res.status(418).end());
+app.use('/sales', router.user);
 
 module.exports = app;
