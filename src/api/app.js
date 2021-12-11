@@ -16,6 +16,8 @@ app.use(bodyParser.json());
 //   }),
 // );
 
-app.use('/sales', router.user);
+// app.use('/', (req, res) => res.send('funcionou'))
+app.use('/users', router.user);
+app.use('/login', router.login);
 
 module.exports = app;

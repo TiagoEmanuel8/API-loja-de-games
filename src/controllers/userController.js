@@ -1,9 +1,9 @@
-const services = require('../services');
+const { userServices } = require('../services');
 
 const createUser = async (req, res) => {
   try {
     const dataUser = req.body;
-    const create = await services.createUser(dataUser);
+    const create = await userServices.createUser(dataUser);
     if (create.message) {
       return res.status(create.code).json({ message: create.message });
     }
