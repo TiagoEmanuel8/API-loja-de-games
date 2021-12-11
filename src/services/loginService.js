@@ -1,5 +1,9 @@
+require('dotenv').config();
 const { User } = require('../database/models');
-const { jwtFunctions, encrypt } = require('../utils')
+const { encrypt } = require('../utils');
+const jwt = require('jsonwebtoken');
+
+const secret = process.env.SECRET;
 
 const login = async (email, password) => {
   if(!email || !password) {
@@ -16,9 +20,10 @@ const login = async (email, password) => {
   if(!verifyPassword) {
     return { code: 400, message: 'invalid "email" or "password"' }
   }
-  
-  const payload = { id: user.id, email: user.email };
-  const token = await jwtFunctions.createJwt(payload);
+
+  const payload = { id: user.id, role: user.role };
+  const jwtConfig = { algorithm: 'HS256', expiresIn: '30d' };
+  const token = jwt.sign(payload, secret, jwtConfig);
 
   return token;
 };

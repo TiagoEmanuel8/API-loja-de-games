@@ -29,6 +29,16 @@ const createUser = async (dataUser) => {
   return messageRegister;
 };
 
+const getUsers = async (userInfo) => {
+  const roleUser = userInfo.role
+  if (roleUser === 'client') {
+    return { code: 401, message: 'invalid authorization' }
+  } 
+  const users = await User.findAll({ attributes: { exclude: ['password'] } });
+  return users;
+}
+
 module.exports = {
   createUser,
+  getUsers
 };
