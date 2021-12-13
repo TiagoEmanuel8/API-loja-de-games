@@ -29,9 +29,18 @@ const getUsers = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-  const { id } = req.params;
-  const user = await userServices.getUser(id);
-  return res.status(200).json(user);
+  try {
+    const { id } = req.params;
+    const userInfo = req.user;
+    const user = await userServices.getUser(id, userInfo);
+      if (user.message) {
+        return res.status(user.code).json({ message: user.message });
+      }
+    return res.status(200).json(user);
+  } catch(error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
 };
 
 module.exports = {

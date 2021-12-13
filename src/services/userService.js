@@ -46,8 +46,12 @@ const getUsers = async (userInfo) => {
   return users;
 };
 
-const getUser = async (id) => {
-  const user = await User.findOne({ where: { id }});
+const getUser = async (id, userInfo) => {
+  const roleUser = userInfo.role
+  if (roleUser === 'client') {
+    return { code: 403, message: 'Only admins or sellers can listen users' }
+  };
+  const user = await User.findOne({ attributes: { exclude: ['password'] } }, { where: { id }});
   return user;
 };
 
