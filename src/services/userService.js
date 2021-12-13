@@ -40,7 +40,7 @@ const createUser = async (dataUser) => {
 const getUsers = async (userInfo) => {
   const roleUser = userInfo.role
   if (roleUser === 'client') {
-    return { code: 401, message: 'invalid authorization' }
+    return { code: 403, message: 'Only admins or sellers can listen users' }
   };
   const users = await User.findAll({ attributes: { exclude: ['password'] } });
   return users;

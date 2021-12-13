@@ -13,7 +13,7 @@ const validateJwt = async (req, res, next) => {
     const dataUserJwt = jwt.verify(token, secret);
     req.user = dataUserJwt;
   } catch (e) {
-    return res.status(401).json({ message: 'invalid token or expired' });
+    return res.status(401).json({ message: 'Expired or invalid token' });
   }
   next();
 };

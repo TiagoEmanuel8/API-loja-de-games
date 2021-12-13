@@ -21,7 +21,7 @@ const getUsers = async (req, res) => {
       if (users.message) {
         return res.status(users.code).json({ message: users.message });
       }
-    return res.status(200).json({ users })
+    return res.status(200).json(users)
   } catch(error) {
     console.log(error);
     return res.status(500).json({ message: error.message });
