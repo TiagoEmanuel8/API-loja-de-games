@@ -58,7 +58,8 @@ module.exports = {
       },
       role: {
         type: Sequelize.STRING,
-        defaultValue: 'client'
+        allowNull: false,
+        // defaultValue: 'client',
       },
       createdAt: {
         allowNull: false,

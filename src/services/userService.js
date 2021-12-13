@@ -22,6 +22,10 @@ const createUser = async (dataUser) => {
     return { code: 409, message: 'password must contain between 6 and 10 characters' }
   }
 
+  if (role !== 'administrator' && role !== 'seller' && role !== 'client') {
+    return { code: 400, message: 'the role field must be administrator, seller or client' }
+  }
+
   const encryptPassword = await encrypt.createHashPassword(password)
   await User.create({ name, email, password: encryptPassword, cpf, mobileNumber, address, addressNumber, district, city, state, country, cep, role })
   

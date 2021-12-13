@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     state: { type: DataTypes.STRING, allowNull: false },
     country: { type: DataTypes.STRING, allowNull: false },
     cep: { type: DataTypes.INTEGER, allowNull: false },
-    role: DataTypes.STRING
+    role: { type: DataTypes.INTEGER, allowNull: false },
   }, {
     tableName: 'users',
     timestamps: false,
