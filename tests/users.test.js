@@ -406,5 +406,4 @@ describe('4 - A aplicação deve listar um usuário cadastradi através do endpo
           })
       })
   });
-
 });
