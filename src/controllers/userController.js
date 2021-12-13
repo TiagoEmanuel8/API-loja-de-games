@@ -7,7 +7,7 @@ const createUser = async (req, res) => {
     if (create.message) {
       return res.status(create.code).json({ message: create.message });
     }
-    return res.status(201).json(create);
+    return res.status(201).json({ message: 'successfully registered user' });
   } catch(error) {
     console.log(error);
     return res.status(500).json({ message: error.message });

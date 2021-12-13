@@ -14,12 +14,17 @@ const createUser = async (dataUser) => {
   
   const findUser = await User.findOne({ where: { email }});
   if (findUser) {
-    return { code: 409, message: 'email already registered' }
+    return { code: 409, message: 'User already registered' }
   }
 
   const verifyLengthPassword = password.length > 6 && password.length < 10;
   if(!verifyLengthPassword) {
     return { code: 409, message: 'password must contain between 6 and 10 characters' }
+  }
+
+  const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
+  if (!emailRegex) {
+    return { code: 400, message: '"email" must be a valid email' };
   }
 
   if (role !== 'administrator' && role !== 'seller' && role !== 'client') {
@@ -29,8 +34,7 @@ const createUser = async (dataUser) => {
   const encryptPassword = await encrypt.createHashPassword(password)
   await User.create({ name, email, password: encryptPassword, cpf, mobileNumber, address, addressNumber, district, city, state, country, cep, role })
   
-  const messageRegister = 'successfully registered user';
-  return messageRegister;
+  return true;
 };
 
 const getUsers = async (userInfo) => {
