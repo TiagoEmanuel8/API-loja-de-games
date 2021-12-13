@@ -287,30 +287,30 @@ describe('3 - A aplicação deve listar os usuários cadastrados através do end
 
 });
 
-describe('4 - A aplicação deve listar um usuário cadastradi através do endpoint GET `/users/:id`', () => {
+describe.only('4 - A aplicação deve listar um usuário cadastradi através do endpoint GET `/users/:id`', () => {
   beforeEach(() => {
     shell.exec('npx sequelize db:drop');
     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
     shell.exec('npx sequelize db:seed:all');
   });
 
-  it('Será validado que é possível listar um usuário', async () => {
+  
+  it('Será validado que é possível listar um usuário específico com sucesso', async () => {
     let token;
     await frisby
       .post(`${url}/login`,
         {
           email: "filipebernardoeduardocosta@gmail.com",
           password: "nOg96hbb05"
-        }
-      )
+        })
       .expect('status', 200)
       .then((response) => {
         const { body } = response;
         const result = JSON.parse(body);
         token = result.token;
       });
-    
-      await frisby
+
+    await frisby
       .setup({
         request: {
           headers: {
@@ -319,27 +319,26 @@ describe('4 - A aplicação deve listar um usuário cadastradi através do endpo
           },
         },
       })
-        .get(`${url}/users/1`)
-        .expect('status', 200)
-        .then((responseSales) => {
-          const { json } = responseSales;
-          const firstUser = json[0];
-          
-          expect(firstUser.name).toBe('Filipe Bernardo Eduardo Costa');
-          expect(firstUser.email).toBe('filipebernardoeduardocosta@gmail.com');
-          expect(firstUser.cpf).toBe(46360452464);
-          expect(firstUser.mobileNumber).toBe(8326447157);
-          expect(firstUser.address).toBe('Rua Cruzeiro do Sul');
-          expect(firstUser.addressNumber).toBe(871);
-          expect(firstUser.district).toBe('Calafate');
-          expect(firstUser.city).toBe('Rio Branco');
-          expect(firstUser.state).toBe('AC');
-          expect(firstUser.country).toBe('BR');
-          expect(firstUser.cep).toBe(69914374);
-          expect(firstUser.role).toBe('administrator');
-        });
+      .get(`${url}/users/1`)
+      .expect('status', 200)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+          expect(result.name).toBe('Filipe Bernardo Eduardo Costa');
+          expect(result.email).toBe('filipebernardoeduardocosta@gmail.com');
+          expect(result.cpf).toBe(46360452464);
+          expect(result.mobileNumber).toBe(8326447157);
+          expect(result.address).toBe('Rua Cruzeiro do Sul');
+          expect(result.addressNumber).toBe(871);
+          expect(result.district).toBe('Calafate');
+          expect(result.city).toBe('Rio Branco');
+          expect(result.state).toBe('AC');
+          expect(result.country).toBe('BR');
+          expect(result.cep).toBe(69914374);
+          expect(result.role).toBe('administrator');
+      });
   });
-
+ 
   it('Será validado que não é possível listar um usuário sem o token na requisição', async () => {
     await frisby
     .setup({
@@ -406,4 +405,5 @@ describe('4 - A aplicação deve listar um usuário cadastradi através do endpo
           })
       })
   });
+
 });
