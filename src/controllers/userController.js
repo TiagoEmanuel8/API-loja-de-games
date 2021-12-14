@@ -47,7 +47,8 @@ const editUser = async (req, res) => {
   try {
     const { id } = req.params;
     const dataUser = req.body;
-    const edit = await userServices.editUser(id, dataUser);
+    const userInfo = req.user;
+    const edit = await userServices.editUser(id, dataUser, userInfo);
       if (edit.message) {
         return res.status(edit.code).json({ message: edit.message });
       }

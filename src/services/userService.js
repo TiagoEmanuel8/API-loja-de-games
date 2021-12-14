@@ -55,16 +55,30 @@ const getUser = async (id, userInfo) => {
   return user;
 };
 
-const editUser = async (id, dataUser) => {
+const editUser = async (id, dataUser, userInfo) => {
   const { name, email, cpf, mobileNumber, address,
-    addressNumber, district, city, state, country, cep } = dataUser;
+    addressNumber, district, city, state, country, cep, role } = dataUser;
+
+  if (role) {
+    return { code: 400, message: 'Role cannot be edited' }
+  }
+
+  const user = await User.findOne({ where: { id }});
+   
+  if(userInfo.role === 'administrator') {
+    return true
+  }
+
+  if(userInfo.id !== user.id) {
+    return { code: 401, message: 'Unauthorized user' }
+  };
   
-    await User.update(
-      { name, email, cpf, mobileNumber, address, addressNumber, district, city, state, country, cep },
-      { where: { id } }
-    );
-  
-    return true;
+  await User.update(
+    { name, email, cpf, mobileNumber, address, addressNumber, district, city, state, country, cep },
+    { where: { id } }
+  );
+
+  return true;
 };
 
 module.exports = {

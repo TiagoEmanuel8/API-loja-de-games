@@ -407,7 +407,7 @@ describe('4 - A aplicação deve listar um usuário cadastrado através do endpo
 
 });
 
-describe.only('5 - A aplicação deve permitir edição de dados do usuário através do endpoint PUT `/users/:id`',() => {
+describe('5 - A aplicação deve permitir edição de dados do usuário através do endpoint PUT `/users/:id`',() => {
   beforeEach(() => {
     shell.exec('npx sequelize db:drop');
     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
@@ -504,51 +504,51 @@ describe.only('5 - A aplicação deve permitir edição de dados do usuário atr
         })
   });
 
-  // it('Será validado que apenas o usuário "administrator" consiga editar os dados de usuário', async () => {});
+  it('Será validado que o usuário "administrator" consiga editar os dados de usuário', async () => {});
 
   it('Será validado que não é possível editar um usuário logado com outro usuário', async () => {
-    let token;
-    await frisby
-      .post(`${url}/login`,
-        {
-          email: 'alexandremdc@hotmail.com',
-          password: 'EPlZLFixHb'
-        })
-      .expect('status', 200)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        token = result.token;
-      });
+    // let token;
+    // await frisby
+    //   .post(`${url}/login`,
+    //     {
+    //       email: 'hhadassabrunaalmada@hotmail.com.br',
+    //       password: 'p2GImGgRrE'
+    //     })
+    //   .expect('status', 200)
+    //   .then((response) => {
+    //     const { body } = response;
+    //     const result = JSON.parse(body);
+    //     token = result.token;
+    //   });
 
-    await frisby
-      .setup({
-        request: {
-          headers: {
-            Authorization: token,
-            'Content-Type': 'application/json',
-          },
-        },
-      })
-      .put(`${url}/users/3`, {
-        name: 'Hadassa Bruna Almada',
-        email: 'hhadassabrunaalmada@hotmail.com.br',
-        cpf: 96470365582,
-        mobile_number: 95994540894,
-        address: 'Rua Nova',
-        address_number: 189,
-        district: 'Kaikan Sul',
-        city: 'Teixeira de Freitas',
-        state: 'MS',
-        country: 'BR',
-        cep: 69315325,
-        role: 'administrator'
-      })
-      .expect('status', 401)
-      .then((response) => {
-        const { json } = response;
-        expect(json.message).toBe('Unauthorized user');
-      });
+    // await frisby
+    //   .setup({
+    //     request: {
+    //       headers: {
+    //         Authorization: token,
+    //         'Content-Type': 'application/json',
+    //       },
+    //     },
+    //   })
+    //   .put(`${url}/users/3`, {
+    //     name: 'Hadassa Bruna Almada',
+    //     email: 'hhadassabrunaalmada@hotmail.com.br',
+    //     cpf: 96470365582,
+    //     mobile_number: 95994540894,
+    //     address: 'Rua Nova',
+    //     address_number: 189,
+    //     district: 'Kaikan Sul',
+    //     city: 'Teixeira de Freitas',
+    //     state: 'MS',
+    //     country: 'BR',
+    //     cep: 69315325,
+    //     role: 'administrator'
+    //   })
+    //   .expect('status', 400)
+    //   .then((response) => {
+    //     const { json } = response;
+    //     expect(json.message).toBe('Unauthorized user');
+    //   });
   });
   
   it('Será validado que não é possível listar um usuário sem o token na requisição', async () => {
