@@ -82,7 +82,19 @@ const editUser = async (id, dataUser, userInfo) => {
 };
 
 const deleteUser = async (id) => {
+  const user = await User.findOne({ where: { id }});
+   
+  if(userInfo.role === 'administrator') {
+    return true
+  }
+
+  if(userInfo.id !== user.id) {
+    return { code: 401, message: 'Unauthorized user' }
+  };
+
   await User.destroy({ where: { id } });
+
+  return true
 };
 
 module.exports = {

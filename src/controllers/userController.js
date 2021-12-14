@@ -60,9 +60,17 @@ const editUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  const { id } = req.params;
-  await userServices.deleteUser(id);
-  return res.status(204).json({ message: 'Usuário deletado com sucesso' });
+  try {
+    const { id } = req.params;
+    const exclude = await userServices.deleteUser(id);
+      if (exclude.message) {
+        return res.status(exclude.code).json({ message: exclude.message });
+      };
+    return res.status(204).json({ message: 'Usuário deletado com sucesso' });
+  } catch(error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
 };
 
 module.exports = {
