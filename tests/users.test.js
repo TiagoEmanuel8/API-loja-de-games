@@ -110,6 +110,110 @@ describe('1 - A aplicação deve permitir cadastro de usuários através do endp
     });
   });
 
+  // it('Será validado que o campo `cpf` seja um número', async () => {
+  //   await frisby
+  //   .post(`${url}/users`,
+  //     {
+  //       name: 'Heloisa Mariane Louise Caldeira',
+  //       email: 'hheloisgmail',
+  //       password: 'HBA5e4Qnw',
+  //       cpf: "38848318878",
+  //       mobile_number: 85994659361,
+  //       address: 'Rua São Paulo',
+  //       address_number: 665,
+  //       district: 'Pajuçara',
+  //       city: 'Rio Branco',
+  //       state: 'CE',
+  //       country: 'BR',
+  //       cep: 61932532,
+  //       role: 'administrator',
+  //     }
+  //   )
+  //   .expect('status', 400)
+  //   .then((response) => {
+  //     const { json } = response;
+  //     expect(json.message).toBe('fields "cpf", "mobileNumber", "addressNumber", "cep" must be numbers');
+  //   });
+  // });
+
+  // it('Será validado que o campo `mobileNumber` seja um número', async () => {
+  //   await frisby
+  //   .post(`${url}/users`,
+  //     {
+  //       name: 'Heloisa Mariane Louise Caldeira',
+  //       email: 'hheloisgmail',
+  //       password: 'HBA5e4Qnw',
+  //       cpf: 38848318878,
+  //       mobile_number: "85994659361",
+  //       address: 'Rua São Paulo',
+  //       address_number: 665,
+  //       district: 'Pajuçara',
+  //       city: 'Rio Branco',
+  //       state: 'CE',
+  //       country: 'BR',
+  //       cep: 61932532,
+  //       role: 'administrator',
+  //     }
+  //   )
+  //   .expect('status', 400)
+  //   .then((response) => {
+  //     const { json } = response;
+  //     expect(json.message).toBe('fields "cpf", "mobileNumber", "addressNumber", "cep" must be numbers');
+  //   });
+  // });
+
+  // it('Será validado que o campo `addressNumber` seja um número', async () => {
+  //   await frisby
+  //   .post(`${url}/users`,
+  //     {
+  //       name: 'Heloisa Mariane Louise Caldeira',
+  //       email: 'hheloisgmail',
+  //       password: 'HBA5e4Qnw',
+  //       cpf: 38848318878,
+  //       mobile_number: 85994659361,
+  //       address: 'Rua São Paulo',
+  //       address_number: "665",
+  //       district: 'Pajuçara',
+  //       city: 'Rio Branco',
+  //       state: 'CE',
+  //       country: 'BR',
+  //       cep: 61932532,
+  //       role: 'administrator',
+  //     }
+  //   )
+  //   .expect('status', 400)
+  //   .then((response) => {
+  //     const { json } = response;
+  //     expect(json.message).toBe('fields "cpf", "mobileNumber", "addressNumber", "cep" must be numbers');
+  //   });
+  // });
+
+  // it('Será validado que o campo `cep` seja um número', async () => {
+  //   await frisby
+  //   .post(`${url}/users`,
+  //     {
+  //       name: 'Heloisa Mariane Louise Caldeira',
+  //       email: 'hheloisgmail',
+  //       password: 'HBA5e4Qnw',
+  //       cpf: 38848318878,
+  //       mobile_number: 85994659361,
+  //       address: 'Rua São Paulo',
+  //       address_number: 665,
+  //       district: 'Pajuçara',
+  //       city: 'Rio Branco',
+  //       state: 'CE',
+  //       country: 'BR',
+  //       cep: "61932532",
+  //       role: 'administrator',
+  //     }
+  //   )
+  //   .expect('status', 400)
+  //   .then((response) => {
+  //     const { json } = response;
+  //     expect(json.message).toBe('fields "cpf", "mobileNumber", "addressNumber", "cep" must be numbers');
+  //   });
+  // });
+
   it('Será validado que o campo "role" deverá ser "administrator", "seller" ou "client"', async () => {
     await frisby
       .post(`${url}/users`,
@@ -337,6 +441,39 @@ describe('4 - A aplicação deve listar um usuário cadastrado através do endpo
           expect(result.role).toBe('administrator');
       });
   });
+
+  it('Será validado que não é possível listar um usuário inexistente', async () => {
+    let token;
+    await frisby
+      .post(`${url}/login`,
+        {
+          email: "filipebernardoeduardocosta@gmail.com",
+          password: "nOg96hbb05"
+        })
+      .expect('status', 200)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        token = result.token;
+      });
+
+    await frisby
+      .setup({
+        request: {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'application/json',
+          },
+        },
+      })
+      .get(`${url}/users/999`)
+      .expect('status', 404)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        expect(result.message).toBe('User does not exist');
+      });
+  });
  
   it('Será validado que não é possível listar um usuário sem o token na requisição', async () => {
     await frisby
@@ -456,6 +593,39 @@ describe('5 - A aplicação deve permitir edição de dados do usuário através
       .then((response) => {
         const { json } = response;
         expect(json.message).toBe('successfully edited user');
+      });
+  });
+
+  it('Será validado que não é possível listar um usuário inexistente', async () => {
+    let token;
+    await frisby
+      .post(`${url}/login`,
+        {
+          email: "filipebernardoeduardocosta@gmail.com",
+          password: "nOg96hbb05"
+        })
+      .expect('status', 200)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        token = result.token;
+      });
+
+    await frisby
+      .setup({
+        request: {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'application/json',
+          },
+        },
+      })
+      .get(`${url}/users/999`)
+      .expect('status', 404)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        expect(result.message).toBe('User does not exist');
       });
   });
 
@@ -619,6 +789,39 @@ describe('6 - A aplicação deve permitir a exclusão de dados do usuário atrav
       })
       .delete(`${url}/users/4`)
       .expect('status', 204);
+  });
+
+  it('Será validado que não é possível listar um usuário inexistente', async () => {
+    let token;
+    await frisby
+      .post(`${url}/login`,
+        {
+          email: "filipebernardoeduardocosta@gmail.com",
+          password: "nOg96hbb05"
+        })
+      .expect('status', 200)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        token = result.token;
+      });
+
+    await frisby
+      .setup({
+        request: {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'application/json',
+          },
+        },
+      })
+      .get(`${url}/users/999`)
+      .expect('status', 404)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        expect(result.message).toBe('User does not exist');
+      });
   });
 
   it('Será validado que não é possível editar um usuário logado com outro usuário', async () => {});

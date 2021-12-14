@@ -3,11 +3,30 @@ const shell = require('shelljs');
 
 const url = 'http://localhost:3001';
 
-describe('7 - Será validado que é possível cadastrar um produto com sucesso', () => {
+describe('7 - A aplicação deve ter o endpoint POST `/products` para cadastrar produtos', () => {
   beforeEach(() => {
     shell.exec('npx sequelize db:drop');
     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
   });
+
+  it('Será validado que é possível cadastrar um produto com sucesso', async () => {});
+
+  it('Será validado que o campo `name` não esteja vazio', async () => {});
+
+  it('Será validado que o campo `type` não esteja vazio', async () => {});
+
+  it('Será validado que o campo `price` não esteja vazio', async () => {});
+
+  it('Será validado que o campo `price` seja um número', async () => {});
+
+  it('Será validado que o campo `url_image` não esteja vazio', async () => {});
+
+  it('Será validado que não é possível cadastrar produtos sem o token na requisição', async () => {});
+  
+  it('Será validado que não é possível listar usuários com o token inválido', async () => {});
+
+  it('Será validado que não é possível listar usuários logado como cliente', async () => {});
+
 });
 
 describe('8 - Será validado que é possível listar todos os produtos com sucesso', () => {

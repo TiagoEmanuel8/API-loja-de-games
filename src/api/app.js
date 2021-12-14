@@ -19,5 +19,6 @@ app.use(bodyParser.json());
 // app.use('/', (req, res) => res.send('funcionou'))
 app.use('/users', router.user);
 app.use('/login', router.login);
+app.use('/products', router.product);
 
 module.exports = app;
