@@ -287,14 +287,13 @@ describe('3 - A aplicação deve listar os usuários cadastrados através do end
 
 });
 
-describe.only('4 - A aplicação deve listar um usuário cadastradi através do endpoint GET `/users/:id`', () => {
+describe('4 - A aplicação deve listar um usuário cadastrado através do endpoint GET `/users/:id`', () => {
   beforeEach(() => {
     shell.exec('npx sequelize db:drop');
     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
     shell.exec('npx sequelize db:seed:all');
   });
 
-  
   it('Será validado que é possível listar um usuário específico com sucesso', async () => {
     let token;
     await frisby
@@ -404,6 +403,187 @@ describe.only('4 - A aplicação deve listar um usuário cadastradi através do 
             expect(json.message).toBe('Only admins or sellers can listen users');
           })
       })
+  });
+
+});
+
+describe.only('5 - A aplicação deve permitir edição de dados do usuário através do endpoint PUT `/users/:id`',() => {
+  beforeEach(() => {
+    shell.exec('npx sequelize db:drop');
+    shell.exec('npx sequelize db:create && npx sequelize db:migrate');
+    shell.exec('npx sequelize db:seed:all');
+  });
+
+  it('será validado que é possível editar um usuário com sucesso', async () => {
+    let token;
+    await frisby
+      .post(`${url}/login`,
+        {
+          email: 'hhadassabrunaalmada@hotmail.com.br',
+          password: 'p2GImGgRrE'
+        }
+      )
+      .expect('status', 200)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        token = result.token;
+      });
+
+    await frisby
+      .setup({
+        request: {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'application/json',
+          },
+        },
+      })
+      .put(`${url}/users/3`, {
+        name: 'Hadassa Bruna Almada',
+        email: 'hhadassabrunaalmada@hotmail.com.br',
+        cpf: 96470365582,
+        mobile_number: 95994540894,
+        address: 'Rua Nova',
+        address_number: 189,
+        district: 'Kaikan Sul',
+        city: 'Teixeira de Freitas',
+        state: 'MS',
+        country: 'BR',
+        cep: 69315325,
+      })
+      .expect('status', 200)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('successfully edited user');
+      });
+  });
+
+  it('Será validado que não é possível editar o campo "role"', async () => {
+      let token;
+      await frisby
+        .post(`${url}/login`,
+          {
+            email: 'hhadassabrunaalmada@hotmail.com.br',
+            password: 'p2GImGgRrE'
+          })
+        .expect('status', 200)
+        .then((response) => {
+          const { body } = response;
+          const result = JSON.parse(body);
+          token = result.token;
+        });
+  
+      await frisby
+        .setup({
+          request: {
+            headers: {
+              Authorization: token,
+              'Content-Type': 'application/json',
+            },
+          },
+        })
+        .put(`${url}/users/3`, {
+          name: 'Hadassa Bruna Almada',
+          email: 'hhadassabrunaalmada@hotmail.com.br',
+          cpf: 96470365582,
+          mobile_number: 95994540894,
+          address: 'Rua Nova',
+          address_number: 189,
+          district: 'Kaikan Sul',
+          city: 'Teixeira de Freitas',
+          state: 'MS',
+          country: 'BR',
+          cep: 69315325,
+          role: 'administrator'
+        })
+        .expect('status', 400)
+        .then((response) => {
+          const { json } = response;
+          expect(json.message).toBe('Role cannot be edited')
+        })
+  });
+
+  // it('Será validado que apenas o usuário "administrator" consiga editar os dados de usuário', async () => {});
+
+  it('Será validado que não é possível editar um usuário logado com outro usuário', async () => {
+    let token;
+    await frisby
+      .post(`${url}/login`,
+        {
+          email: 'alexandremdc@hotmail.com',
+          password: 'EPlZLFixHb'
+        })
+      .expect('status', 200)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        token = result.token;
+      });
+
+    await frisby
+      .setup({
+        request: {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'application/json',
+          },
+        },
+      })
+      .put(`${url}/users/3`, {
+        name: 'Hadassa Bruna Almada',
+        email: 'hhadassabrunaalmada@hotmail.com.br',
+        cpf: 96470365582,
+        mobile_number: 95994540894,
+        address: 'Rua Nova',
+        address_number: 189,
+        district: 'Kaikan Sul',
+        city: 'Teixeira de Freitas',
+        state: 'MS',
+        country: 'BR',
+        cep: 69315325,
+        role: 'administrator'
+      })
+      .expect('status', 401)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Unauthorized user');
+      });
+  });
+  
+  it('Será validado que não é possível listar um usuário sem o token na requisição', async () => {
+    await frisby
+    .setup({
+      request: {
+        headers: {
+          Authorization: '',
+          'Content-Type': 'application/json',
+        },
+      },
+    })
+      .get(`${url}/users`)
+      .then((response) =>{
+        const { json } = response;
+        expect(json.message).toBe('Token not found');
+      })
+  });
+
+  it('Será validado que não é possível listar um usuário com o token inválido', async () => {
+    await frisby
+    .setup({
+      request: {
+        headers: {
+          Authorization: 'yJhbGciOiJIUzI1NiIsInR5cCI',
+          'Content-Type': 'application/json',
+        },
+      },
+    })
+    .get(`${url}/users`)
+    .expect('status', 401)
+    .then((responseSales) => {
+      const { json } = responseSales;
+      expect(json.message).toBe('Expired or invalid token');
+    });
   });
 
 });

@@ -55,8 +55,21 @@ const getUser = async (id, userInfo) => {
   return user;
 };
 
+const editUser = async (id, dataUser) => {
+  const { name, email, cpf, mobileNumber, address,
+    addressNumber, district, city, state, country, cep } = dataUser;
+  
+    await User.update(
+      { name, email, cpf, mobileNumber, address, addressNumber, district, city, state, country, cep },
+      { where: { id } }
+    );
+  
+    return true;
+};
+
 module.exports = {
   createUser,
   getUsers,
-  getUser
+  getUser,
+  editUser
 };

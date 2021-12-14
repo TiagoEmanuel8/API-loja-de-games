@@ -43,8 +43,24 @@ const getUser = async (req, res) => {
   }
 };
 
+const editUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const dataUser = req.body;
+    const edit = await userServices.editUser(id, dataUser);
+      if (edit.message) {
+        return res.status(edit.code).json({ message: edit.message });
+      }
+    return res.status(200).json({ message: 'successfully edited user' })
+  } catch(error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createUser,
   getUsers,
-  getUser
+  getUser,
+  editUser
 };

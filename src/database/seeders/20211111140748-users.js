@@ -51,6 +51,22 @@ module.exports = {
       country: 'BR',
       cep: 69315325,
       role: 'client',
+    },
+    {
+      id: 4,
+      name: 'Alexandre Márcio da Conceição',
+      email: 'alexandremdc@hotmail.com',
+      password: 'EPlZLFixHb',
+      cpf: 99394150870,
+      mobile_number: 67988367826,
+      address: 'Rua Manoel Vieira Nóia',
+      address_number: 916,
+      district: 'Parque Residencial Pelicano',
+      city: 'Dourados',
+      state: 'MS',
+      country: 'BR',
+      cep: 79833640,
+      role: 'client',
     }
   ], {
     timestamps: false,
