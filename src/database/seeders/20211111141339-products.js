@@ -57,7 +57,8 @@ module.exports = {
       type: 'Playstation 5',
       price: 150.0,
       url_image: 'http://localhost:3001/images/far_cry6_ps5.jpg'
-    }, {
+    },
+    /*  {
       id: 10,
       name: 'Fifa 21',
       type: 'Xbox One | X|S',
@@ -261,7 +262,7 @@ module.exports = {
       type: 'Nintendo Switch',
       price: 60.0,
       url_image: 'http://localhost:3001/images/the_witcher_nintendo.jpg'
-    }
+    } */
     ], {
       timestamps: false,
       tableName: 'products',

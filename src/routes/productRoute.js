@@ -1,8 +1,9 @@
 const express = require('express');
 const { productControllers } = require('../controllers');
+// const { multer } = require('../utils');
 
 const router = express.Router();
 
-router.post('/', productControllers.createProduct);
+router.post('/', /* multer.imageUpload(), */ productControllers.createProduct);
 
 module.exports = router;
