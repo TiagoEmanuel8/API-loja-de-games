@@ -504,8 +504,6 @@ describe('5 - A aplicação deve permitir edição de dados do usuário através
         })
   });
 
-  it('Será validado que o usuário "administrator" consiga editar os dados de usuário', async () => {});
-
   it('Será validado que não é possível editar um usuário logado com outro usuário', async () => {
     // let token;
     // await frisby
@@ -587,3 +585,77 @@ describe('5 - A aplicação deve permitir edição de dados do usuário através
   });
 
 });
+
+describe('6 - A aplicação deve permitir a exclusão de dados do usuário através do endpoint DELETE `/users/:id`', () => {
+  beforeEach(() => {
+    shell.exec('npx sequelize db:drop');
+    shell.exec('npx sequelize db:create && npx sequelize db:migrate');
+    shell.exec('npx sequelize db:seed:all');
+  });
+
+  it('Será validado que é possível excluir um usuário com sucesso', async () => {
+    let token;
+    await frisby
+      .post(`${url}/login`,
+        {
+          email: 'alexandremdc@hotmail.com',
+          password: 'EPlZLFixHb',
+        })
+      .expect('status', 200)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        token = result.token;
+      });
+
+    await frisby
+      .setup({
+        request: {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'application/json',
+          },
+        },
+      })
+      .delete(`${url}/users/me`)
+      .expect('status', 204);
+  });
+
+  it('Será validado que não é possível editar um usuário logado com outro usuário', async () => {});
+  
+  it('Será validado que não é possível excluir um usuário sem o token na requisição', async () => {
+    await frisby
+    .setup({
+      request: {
+        headers: {
+          Authorization: '',
+          'Content-Type': 'application/json',
+        },
+      },
+    })
+      .get(`${url}/users`)
+      .then((response) =>{
+        const { json } = response;
+        expect(json.message).toBe('Token not found');
+      })
+  });
+
+  it('Será validado que não é possível excluir um usuário com o token inválido', async () => {
+    await frisby
+    .setup({
+      request: {
+        headers: {
+          Authorization: 'yJhbGciOiJIUzI1NiIsInR5cCI',
+          'Content-Type': 'application/json',
+        },
+      },
+    })
+    .get(`${url}/users`)
+    .expect('status', 401)
+    .then((responseSales) => {
+      const { json } = responseSales;
+      expect(json.message).toBe('Expired or invalid token');
+    });
+  });
+
+})

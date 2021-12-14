@@ -59,9 +59,16 @@ const editUser = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  await userServices.deleteUser(id);
+  return res.status(204).json({ message: 'Usuário deletado com sucesso' });
+};
+
 module.exports = {
   createUser,
   getUsers,
   getUser,
-  editUser
+  editUser,
+  deleteUser
 };
