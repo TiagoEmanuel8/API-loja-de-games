@@ -21,11 +21,11 @@ module.exports = {
         allowNull: false
       },
       cpf: {
-        type: Sequelize.STRING,
+        type: Sequelize.BIGINT,
         allowNull: false
       },
       mobileNumber: {
-        type: Sequelize.STRING,
+        type: Sequelize.BIGINT,
         field: 'mobile_number',
       },
       address: {
@@ -33,7 +33,7 @@ module.exports = {
         allowNull: false
       },
       addressNumber: {
-        type: Sequelize.STRING,
+        type: Sequelize.BIGINT,
         field: 'address_number',
       },
       district: {
@@ -53,12 +53,13 @@ module.exports = {
         allowNull: false
       },
       cep: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
         allowNull: false
       },
       role: {
         type: Sequelize.STRING,
-        defaultValue: 'client'
+        allowNull: false,
+        // defaultValue: 'client',
       },
       createdAt: {
         allowNull: false,
@@ -72,7 +73,7 @@ module.exports = {
       }
     });
   },
-  down: async (queryInterface, _Sequelize) => {
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('users');
   }
 };
