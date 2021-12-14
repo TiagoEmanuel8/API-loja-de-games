@@ -617,7 +617,7 @@ describe('6 - A aplicação deve permitir a exclusão de dados do usuário atrav
           },
         },
       })
-      .delete(`${url}/users/me`)
+      .delete(`${url}/users/4`)
       .expect('status', 204);
   });
 
@@ -658,4 +658,4 @@ describe('6 - A aplicação deve permitir a exclusão de dados do usuário atrav
     });
   });
 
-})
+});

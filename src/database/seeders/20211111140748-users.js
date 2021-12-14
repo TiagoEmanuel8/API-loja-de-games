@@ -56,7 +56,7 @@ module.exports = {
       id: 4,
       name: 'Alexandre Márcio da Conceição',
       email: 'alexandremdc@hotmail.com',
-      password: 'EPlZLFixHb',
+      password: '$2a$10$Hmgvbks7AQ4PlhKGvI7xz.4rezdkfhX9fYFsJsidEQKdEzn/7mN7y', //Senha: EPlZLFixHb
       cpf: 99394150870,
       mobile_number: 67988367826,
       address: 'Rua Manoel Vieira Nóia',

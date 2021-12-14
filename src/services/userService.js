@@ -81,7 +81,7 @@ const editUser = async (id, dataUser, userInfo) => {
   return true;
 };
 
-const deleteUser = async (id) => {
+const deleteUser = async (id, userInfo) => {
   const user = await User.findOne({ where: { id }});
    
   if(userInfo.role === 'administrator') {
