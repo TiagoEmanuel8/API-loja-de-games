@@ -7,6 +7,7 @@ describe('1 - A aplicação deve permitir cadastro de usuários através do endp
   beforeEach(() => {
     shell.exec('npx sequelize db:drop');
     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
+    shell.exec('npx sequelize db:seed:all');
   });
 
   it('Será validado que é possível cadastrar um usuário com sucesso', async () => {

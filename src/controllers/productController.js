@@ -3,9 +3,10 @@ const { productServices } = require('../services');
 const createProduct = async (req, res) => {
   try {
     const { name, type, price } = req.body;
+    const userInfo = req.user;
     // const { filename } = req.file;
     // const url_image = `http://localhost:3001/src/uploads/${filename}`;
-    const product = await productServices.createProduct(name, type, price/* , url_image */);
+    const product = await productServices.createProduct(name, type, price, userInfo/* , url_image */);
       if (product.message) {
         return res.status(product.code).json({ message: product.message });
       }
