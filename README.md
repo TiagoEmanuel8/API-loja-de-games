@@ -8,7 +8,7 @@ Após o módulo de back end no curso da Trybe, curti bastante a atuação dessa 
 
 Atualmente o projeto está em construção, mas está sendo uma experiência enriquecedora para mim pois esse está sendo desenvolvendo com TDD 'Test Driven Development' ao mesmo tempo que uso e me aprofundo em tecnologias como nodejs, sequelize, mysql além de multer, bcrypt e jwt.
 
-Em breve atualizarei com mais informações esse readme
+Em breve atualizarei com mais informações esse readme, como também farei o deploy do mesmo.
 
 possui alguma dúvida, feedback ou quer entrar em contato comigo? 
 procure me através do email: tiago.emanuel.n@gmail.com
