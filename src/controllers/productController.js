@@ -77,10 +77,17 @@ const editProduct = async (req, res) => {
   }
 };
 
+const excludeProduct = async (req, res) => {
+  const { id } = req.params;
+  const exclude = await productServices.excludeProduct(id);
+  return res.status(204).end()
+};
+
 module.exports = {
   createProduct,
   addImageProduct,
   getProducts,
   getProduct,
-  editProduct
+  editProduct,
+  excludeProduct
 };

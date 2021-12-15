@@ -670,10 +670,74 @@ describe('11 - A aplicação deve ter o endpoint PUT `/products` para editar um 
 
 });
 
-// describe('12 - Será validado que é possível deletar um produto com sucesso', () => {
-//   beforeEach(() => {
-//     shell.exec('npx sequelize db:drop');
-//     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
-//     shell.exec('npx sequelize db:seed:all');
-//   });
-// });
+describe('12 - Será validado que é possível deletar um produto com sucesso', () => {
+  beforeEach(() => {
+    shell.exec('npx sequelize db:drop');
+    shell.exec('npx sequelize db:create && npx sequelize db:migrate');
+    shell.exec('npx sequelize db:seed:all');
+  });
+
+  it('Será validado que é possível excluir um produto com sucesso', async () => {
+    let token;
+    await frisby
+      .post(`${url}/login`,
+        {
+          email: 'alexandremdc@hotmail.com',
+          password: 'EPlZLFixHb',
+        })
+      .expect('status', 200)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        token = result.token;
+      });
+
+    await frisby
+      .setup({
+        request: {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'application/json',
+          },
+        },
+      })
+      .delete(`${url}/users/4`)
+      .expect('status', 204);
+  });
+  
+  it('Será validado que não é possível excluir um produto sem o token na requisição', async () => {
+    await frisby
+    .setup({
+      request: {
+        headers: {
+          Authorization: '',
+          'Content-Type': 'application/json',
+        },
+      },
+    })
+      .get(`${url}/users`)
+      .then((response) =>{
+        const { json } = response;
+        expect(json.message).toBe('Token not found');
+      })
+  });
+
+  it('Será validado que não é possível excluir um produto com o token inválido', async () => {
+    await frisby
+    .setup({
+      request: {
+        headers: {
+          Authorization: 'yJhbGciOiJIUzI1NiIsInR5cCI',
+          'Content-Type': 'application/json',
+        },
+      },
+    })
+    .get(`${url}/users`)
+    .expect('status', 401)
+    .then((responseSales) => {
+      const { json } = responseSales;
+      expect(json.message).toBe('Expired or invalid token');
+    });
+  });
+
+});

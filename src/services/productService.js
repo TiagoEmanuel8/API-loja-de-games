@@ -69,10 +69,15 @@ const editProduct = async (userInfo, id, name, type, price, quantity) => {
   return edited;
 };
 
+const excludeProduct = async (id) => {
+  await Product.destroy({ where: { id } });
+};
+
 module.exports = {
   createProduct,
   addImageProduct,
   getProducts,
   getProduct,
-  editProduct
+  editProduct,
+  excludeProduct
 }
