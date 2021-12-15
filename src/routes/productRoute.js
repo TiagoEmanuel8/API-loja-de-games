@@ -9,5 +9,6 @@ router.post('/', tokenValidation.tokenValidation, productControllers.createProdu
 router.put('/:id/image', tokenValidation.tokenValidation, multer.imageUpload(), productControllers.addImageProduct);
 router.get('/:id/image', multer.imageUpload())
 router.get('/', tokenValidation.tokenValidation, productControllers.getProducts);
+router.get('/:id', productControllers.getProduct);
 
 module.exports = router;

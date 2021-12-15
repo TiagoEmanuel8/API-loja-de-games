@@ -313,7 +313,7 @@ describe('8 - A aplicação deve ter o endpoint PUT `/products/images` para adic
 
 });
 
-describe.only('9 - A aplicação deve ter o endpoint GET `/products` para listar produtos', () => {
+describe('9 - A aplicação deve ter o endpoint GET `/products` para listar produtos', () => {
   beforeEach(() => {
     shell.exec('npx sequelize db:drop');
     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
@@ -389,7 +389,15 @@ describe.only('9 - A aplicação deve ter o endpoint GET `/products` para listar
 
 });
 
-// describe('10 - Será validado que é possível listar um produto por parâmetros com sucesso', () => {
+describe.only('10 - A aplicação deve ter o endoint GET `/products/:id` para listar um produto', () => {
+  beforeEach(() => {
+    shell.exec('npx sequelize db:drop');
+    shell.exec('npx sequelize db:create && npx sequelize db:migrate');
+    shell.exec('npx sequelize db:seed:all');
+  });
+});
+
+// describe('11 - Será validado que é possível listar um produto por parâmetros com sucesso', () => {
 //   beforeEach(() => {
 //     shell.exec('npx sequelize db:drop');
 //     shell.exec('npx sequelize db:create && npx sequelize db:migrate');

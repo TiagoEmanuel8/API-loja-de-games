@@ -40,14 +40,21 @@ const getProducts = async (req, res) => {
         return res.status(products.code).json({ message: products.message });
       }
     return res.status(200).json(products);
-} catch(error) {
-    console.log(error);
-    return res.status(500).json({ message: error.message });
-}
+  } catch(error) {
+      console.log(error);
+      return res.status(500).json({ message: error.message });
+  }
+};
+
+const getProduct = async (req, res) => {
+  const { id } = req.params;
+  const product = await productServices.getProduct(id);
+  return res.status(200).json(product);
 };
 
 module.exports = {
   createProduct,
   addImageProduct,
-  getProducts
+  getProducts,
+  getProduct
 };
