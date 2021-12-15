@@ -41,8 +41,15 @@ const getProducts = async (userInfo) => {
   return products;
 };
 
-const getProduct = async (id) => {
+const getProduct = async (id, userInfo) => {
+  const roleUser = userInfo.role
+    if (roleUser === 'client') {
+      return { code: 403, message: 'Only admins or sellers can add products' }
+    };
   const product = await Product.findOne({ where: { id } });
+  if(!product) {
+    return { code: 404, message: 'Product does not exist' }
+  }
   return product;
 };
 

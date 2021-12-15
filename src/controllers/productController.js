@@ -47,9 +47,18 @@ const getProducts = async (req, res) => {
 };
 
 const getProduct = async (req, res) => {
-  const { id } = req.params;
-  const product = await productServices.getProduct(id);
-  return res.status(200).json(product);
+  try {
+    const { id } = req.params;
+    const userInfo = req.user;
+    const product = await productServices.getProduct(id, userInfo);
+      if (product.message) {
+        return res.status(product.code).json({ message: product.message });
+      }
+    return res.status(200).json(product);
+  } catch(error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
 };
 
 module.exports = {
