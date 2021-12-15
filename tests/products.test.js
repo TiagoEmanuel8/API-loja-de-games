@@ -608,7 +608,12 @@ describe.only('11 - A aplicação deve ter o endpoint PUT `/products` para edita
           },
         },
       })
-      .get(`${url}/products/999`)
+      .post(`${url}/products/999`, {
+        name: "Far Cry 6",
+        type: "Playstation 5",
+        price: "100.00",
+        quantity: 10,
+      })
       .expect('status', 404)
       .then((response) => {
         const { body } = response;
@@ -627,7 +632,12 @@ describe.only('11 - A aplicação deve ter o endpoint PUT `/products` para edita
         },
       },
     })
-      .get(`${url}/users`)
+    .post(`${url}/products/9`, {
+      name: "Far Cry 6",
+      type: "Playstation 5",
+      price: "100.00",
+      quantity: 10,
+    })
       .then((response) =>{
         const { json } = response;
         expect(json.message).toBe('Token not found');
@@ -644,7 +654,12 @@ describe.only('11 - A aplicação deve ter o endpoint PUT `/products` para edita
           },
         },
       })
-      .get(`${url}/users`)
+      .post(`${url}/products/9`, {
+        name: "Far Cry 6",
+        type: "Playstation 5",
+        price: "100.00",
+        quantity: 10,
+      })
       .expect('status', 401)
       .then((responseSales) => {
         const { json } = responseSales;
@@ -675,7 +690,12 @@ describe.only('11 - A aplicação deve ter o endpoint PUT `/products` para edita
               },
             },
           })
-          .post(`${url}/products`)
+          .post(`${url}/products/9`,{
+            name: "Far Cry 6",
+            type: "Playstation 5",
+            price: "100.00",
+            quantity: 10,
+          })
           .expect('status', 403)
           .then((response) => {
             const { json } = response;
