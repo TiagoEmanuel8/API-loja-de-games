@@ -53,9 +53,16 @@ const getProduct = async (id, userInfo) => {
   return product;
 };
 
+const editProduct = async (id, name, type, price, quantity) => {
+  await Product.update({ name, type, price, quantity }, { where: { id } });
+  const editedProduct = await Product.findOne({ where: { id }})
+  return editedProduct;
+};
+
 module.exports = {
   createProduct,
   addImageProduct,
   getProducts,
-  getProduct
+  getProduct,
+  editProduct
 }

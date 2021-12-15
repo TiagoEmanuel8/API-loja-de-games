@@ -61,9 +61,17 @@ const getProduct = async (req, res) => {
   }
 };
 
+const editProduct = async (req, res) => {
+  const { id } = req.params;
+  const { name, type, price, quantity } = req.body;
+  const edited = await productServices.editProduct(id, name, type, price, quantity)
+  return res.status(200).json(edited);
+};
+
 module.exports = {
   createProduct,
   addImageProduct,
   getProducts,
-  getProduct
+  getProduct,
+  editProduct
 };
