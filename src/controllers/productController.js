@@ -32,9 +32,18 @@ const addImageProduct = async (req, res) => {
   }
 };
 
-const getProducts = async (_req, res) => {
-  const products = await productServices.getProducts();
-  return res.status(200).json(products)
+const getProducts = async (req, res) => {
+  try {
+    const userInfo = req.user;
+    const products = await productServices.getProducts(userInfo);
+      if (products.message) {
+        return res.status(products.code).json({ message: products.message });
+      }
+    return res.status(200).json(products);
+} catch(error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+}
 };
 
 module.exports = {

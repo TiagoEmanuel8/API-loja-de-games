@@ -32,7 +32,11 @@ const addImageProduct = async (id, url_image, userInfo) => {
   return productWithImage;
 };
 
-const getProducts = async () => {
+const getProducts = async (userInfo) => {
+  const roleUser = userInfo.role
+    if (roleUser === 'client') {
+      return { code: 403, message: 'Only admins or sellers can add products' }
+    };
   const products = await Product.findAll();
   return products;
 };
