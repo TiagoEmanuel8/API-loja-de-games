@@ -235,7 +235,7 @@ describe('7 - A aplicação deve ter o endpoint POST `/products` para cadastrar 
 
 });
 
-describe.only('8 - A aplicação deve ter o endpoint PUT `/products/images` para adicionar uma imagem ao produto', () => {
+describe('8 - A aplicação deve ter o endpoint PUT `/products/images` para adicionar uma imagem ao produto', () => {
   beforeEach(() => {
     shell.exec('npx sequelize db:drop');
     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
@@ -313,13 +313,81 @@ describe.only('8 - A aplicação deve ter o endpoint PUT `/products/images` para
 
 });
 
-// describe('9 - Será validado que é possível listar um produto com sucesso', () => {
-//   beforeEach(() => {
-//     shell.exec('npx sequelize db:drop');
-//     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
-//     shell.exec('npx sequelize db:seed:all');
-//   });
-// });
+describe('9 - A aplicação deve ter o endpoint GET `/products` para listar produtos', () => {
+  beforeEach(() => {
+    shell.exec('npx sequelize db:drop');
+    shell.exec('npx sequelize db:create && npx sequelize db:migrate');
+    shell.exec('npx sequelize db:seed:all');
+  });
+
+  it('Será validado que não é possível listar um produto sem o token na requisição', async () => {
+    await frisby
+    .setup({
+      request: {
+        headers: {
+          Authorization: '',
+          'Content-Type': 'application/json',
+        },
+      },
+    })
+      .get(`${url}/users`)
+      .then((response) =>{
+        const { json } = response;
+        expect(json.message).toBe('Token not found');
+      })
+  });
+
+  it('Será validado que não é possível listar um produto com o token inválido', async () => {
+    await frisby
+      .setup({
+        request: {
+          headers: {
+            Authorization: 'yJhbGciOiJIUzI1NiIsInR5cCI',
+            'Content-Type': 'application/json',
+          },
+        },
+      })
+      .get(`${url}/users`)
+      .expect('status', 401)
+      .then((responseSales) => {
+        const { json } = responseSales;
+        expect(json.message).toBe('Expired or invalid token');
+      });
+  });
+
+  it('Será validado que não é possível listar um produto logado como cliente', async () => {
+    let result;
+
+    await frisby
+      .post(`${url}/login`,
+        {
+          email: "hhadassabrunaalmada@hotmail.com.br",
+          password: "p2GImGgRrE"
+        }
+      )
+      .expect('status', 200)
+      .then((response) => {
+        const { body } = response;
+        result = JSON.parse(body);
+        return frisby
+          .setup({
+            request: {
+              headers: {
+                Authorization: result.token,
+                'Content-Type': 'application/json',
+              },
+            },
+          })
+          .post(`${url}/products`)
+          .expect('status', 403)
+          .then((response) => {
+            const { json } = response;
+            expect(json.message).toBe('Only admins or sellers can add products');
+          })
+      })
+  });
+
+});
 
 // describe('10 - Será validado que é possível listar um produto por parâmetros com sucesso', () => {
 //   beforeEach(() => {
