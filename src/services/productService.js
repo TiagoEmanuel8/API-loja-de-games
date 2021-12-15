@@ -13,7 +13,7 @@ const createProduct = async (name, type, price, userInfo) => {
   }
 
   if(typeof price !== 'number') {
-    return { code: 400, message: 'the name field must be a number' };
+    return { code: 400, message: 'the "name" field must be a number' };
   }
 
   await Product.create({ name, type, price });
@@ -21,8 +21,12 @@ const createProduct = async (name, type, price, userInfo) => {
 };
 
 const addImageProduct = async (id, url_image) => {
+  if(!url_image || url_image === '') {
+    return { code: 400, message: 'the field "url_image" is required and cannot be empty' };
+  }
   await Product.update({ url_image }, { where: { id } });
-  return true
+  const productWithImage = await Product.findOne({ where: { id } })
+  return productWithImage;
 };
 
 module.exports = {

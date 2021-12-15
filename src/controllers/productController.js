@@ -26,7 +26,7 @@ const addImageProduct = async (req, res) => {
       if (upload.message) {
         return res.status(upload.code).json({ message: upload.message });
       }
-    return res.status(200).json({ message: 'image registered successfully' })
+    return res.status(200).json(upload)
   } catch(error) {
     console.log(error);
     return res.status(500).json({ message: error.message });
