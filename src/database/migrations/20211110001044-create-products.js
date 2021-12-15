@@ -18,6 +18,10 @@ module.exports = {
       price: {
         type: Sequelize.DECIMAL(10,2)
       },
+      quantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       urlImage: {
         type: Sequelize.STRING,
         field: 'url_image',

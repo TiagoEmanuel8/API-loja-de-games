@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const { resolve } = require('path');
 const router = require('../routes');
 
-const uploadPath = resolve(__dirname, '..', 'uploads');
+const uploadPath = resolve(__dirname, '..', 'images');
 
 const app = express();
 app.use(bodyParser.json());
@@ -16,10 +16,9 @@ app.use(
   }),
 );
 
-// app.use('/', (req, res) => res.send('funcionou'))
 app.use('/users', router.user);
 app.use('/login', router.login);
 app.use('/products', router.product);
-app.use('/src/uploads', express.static(`${uploadPath}`));
+app.use('/images', express.static(`${uploadPath}`));
 
 module.exports = app;

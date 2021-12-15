@@ -313,7 +313,7 @@ describe('8 - A aplicação deve ter o endpoint PUT `/products/images` para adic
 
 });
 
-describe('9 - A aplicação deve ter o endpoint GET `/products` para listar produtos', () => {
+describe.only('9 - A aplicação deve ter o endpoint GET `/products` para listar produtos', () => {
   beforeEach(() => {
     shell.exec('npx sequelize db:drop');
     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
