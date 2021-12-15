@@ -17,19 +17,21 @@ const createProduct = async (name, type, price, userInfo) => {
   }
 
   await Product.create({ name, type, price });
-  return true
+
+  const newProduct = await Product.findOne({ where: { name } });
+  return newProduct;
 };
 
 const addImageProduct = async (id, url_image) => {
-  if(!url_image || url_image === '') {
-    return { code: 400, message: 'the field "url_image" is required and cannot be empty' };
-  }
   await Product.update({ url_image }, { where: { id } });
-  const productWithImage = await Product.findOne({ where: { id } })
+  const productWithImage = await Product.findByPk(id);
   return productWithImage;
 };
 
+const getProducts = async () => {};
+
 module.exports = {
   createProduct,
-  addImageProduct
+  addImageProduct,
+  getProducts
 }

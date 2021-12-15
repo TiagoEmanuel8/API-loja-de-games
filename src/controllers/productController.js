@@ -4,13 +4,11 @@ const createProduct = async (req, res) => {
   try {
     const { name, type, price } = req.body;
     const userInfo = req.user;
-    // const { filename } = req.file;
-    // const url_image = `http://localhost:3001/src/uploads/${filename}`;
-    const product = await productServices.createProduct(name, type, price, userInfo/* , url_image */);
+    const product = await productServices.createProduct(name, type, price, userInfo);
       if (product.message) {
         return res.status(product.code).json({ message: product.message });
       }
-    return res.status(201).json({ message: 'successfully registered product' });
+    return res.status(201).json(product);
   } catch(error) {
     console.log(error);
     return res.status(500).json({ message: error.message });
@@ -23,18 +21,17 @@ const addImageProduct = async (req, res) => {
     const { filename } = req.file;
     const url_image = `http://localhost:3001/src/uploads/${filename}`;
     const upload = await productServices.addImageProduct(id, url_image);
-      if (upload.message) {
-        return res.status(upload.code).json({ message: upload.message });
-      }
-    return res.status(200).json(upload)
+    return res.status(200).json(upload);
   } catch(error) {
     console.log(error);
     return res.status(500).json({ message: error.message });
   }
 };
 
+const getProducts = async () => {};
 
 module.exports = {
   createProduct,
-  addImageProduct
+  addImageProduct,
+  getProducts
 };
