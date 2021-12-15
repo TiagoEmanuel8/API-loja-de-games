@@ -520,3 +520,4 @@ describe.only('10 - A aplicação deve ter o endoint GET `/products/:id` para li
 //     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
 //     shell.exec('npx sequelize db:seed:all');
 //   });
+// });
