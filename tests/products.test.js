@@ -235,17 +235,20 @@ describe('7 - A aplicação deve ter o endpoint POST `/products` para cadastrar 
 
 });
 
-// describe('8 - Será validado que é possível listar todos os produtos com sucesso', () => {
-//   beforeEach(() => {
-//     shell.exec('npx sequelize db:drop');
-//     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
-//   });
-// });
+describe('8 - A aplicação deve ter o endpoint PUT `/products/images` para adicionar uma imagem ao produto', () => {
+  beforeEach(() => {
+    shell.exec('npx sequelize db:drop');
+    shell.exec('npx sequelize db:create && npx sequelize db:migrate');
+    shell.exec('npx sequelize db:seed:all');
+  });
+
+});
 
 // describe('9 - Será validado que é possível listar um produto com sucesso', () => {
 //   beforeEach(() => {
 //     shell.exec('npx sequelize db:drop');
 //     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
+//     shell.exec('npx sequelize db:seed:all');
 //   });
 // });
 
@@ -253,6 +256,7 @@ describe('7 - A aplicação deve ter o endpoint POST `/products` para cadastrar 
 //   beforeEach(() => {
 //     shell.exec('npx sequelize db:drop');
 //     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
+//     shell.exec('npx sequelize db:seed:all');
 //   });
 // });
 
@@ -260,6 +264,7 @@ describe('7 - A aplicação deve ter o endpoint POST `/products` para cadastrar 
 //   beforeEach(() => {
 //     shell.exec('npx sequelize db:drop');
 //     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
+//     shell.exec('npx sequelize db:seed:all');
 //   });
 // });
 
@@ -267,4 +272,5 @@ describe('7 - A aplicação deve ter o endpoint POST `/products` para cadastrar 
 //   beforeEach(() => {
 //     shell.exec('npx sequelize db:drop');
 //     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
+//     shell.exec('npx sequelize db:seed:all');
 //   });

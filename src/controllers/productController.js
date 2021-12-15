@@ -17,4 +17,24 @@ const createProduct = async (req, res) => {
   }
 };
 
-module.exports = { createProduct };
+const addImageProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { filename } = req.file;
+    const url_image = `http://localhost:3001/src/uploads/${filename}`;
+    const upload = await productServices.addImageProduct(id, url_image);
+      if (upload.message) {
+        return res.status(upload.code).json({ message: upload.message });
+      }
+    return res.status(200).json({ message: 'image registered successfully' })
+  } catch(error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+
+module.exports = {
+  createProduct,
+  addImageProduct
+};
