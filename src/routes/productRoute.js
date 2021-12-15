@@ -10,6 +10,6 @@ router.put('/:id/image', tokenValidation.tokenValidation, multer.imageUpload(), 
 router.get('/:id/image', multer.imageUpload())
 router.get('/', tokenValidation.tokenValidation, productControllers.getProducts);
 router.get('/:id', tokenValidation.tokenValidation, productControllers.getProduct);
-router.put('/:id', productControllers.editProduct);
+router.put('/:id', tokenValidation.tokenValidation, productControllers.editProduct);
 
 module.exports = router;

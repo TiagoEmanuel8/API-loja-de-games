@@ -62,10 +62,19 @@ const getProduct = async (req, res) => {
 };
 
 const editProduct = async (req, res) => {
-  const { id } = req.params;
-  const { name, type, price, quantity } = req.body;
-  const edited = await productServices.editProduct(id, name, type, price, quantity)
-  return res.status(200).json(edited);
+  try {
+    const userInfo = req.user;
+    const { id } = req.params;
+    const { name, type, price, quantity } = req.body;
+    const edited = await productServices.editProduct(userInfo, id, name, type, price, quantity)
+      if (edited.message) {
+        return res.status(edited.code).json({ message: edited.message });
+      }
+    return res.status(200).json(edited);
+  } catch(error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
 };
 
 module.exports = {
