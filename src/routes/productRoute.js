@@ -11,6 +11,6 @@ router.get('/:id/image', multer.imageUpload())
 router.get('/', tokenValidation.tokenValidation, productControllers.getProducts);
 router.get('/:id', tokenValidation.tokenValidation, productControllers.getProduct);
 router.put('/:id', tokenValidation.tokenValidation, productControllers.editProduct);
-router.delete('/:id', productControllers.excludeProduct)
+router.delete('/:id', tokenValidation.tokenValidation, productControllers.excludeProduct)
 
 module.exports = router;

@@ -78,9 +78,18 @@ const editProduct = async (req, res) => {
 };
 
 const excludeProduct = async (req, res) => {
-  const { id } = req.params;
-  const exclude = await productServices.excludeProduct(id);
-  return res.status(204).end()
+  try {
+    const userInfo = req.user;
+    const { id } = req.params;
+    const exclude = await productServices.excludeProduct(id, userInfo);
+      if (exclude.message) {
+        return res.status(exclude.code).json({ message: exclude.message });
+      }
+    return res.status(204).end()
+  } catch(error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
 };
 
 module.exports = {

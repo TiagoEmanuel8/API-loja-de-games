@@ -69,9 +69,19 @@ const editProduct = async (userInfo, id, name, type, price, quantity) => {
   return edited;
 };
 
-const excludeProduct = async (id) => {
-  await Product.destroy({ where: { id } });
+const excludeProduct = async (id, userInfo) => {
+  const roleUser = userInfo.role
+  if (roleUser === 'client') {
+    return { code: 403, message: 'Only admins or sellers can add products' }
+  };
+
+  const findProduct = await Product.findOne({ where: { id }});
+    if(!findProduct) {
+      return { code: 404, message: 'Product does not exist' }
+    }
   
+  await Product.destroy({ where: { id } });
+  return true
 };
 
 module.exports = {
