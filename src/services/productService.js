@@ -71,6 +71,7 @@ const editProduct = async (userInfo, id, name, type, price, quantity) => {
 
 const excludeProduct = async (id) => {
   await Product.destroy({ where: { id } });
+  
 };
 
 module.exports = {
