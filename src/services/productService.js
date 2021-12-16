@@ -91,4 +91,4 @@ module.exports = {
   getProduct,
   editProduct,
   excludeProduct
-}
+};
