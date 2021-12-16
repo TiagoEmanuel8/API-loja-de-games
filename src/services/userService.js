@@ -11,7 +11,7 @@ const createUser = async (dataUser) => {
       return { code: 400,
         message: 'the fields "name", "email", "password", "cpf", "address", "district", "city", "state", "country" and "cep" are required.'};
   }
-  
+
   const findUser = await User.findOne({ where: { email }});
   if (findUser) {
     return { code: 409, message: 'User already registered' }
@@ -30,6 +30,11 @@ const createUser = async (dataUser) => {
   if (role !== 'administrator' && role !== 'seller' && role !== 'client') {
     return { code: 400, message: 'the role field must be administrator, seller or client' }
   }
+
+  // const typeNumber = typeof cpf !== 'number' || typeof mobileNumber !== 'number' || typeof addressNumber !== 'number' || typeof cep !== 'number';
+  // if(typeNumber) {
+  //   return { code: 400, message: 'fields "cpf", "mobileNumber", "addressNumber", "cep" must be numbers' }
+  // };
 
   const encryptPassword = await encrypt.createHashPassword(password)
   await User.create({ name, email, password: encryptPassword, cpf, mobileNumber, address, addressNumber, district, city, state, country, cep, role })
@@ -51,6 +56,13 @@ const getUser = async (id, userInfo) => {
   if (roleUser === 'client') {
     return { code: 403, message: 'Only admins or sellers can listen users' }
   };
+  
+  const data = await User.findByPk(id);
+  
+  if(!data) {
+    return { code: 404, message: 'User does not exist' }
+  }
+
   const user = await User.findOne({ attributes: { exclude: ['password'] } }, { where: { id }});
   return user;
 };
@@ -58,6 +70,12 @@ const getUser = async (id, userInfo) => {
 const editUser = async (id, dataUser, userInfo) => {
   const { name, email, cpf, mobileNumber, address,
     addressNumber, district, city, state, country, cep, role } = dataUser;
+
+  const data = await User.findByPk(id);
+
+  if(!data) {
+    return { code: 404, message: 'User does not exist' }
+  }
 
   if (role) {
     return { code: 400, message: 'Role cannot be edited' }
@@ -82,6 +100,12 @@ const editUser = async (id, dataUser, userInfo) => {
 };
 
 const deleteUser = async (id, userInfo) => {
+  const data = await User.findByPk(id);
+
+  if(!data) {
+    return { code: 404, message: 'User does not exist' }
+  }
+
   const user = await User.findOne({ where: { id }});
    
   if(userInfo.role === 'administrator') {
