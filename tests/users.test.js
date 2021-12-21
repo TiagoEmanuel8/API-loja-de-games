@@ -861,5 +861,4 @@ describe('6 - A aplicação deve permitir a exclusão de dados do usuário atrav
       expect(json.message).toBe('Expired or invalid token');
     });
   });
-
 });
