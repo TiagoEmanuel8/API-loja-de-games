@@ -19,6 +19,7 @@ app.use(
 app.use('/users', router.user);
 app.use('/login', router.login);
 app.use('/products', router.product);
+app.use('/sales', router.sale);
 app.use('/images', express.static(`${uploadPath}`));
 
 module.exports = app;
