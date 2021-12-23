@@ -139,6 +139,253 @@ Será validado que o campo **role** deve ser `administrator`, `seller` ou `clien
 
 ![1- verifica a role](https://user-images.githubusercontent.com/72472530/147265242-0a857c21-1d22-43df-a2a4-dedc7d3fc177.png)
 
+### 2 - A aplicação tem o endpoint `POST /login`
+
+Esse endpoint é responsável pelo **login** no sistema.
+
+*Exemplo de requisição*
+
+![2 - login](https://user-images.githubusercontent.com/72472530/147272448-2d9ccaa5-cf12-418d-b66a-37c5a9ad06de.png)
+
+Será validado que os campos `email` e `password` são **obrigatórios**, caso contrário a API retornará um erro.
+
+*Exemplo de requisição*
+
+![2 - verifica preenchimento campos](https://user-images.githubusercontent.com/72472530/147272465-f8b7ea59-66dd-4e3b-bbda-e98d91301e31.png)
+
+Será validado que o campo `email` deve estar **registrado no banco de dados**,  caso contrário a API retornará um erro.
+
+*Exemplo de requisição*
+
+![2 - verifica email](https://user-images.githubusercontent.com/72472530/147272491-cbbf3938-685f-4682-9cd6-ac85f50fb1db.png)
+
+Será validado que a `senha` passada no login do usuário deve ser a mesma cadastrada no banco de dados,  caso contrário a API retornará um erro.
+
+*Exemplo de requisição*
+
+![2 - valida senha](https://user-images.githubusercontent.com/72472530/147272506-7b122b5a-ef3b-4bb3-a736-01bed5a7c5eb.png)
+
+### 3 - A aplicação tem o endpoint `GET /users`
+
+Esse endpoint é responsável por **listar** todos os usuários cadastrados no banco de dados
+
+*Exemplo de requisição*
+
+![3 - listagem usuarios](https://user-images.githubusercontent.com/72472530/147272594-f04f7bdb-ee62-4798-90be-fc3129d103db.png)
+
+Será validado que o usuário logado deve ser um `administrator` ou `seller`, caso seja um cliente o erro será disparado
+
+*Exemplo de requisição*
+
+![3 - verifica usuario](https://user-images.githubusercontent.com/72472530/147272778-90f8200f-fea6-4319-a52a-ba9d96646923.png)
+
+### 4 - A aplicação tem o endpoint `GET /users/:id`
+
+Esse endpoint é responsável por **listar** um único usuário cadastrado no banco de dados
+
+*Exemplo de requisição*
+
+![4 - listar user](https://user-images.githubusercontent.com/72472530/147272821-6df1f5a8-5c64-46bb-9492-9ee7dfd7ede0.png)
+
+Será validado que o usuário logado deve ser um `administrator` ou `seller`, caso seja um cliente o erro será disparado
+
+*Exemplo de requisição*
+
+![4 - verifica tipo login](https://user-images.githubusercontent.com/72472530/147272848-1a238c32-a25d-409a-9f0b-e2ca62e8d085.png)
+
+Será validado que o `id` deve **corresponder a um usuário cadastrado**, caso contrário a API será retornará um erro.
+
+*Exemplo de requisição*
+
+![4 - verifica se o user existe](https://user-images.githubusercontent.com/72472530/147272885-faf3da77-fb7a-471a-b637-704a6d1f49df.png)
+
+### 5 - A aplicação tem o endpoint `PUT /users/:id`
+
+Esse endpoint é responsável por **editar** único usuário.
+
+*Exemplo de requisição*
+
+![5 - edita usuario](https://user-images.githubusercontent.com/72472530/147272921-051c266f-664e-47fa-9669-584b16c02614.png)
+
+Será validado que o campo `role` não pode ser editado, caso contrário a API será retornará um erro.
+
+*Exemplo de requisição*
+
+![5 - valida que o campo role nao pode ser editado](https://user-images.githubusercontent.com/72472530/147272939-f7fcfea7-786d-49b6-aebd-dd9a7c6bad76.png)
+
+Será validado que apenas um `admnistrador` ou o `usuário logado` deve ser o mesmo que criou o usuário que podem editar os dados.
+
+*Exemplo de requisição*
+
+![5 - privilegio de user](https://user-images.githubusercontent.com/72472530/147273300-37971535-8f86-4078-928c-e875e25e53c1.png)
+
+
+Será validado que o `id` deve **corresponder a um usuário cadastrado**, caso contrário a API será retornará um erro.
+
+*Exemplo de requisição*
+
+![5 - valida se o usuario existe](https://user-images.githubusercontent.com/72472530/147273031-44dc31be-4642-428d-be5e-d178b8fe9484.png)
+
+### 6 - A aplicação tem o endpoint `DELETE /users/:id`
+
+Esse endpoint é responsável por **deletar** um usuário cadastrado no banco de dados.
+
+*Exemplo de requisição*
+
+![6 - deleta um usuario](https://user-images.githubusercontent.com/72472530/147273338-59d98510-af49-4c9b-b2af-dd24750cb70b.png)
+
+Será validado que o `id` deve **corresponder a um usuário cadastrado**, caso contrário a API retornará um erro.
+
+*Exemplo de requisição*
+
+![6 - verifica se o user existe](https://user-images.githubusercontent.com/72472530/147273361-b1990302-8a22-410f-b2ea-78883a2187c5.png)
+
+### 7 - A aplicação tem o endpoint `POST /products`
+
+Esse endpoint é responsável por **adicionar** um produto no banco de dados
+
+*Exemplo de requisição*
+
+![7 - cadastra produto](https://user-images.githubusercontent.com/72472530/147273422-eccc1b56-1c64-4b3b-8ab7-1d50d54e3b8a.png)
+
+Será validado que o usuário logado deve ser um `administrator` ou `seller`, caso seja um cliente o erro será disparado
+
+*Exemplo de requisição*
+
+![7 - valida tipos de usuario](https://user-images.githubusercontent.com/72472530/147273505-377ece23-64ac-4e56-8fac-03d8d9b0031c.png)
+
+Será validado que os campos`name`, `type` e `price` não devem ser nulos, caso contrário a API retornará um erro.
+
+*Exemplo de requisição*
+
+![7 - valida que os campos nao podem estar vazios](https://user-images.githubusercontent.com/72472530/147273459-6dab0774-7e7e-47f6-b183-e3200d8f8132.png)
+
+Será validado que o campo `price` deve ser um **tipo numero**
+
+*Exemplo de requisição*
+
+![7 - valida type number](https://user-images.githubusercontent.com/72472530/147273575-c25e0818-e006-4cf1-b870-5bc0cfd0c031.png)
+
+### 8 - A aplicação tem o endpoint `PUT /products/:id/image`
+
+Esse endpoint é responsável por **adicionar** uma nova imagem ao banco de dados
+
+*Exemplo de requisição*
+
+![8 - adiciona produto](https://user-images.githubusercontent.com/72472530/147273594-4e379ad1-bbad-461c-a502-991ace929c46.png)
+
+### 9 - A aplicação tem o endpoint `GET /products`
+
+Esse endpoint é responsável por **listar** todos os produtos cadastrados no banco de dados.
+
+*Exemplo de requisição*
+
+![9 - lista produtos](https://user-images.githubusercontent.com/72472530/147273757-0f9e7325-2908-4c78-adaa-1744a17cfc7a.png)
+
+Será validado que o usuário logado deve ser um `administrator` ou `seller`, caso seja um cliente o erro será disparado
+
+*Exemplo de requisição*
+
+![9 - verifica usuario](https://user-images.githubusercontent.com/72472530/147273767-275ecab8-f9a5-472c-9ef1-8641c2480576.png)
+
+### 10 - A aplicação tem o endpoint `GET /products/:id`
+
+Esse endpoint é responsável por **listar** um produto cadastrado no banco de dados.
+
+*Exemplo de requisição*
+
+![10 - lista produto](https://user-images.githubusercontent.com/72472530/147273785-fd67875c-d5ca-4d0b-a62a-be305cf2d2c0.png)
+
+Será validado que o usuário logado deve ser um `administrator` ou `seller`, caso seja um cliente o erro será disparado
+
+*Exemplo de requisição*
+
+![10 - verifica usuarios](https://user-images.githubusercontent.com/72472530/147273805-7896420b-d745-4bc3-9a4d-dbecc72389f9.png)
+
+Será validado que o `id` deve **corresponder a um produto cadastrado**, caso contrário a API retornará um erro. 
+
+*Exemplo de requisição*
+
+![10 - verifica se produto existe](https://user-images.githubusercontent.com/72472530/147273821-a2179a3f-28a2-4fab-b616-08ec7c077443.png)
+
+### 11 - A aplicação tem o endpoint `PUT /products/:id`
+
+Esse endpoint é responsável por **editar** um produto cadastrado no banco de dados.
+
+*Exemplo de requisição*
+
+![11 - edita produto](https://user-images.githubusercontent.com/72472530/147273847-4befb267-53b3-4c5b-82d2-e354a69dad06.png)
+
+Será validado que o usuário logado deve ser um `administrator` ou `seller`, caso seja um cliente o erro será disparado
+
+*Exemplo de requisição*
+
+![11 - verifica usuario](https://user-images.githubusercontent.com/72472530/147273971-f4a5b5cf-218e-4566-af0b-a7bded8419b9.png)
+
+Será validado que o `id` deve **corresponder a um produto cadastrado**, caso contrário a API retornará um erro. 
+
+*Exemplo de requisição*
+
+![11 - verifica produto](https://user-images.githubusercontent.com/72472530/147273868-d0c8e5f6-2a22-4db4-8e71-e712cd85fdab.png)
+
+### 12 - A aplicação tem o endpoint `DELETE /products/:id`
+
+Esse endpoint é responsável por **deletar** um produto cadastrado no banco de dados.
+
+*Exemplo de requisição*
+
+![12 - deleta produto](https://user-images.githubusercontent.com/72472530/147273980-ee930fc2-51dd-4316-a03f-4360d94e57b1.png)
+
+Será validado que o usuário logado deve ser um `administrator` ou `seller`, caso seja um cliente o erro será disparado
+
+*Exemplo de requisição*
+
+![12 - verifica usuario](https://user-images.githubusercontent.com/72472530/147273999-fe1b6505-9740-41f7-9899-0f89f510de4b.png)
+
+Será validado que o `id` deve **corresponder a um produto cadastrado**, caso contrário a API retornará um erro. 
+
+*Exemplo de requisição*
+
+![12 - verifica produto](https://user-images.githubusercontent.com/72472530/147274057-d71a8fc1-5a22-41ff-a6d7-77bef7284731.png)
+
+
+### 13 - A aplicação tem o endpoint `POST /sales`
+
+Esse endpoint é responsável por **criar** uma venda no banco de dados.
+
+*Exemplo de requisição*
+
+![13 - cria venda](https://user-images.githubusercontent.com/72472530/147274080-40752a05-49ca-407f-9acb-594b833c16e6.png)
+
+Será validado que o campo `userId` deve **corresponder a um usuário cadastrado** no banco de dados, caso contrário a API retornará um erro. 
+
+*Exemplo de requisição*
+
+![13 - verifica id usuario](https://user-images.githubusercontent.com/72472530/147274099-5dee1369-867f-43d9-8d0d-235ed244baa5.png)
+
+### 14 - A aplicação tem o endpoint `GET /sales`
+
+Esse endpoint é responsável por **listar** todas as vendas cadastradas no banco de dados.
+
+*Exemplo de requisição*
+
+![14 - lista vendas](https://user-images.githubusercontent.com/72472530/147274126-e8cac77a-abdd-413b-beb0-8f31e49c1c84.png)
+
+Será validado que o usuário logado deve ser um `administrator` ou `seller`, caso seja um cliente o erro será disparado
+
+*Exemplo de requisição*
+
+![14 - verifica usuario](https://user-images.githubusercontent.com/72472530/147274137-7a8abad4-ff04-4abd-9afc-470d82dcc48c.png)
+
+### 15 - A aplicação tem o endpoint `GET /sales/:id`
+
+
+Esse endpoint é responsável por **listar** uma única venda cadastrada no banco de dados.
+
+*Exemplo de requisição*
+
+![15 - listar venda](https://user-images.githubusercontent.com/72472530/147274162-ce413695-3739-4cd6-a744-5ac94875a9f9.png)
+
 ---
 
 # Testes
