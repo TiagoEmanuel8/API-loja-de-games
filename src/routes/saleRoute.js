@@ -1,9 +1,9 @@
 const express = require('express');
 const { saleControllers } = require('../controllers');
-// const tokenValidation = require('../middlewares');
+const middleware = require('../middlewares');
 
 const router = express.Router();
 
-router.get('/', saleControllers.getSales);
+router.get('/', middleware.tokenValidation , saleControllers.getSales);
 
 module.exports = router;
