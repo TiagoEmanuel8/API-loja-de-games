@@ -84,7 +84,60 @@ Acesse https://api-store-game.herokuapp.com/ e veja a API rodando em tempo real 
 
 # Documentação API
 
+Os dados foram gerados no site [4devs](https://www.4devs.com.br/gerador_de_pessoas)
 
+Com exceção do endpoint `POST /users`, as seguintes verificações serão feitas para os outros endpoints da aplicação.
+
+*Verifica se o Token existe*
+
+![GERAL - necessita do token](https://user-images.githubusercontent.com/72472530/147264947-868139a2-f2f7-42c2-ba65-bd07aeb63f58.png)
+
+*Verifica se o Token é válido*
+
+![GERAL - verifica token](https://user-images.githubusercontent.com/72472530/147265050-c2e366c7-d0f6-49a8-91a8-c606308ffe4f.png)
+
+
+### 1 - A aplicação tem o endpoint `POST /users`
+
+
+Esse endpoint é responsável pelo cadastro de um novo usuário no sistema
+
+*Exemplo de requisição*
+
+![1 - cadastro user](https://user-images.githubusercontent.com/72472530/147265085-1f45e992-e3ec-4d90-96b9-e106fa0a826c.png)
+
+
+Será validado que os campos `name`,  `email`, `password`, `cpf` , `address`, `district`, `city`,  `state`, `country`,  `cep` são de preenchimento **obrigatórios** e caso sejam passados vazios o erro será disparado.
+
+*Exemplo de requisição*
+
+![1 - verifica campos](https://user-images.githubusercontent.com/72472530/147265106-9b415d8d-9bfa-4f11-aec9-6c2e7803e6b6.png)
+
+Será validado que para cadastrar um usuário novo, o **email não deve estar em uso**, caso seja diferente a API retornará um erro.
+
+*Exemplo de requisição*
+
+![1 - verifica email](https://user-images.githubusercontent.com/72472530/147265118-4765e86b-8f02-44f6-a096-e1a9c7a53117.png)
+
+Será validado que a senha deve ter entre **6 e 10 caracteres**, caso seja um valor diferente a API retornará um erro.
+
+*Exemplo de requisição*
+
+![1 - verifica senha](https://user-images.githubusercontent.com/72472530/147265140-19f48e09-a866-4b9e-9c33-54393097a5fe.png)
+
+*Obs: apesar da senha ser curta, a mesma será criptografada no registro do banco de dados com o **bcrypt**, dessa forma só o usuário saberá a senha. do seu login.*
+
+Será validado que o email deve ter o formato correto, como por exemplo: `email@email.com`, caso seja diferente a API retornará um erro.
+
+*Exemplo de requisição*
+
+![1 - verifica email](https://user-images.githubusercontent.com/72472530/147265210-c47345c2-4863-483e-ba90-2771dbc380e2.png)
+
+Será validado que o campo **role** deve ser `administrator`, `seller` ou `client`, caso seja diferente a API retornará um erro.
+
+*Exemplo de requisição*
+
+![1- verifica a role](https://user-images.githubusercontent.com/72472530/147265242-0a857c21-1d22-43df-a2a4-dedc7d3fc177.png)
 
 ---
 
