@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { resolve } = require('path');
 const router = require('../routes');
+const message = require('../utils/message.json');
 
 const uploadPath = resolve(__dirname, '..', 'images');
 
@@ -16,6 +17,7 @@ app.use(
   }),
 );
 
+app.get('/', (_req, res) => res.status(200).json(message))
 app.use('/users', router.user);
 app.use('/login', router.login);
 app.use('/products', router.product);
