@@ -3,7 +3,7 @@ const shell = require('shelljs');
 
 const url = 'http://localhost:3001';
 
-describe('1 - A aplicação deve permitir cadastro de usuários através do endpoint POST `/users`', () => {
+describe('A aplicação deve permitir cadastro de usuários através do endpoint POST `/users`', () => {
   beforeEach(() => {
     shell.exec('npx sequelize db:drop');
     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
@@ -242,7 +242,7 @@ describe('1 - A aplicação deve permitir cadastro de usuários através do endp
   });
 });
 
-describe('3 - A aplicação deve listar os usuários cadastrados através do endpoint GET `/users`', () => {
+describe('A aplicação deve listar os usuários cadastrados através do endpoint GET `/users`', () => {
   beforeEach(() => {
     shell.exec('npx sequelize db:drop');
     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
@@ -392,7 +392,7 @@ describe('3 - A aplicação deve listar os usuários cadastrados através do end
 
 });
 
-describe('4 - A aplicação deve listar um usuário cadastrado através do endpoint GET `/users/:id`', () => {
+describe('A aplicação deve listar um usuário cadastrado através do endpoint GET `/users/:id`', () => {
   beforeEach(() => {
     shell.exec('npx sequelize db:drop');
     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
@@ -545,7 +545,7 @@ describe('4 - A aplicação deve listar um usuário cadastrado através do endpo
 
 });
 
-describe('5 - A aplicação deve permitir edição de dados do usuário através do endpoint PUT `/users/:id`',() => {
+describe('A aplicação deve permitir edição de dados do usuário através do endpoint PUT `/users/:id`',() => {
   beforeEach(() => {
     shell.exec('npx sequelize db:drop');
     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
@@ -757,7 +757,7 @@ describe('5 - A aplicação deve permitir edição de dados do usuário através
 
 });
 
-describe('6 - A aplicação deve permitir a exclusão de dados do usuário através do endpoint DELETE `/users/:id`', () => {
+describe('A aplicação deve permitir a exclusão de dados do usuário através do endpoint DELETE `/users/:id`', () => {
   beforeEach(() => {
     shell.exec('npx sequelize db:drop');
     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
