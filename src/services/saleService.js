@@ -7,7 +7,7 @@ const findUser = async (id) => {
 
 const createSales = async (dataSales) => {
   const { userId, sellerId, totalPrice, statusSale, products  } = dataSales;
-  
+
   if (!await findUser(userId)) {
     return { code: 400, message: 'id de usuário inválido' };
   }
@@ -33,13 +33,23 @@ const getSales = async (userInfo) => {
     };
   const sales = await Sale.findAll({
       include: [
-        { model: User, as: 'user_id', attributes: { exclude: ['password'] } }
+        { model: User, as: 'user_id', attributes: { exclude: ['password'] } },
       ]
   });
   return sales;
 };
 
+const getSale = async (id) => {
+  const sale = await Sale.findByPk(id, {
+    include: [
+      { model: User, as: 'user_id', attributes: { exclude: ['password'] } }
+    ]
+  });
+  return sale;
+};
+
 module.exports = {
+  createSales,
   getSales,
-  createSales
+  getSale
 }
