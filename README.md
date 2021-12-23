@@ -3,7 +3,7 @@
 # Sumário
 
 - [Comentários sobre o projeto](#comentários-sobre-o-projeto)
-- [O que é a Api loja de games?](#o-que-é-a-api-loja-de-game)
+- [O que é a Api loja de games?](#o-que-é-a-api-loja-de-games)
 - [Deploy](#deploy)
 - [Tecnologias envolvidas](#tecnologias-envolvidas)
 - [Funcionalidades](#funcionalidades)
@@ -56,91 +56,42 @@ Acesse https://api-store-game.herokuapp.com/ e veja a API rodando em tempo real 
 
 # Funcionalidades
 
-- Cadastrar uma nova espécie
-- Adicionar imagem da nova espécie
-- Listar todas as espécies
-- Listar apenas uma espécie
-- Editar uma espécie
+**Fluxo de usuários**
 
-*Obs: Não achei que fazia sentido criar um método para deletar uma espécie, pois mesmo que sua espécie tenha sido extinta ainda seria válido deixar seu registro e no caso de erro durante o cadastro de uma espécie é possível editar.*
+- Cadastrar um novo usuário.
+- Logar como user no sistema.
+- Listar Todos os usuários.
+- Listar um único usuário.
+- Editar usuários.
+- Deletar usuários.
+
+*Para listar, editar ou deletar users é necessário realizar login como admnistrador ou vendedor, para descobrir mais validações leia a secção [Documentação API](#documentação-api)*
+
+**Fluxo de produtos**
+
+- Cadastrar um novo produto.
+- Adicionar imagem ao produto.
+- Listar todos os produtos.
+- Listar um produto.
+- Editar um produto.
+- Deletar um produto.
+
+*Para cadastrar, listar, editar ou deletar produto é necessário realizar login como admnistrador ou vendedor, para descobrir mais validações leia a secção [Documentação API](#documentação-api)*
+
+**Fluxo de vendas**
+
+- Criar vendas.
+- Listar todas as vendas.
+- Listar uma venda.
+
+*Para criar uma venda é necessário login no sistema.*
+*Para listar, vendas é necessário realizar login como admnistrador ou vendedor, para descobrir mais validações leia a secção [Documentação API](#documentação-api)*
 
 ---
 
 # Documentação API
 
-### 1 - A aplicação tem o endpoint `POST /specie`
 
-
-Esse endpoint é responsável pelo cadastro de uma nova espécie
-Os campos `reino, filo, classe, ordem, subOrdem, familia, genero, especie, subEspecie, nome` são esperados na requisição
-
-*Exemplo de requisição*
-
-![1 - sucesso](https://user-images.githubusercontent.com/72472530/146947897-e7c8434d-7fde-46cd-934d-cc6a520bb55a.png)
-
-Será validado que os campos `reino, filo, classe, ordem,	familia, genero, especie e nome` são **obrigatórios**
-
-
-*No exemplo abaixo fiz a requisição sem o campo "name", porém o mesmo erro iria se repetir se algum dos campos obrigatórios não fossem enviados na requisição*
-
-![1 - caso de erro](https://user-images.githubusercontent.com/72472530/146947938-df82ac2d-024e-40d4-ae35-39d1c8525e34.png)
-
-### 2 - A aplicação tem o endpoint `PATCH /specie/:id/image`
-Esse endpoint é responsável por adicionar uma nova imagem a uma espécie previamente cadastrada.
-
-O campo **id** deve corresponder ao id da espécie cadastrada
-
-*exemplo de requisição*
-
-![2 - caso de sucesso](https://user-images.githubusercontent.com/72472530/146948147-e453d7ea-7ed1-416d-a829-174156145bf7.png)
-
-Ao clicar na url a imagem será carregada
-
-![2 - caso de erro](https://user-images.githubusercontent.com/72472530/146948187-4ca5c39d-aad8-46d9-95ed-37e1c84da763.png)
-
-Será validado que o campo id deve corresponder a alguma espécie previamente cadastrada no banco de dados, caso esse campo esteja errado será disparado um erro.
-
-*exemplo de requisição*
-
-![2 - id invalido](https://user-images.githubusercontent.com/72472530/146543714-ec9d0b08-dc4e-4e27-aa40-4258b672df7b.png)
-
-### 3 - A aplicação tem o endpoint `GET /specie`
-
-Esse endpoint é responsável por listar todas as espécies cadastradas no banco de dados.
-
-*exemplo de requisição*
-
-![3 - caso de sucesso](https://user-images.githubusercontent.com/72472530/146948252-9bb74846-b1c2-494f-8953-3ef6deb80c7b.png)
-
-### 4 - A aplicação tem o endpoint `GET /specie/:id`
-
-Esse endpoint é responsável por listar uma espécie através do **id**
-
-*exemplo de requisição*
-
-![4 - caso de sucesso](https://user-images.githubusercontent.com/72472530/146948303-5ba1b785-883f-41a0-bcd6-002f74b9e6c4.png)
-
-Será validado que o campo id deve corresponder a alguma espécie previamente cadastrada no banco de dados, caso esse campo esteja errado será disparado um erro.
-
-*exemplo de requisição*
-
-![4 - caso de erro](https://user-images.githubusercontent.com/72472530/146948337-3be68a5f-55ca-41bf-9305-7abee7d7b7d1.png)
-
-### 5 - A aplicação tem o endpoint `PATCH /specie/:id`
-
-Esse endpoint é responsável por editar dados de uma espécie previamente cadastrada
-
-Nessa requisição devem ser enviados dados através do **id** que corresponde a uma espécie preciamente cadastrada, e no corpo da requisição devem ser enviados o dado a ser alterado
-
-*exemplo de requisição*
-
-![5 - caso de sucesso](https://user-images.githubusercontent.com/72472530/146948377-44127e98-31b6-4cb7-adc5-fa8cf4bd37ec.png)
-
-Será validado que o campo id deve corresponder a alguma espécie previamente cadastrada no banco de dados, caso esse campo esteja errado será disparado um erro.
-
-*exemplo de requisição*
-
-![5 - caso de erro](https://user-images.githubusercontent.com/72472530/146948463-f8cc718a-8f5d-4190-b10e-b0da3c74bc79.png)
 
 ---
 
