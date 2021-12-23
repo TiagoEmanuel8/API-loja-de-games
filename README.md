@@ -65,8 +65,6 @@ Acesse https://api-store-game.herokuapp.com/ e veja a API rodando em tempo real 
 - Editar usuários.
 - Deletar usuários.
 
-*Para listar, editar ou deletar users é necessário realizar login como admnistrador ou vendedor, para descobrir mais validações leia a secção [Documentação API](#documentação-api)*
-
 **Fluxo de produtos**
 
 - Cadastrar um novo produto.
@@ -76,16 +74,11 @@ Acesse https://api-store-game.herokuapp.com/ e veja a API rodando em tempo real 
 - Editar um produto.
 - Deletar um produto.
 
-*Para cadastrar, listar, editar ou deletar produto é necessário realizar login como admnistrador ou vendedor, para descobrir mais validações leia a secção [Documentação API](#documentação-api)*
-
 **Fluxo de vendas**
 
 - Criar vendas.
 - Listar todas as vendas.
 - Listar uma venda.
-
-*Para criar uma venda é necessário login no sistema.*
-*Para listar, vendas é necessário realizar login como admnistrador ou vendedor, para descobrir mais validações leia a secção [Documentação API](#documentação-api)*
 
 ---
 
