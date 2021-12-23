@@ -1,4 +1,4 @@
-const { Sale, User, SalesProduct } = require('../database/models');
+const { Sale, User, Product, SalesProduct } = require('../database/models');
 
 const findUser = async (id) => {
   const user = await User.findByPk(id);
@@ -34,6 +34,7 @@ const getSales = async (userInfo) => {
   const sales = await Sale.findAll({
       include: [
         { model: User, as: 'user_id', attributes: { exclude: ['password'] } },
+        { model: Product, as: 'product', though: { attributes: [] } }
       ]
   });
   return sales;
@@ -42,7 +43,8 @@ const getSales = async (userInfo) => {
 const getSale = async (id) => {
   const sale = await Sale.findByPk(id, {
     include: [
-      { model: User, as: 'user_id', attributes: { exclude: ['password'] } }
+      { model: User, as: 'user_id', attributes: { exclude: ['password'] } },
+      { model: Product, as: 'product', though: { attributes: [] } },
     ]
   });
   return sale;
