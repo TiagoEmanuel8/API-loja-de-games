@@ -1,9 +1,5 @@
 # Boas vindas ao projeto API-loja-de-games
 
-
-
-# Boas vindas ao projeto Species-API
-
 # Sumário
 
 - [Comentários sobre o projeto](#comentários-sobre-o-projeto)
