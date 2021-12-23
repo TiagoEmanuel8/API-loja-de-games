@@ -1,7 +1,17 @@
 const { Sale, User, SalesProduct } = require('../database/models');
 
+const findUser = async (id) => {
+  const user = await User.findByPk(id);
+  return user;
+};
+
 const createSales = async (dataSales) => {
   const { userId, sellerId, totalPrice, statusSale, products  } = dataSales;
+  
+  if (!await findUser(userId)) {
+    return { code: 400, message: 'id de usuário inválido' };
+  }
+
   const addSale = await Sale.create({ userId, sellerId, totalPrice, statusSale });
 
   const saleId = addSale.id;
