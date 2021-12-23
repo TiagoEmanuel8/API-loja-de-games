@@ -1,4 +1,20 @@
-const { Sale, User } = require('../database/models');
+const { Sale, User, SalesProduct } = require('../database/models');
+
+const createSales = async (dataSales) => {
+  const { userId, sellerId, totalPrice, statusSale, products  } = dataSales;
+  const addSale = await Sale.create({ userId, sellerId, totalPrice, statusSale });
+
+  const saleId = addSale.id;
+
+  const registerProduct = products.map(async ({ productId, quantity }) => {
+    const product = await SalesProduct.create({ saleId, productId, quantity  });
+    return product;
+  });
+
+  await Promise.all(registerProduct);
+
+  return addSale;
+};
 
 const getSales = async (userInfo) => {
   const roleUser = userInfo.role
@@ -14,5 +30,6 @@ const getSales = async (userInfo) => {
 };
 
 module.exports = {
-  getSales
+  getSales,
+  createSales
 }
