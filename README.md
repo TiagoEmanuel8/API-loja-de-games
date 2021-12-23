@@ -48,10 +48,11 @@ Acesse https://api-store-game.herokuapp.com/ e veja a API rodando em tempo real 
 # Tecnologias envolvidas:
  - Javascript
  - NodeJs
- - MongoDB
+ - Mysql
  - Jest
- - Mongoose
- - Mongo Atlas
+ - Sequelize
+ - Jwt
+ - Bcrypt
  - Multer
  - Heroku
 
@@ -148,10 +149,19 @@ Será validado que o campo id deve corresponder a alguma espécie previamente ca
 ---
 
 # Testes
+Os arquivos de teste foram subdivididos em 4 `login`, `products`, `sales` e `users`.
 
-É possível abrir o terminal dentro da aplicação e digitar o comando `npm test specie.test.js` ou `npm test` para testar a aplicação
+É possível testar todos os arquivos de uma única vez ou testar cada arquivo separadamente
 
-![2021-12-16-17-46-39](https://user-images.githubusercontent.com/72472530/146544916-712b61c9-0195-4acc-9320-f9d22a304975.gif)
+Segue os passos para realização dos testes
+
+ 1. Instalação do projeto e ligar o servidor-  É necessário a instalação do projeto, *se tiver dúvidas leia a parte de [Instalação e uso](#instalação-e-uso) desse readme* , após a instalação abra seu terminal e digite o comando `npm start` ou `npm run dev` para ligar o servidor.
+ 2. Se deseja realizar um teste de toda a aplicação digite o comando `npm test`
+ 3. Caso deseje  testar apenas uma parte isolada da API digite no terminal:
+	 - `npm test login.test.js` para testar o fluxo de login,
+	 - `npm test products.test.js` para testar o fluxo de produtos.
+	 - `npm test sales.test.js` para testar o fluxo de vendas
+	 - `npm test users.test.js` para testar o fluxo de usuários
 
 ---
 
