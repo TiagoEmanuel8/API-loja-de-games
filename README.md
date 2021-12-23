@@ -163,6 +163,24 @@ Segue os passos para realização dos testes
 	 - `npm test sales.test.js` para testar o fluxo de vendas
 	 - `npm test users.test.js` para testar o fluxo de usuários
 
+## Segue abaixo imagens de teste dessa aplicação
+
+**Testando toda a aplicação**
+<br/>
+![teste all](https://user-images.githubusercontent.com/72472530/147251198-ff7d94a1-a47f-406b-9a54-a787c9fe3083.png)
+
+**Testando o fluxo de login**
+![teste login](https://user-images.githubusercontent.com/72472530/147251212-b674f01f-817c-49d8-b62f-38a24429155f.png)
+
+**Testando o fluxo de produto**
+![teste produto](https://user-images.githubusercontent.com/72472530/147251219-da310fdb-5086-444c-9fa9-a0e3e561b1cf.png)
+
+**Testando o fluxo de usuários**
+![teste users](https://user-images.githubusercontent.com/72472530/147251233-d3070028-b200-457e-aca4-345c2d2590d2.png)
+
+**Testando o fluxo de vendas**
+![teste vendas](https://user-images.githubusercontent.com/72472530/147251256-5f82959f-856c-4711-8e27-81263ecf1fd1.png)
+
 ---
 
 # Instalação e uso
@@ -187,14 +205,14 @@ Pré-requisitos
 Digite o comando abaixo para clonar o projeto.  
   
 ```  
-git clone [https://github.com/TiagoEmanuel8/species-Api.git](https://github.com/TiagoEmanuel8/species-Api.git)  
+git clone [https://github.com/TiagoEmanuel8/API-loja-de-games.git](https://github.com/TiagoEmanuel8/API-loja-de-games.git)  
   
 ```  
   
 Entre na pasta  
   
 ```  
-cd species-Api 
+cd API-loja-de-games
   
 ```  
   
