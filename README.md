@@ -7,7 +7,7 @@
 # Sumário
 
 - [Comentários sobre o projeto](#comentários-sobre-o-projeto)
-- [O que é o Species Api?](#o-que-é-o-species-api)
+- [O que é a Api loja de games?](#o-que-é-a-api-loja-de-game)
 - [Deploy](#deploy)
 - [Tecnologias envolvidas](#tecnologias-envolvidas)
 - [Funcionalidades](#funcionalidades)
@@ -32,9 +32,9 @@ procure me através do email: tiago.emanuel.n@gmail.com
 
 ---
 
-# O que é o Api Loja de Games?
+# O que é a Api Loja de Games?
 
-Uma aplicação Back end onde é possível registrar, listar e editar a taxonomia (classificar espécies) de seres vivos, também é possível adicionar imagem para representar cada espécie
+Uma aplicação Back end onde é possível registrar, listar, editar e deletar (fazer o famoso CRUD) de usuários, produtos e vendas relacionadas ao contexto de uma loja virtual de games, a api também possui um sistema de login, encriptação de senha no banco de dados e permite a visualização dos produtos.
 
 ---
 
