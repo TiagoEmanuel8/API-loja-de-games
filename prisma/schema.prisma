@@ -2,10 +2,28 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model Users {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Sales {
+  id Int @id @default(autoincrement())
+}
+
+model Product {
+  id Int @id @default(autoincrement())
+}
+
+model SalesProducts {
+  id Int @id @default(autoincrement())
 }
