@@ -1,4 +1,4 @@
-# O projeto encontra-se em atualização, estou adicionando typescript, prisma, nestjs, swagger e docker.
+# O projeto encontra-se em atualização, estou adicionando typescript, nestjs, swagger e docker.
 
 # Boas vindas ao projeto API-loja-de-games
 
