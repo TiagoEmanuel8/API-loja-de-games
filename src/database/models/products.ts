@@ -2,12 +2,12 @@ import { DataTypes, Model } from 'sequelize';
 import db from '.';
 
 class Products extends Model {
-  id!: number;
-  name!: string;
-  type!: string;
-  price!: string;
-  quantity!: string;
-  url_image!: string;
+  declare id: number;
+  declare name: string;
+  declare type: string;
+  declare price: string;
+  declare quantity: string;
+  declare url_image: string;
 }
 
 Products.init({
@@ -17,26 +17,11 @@ Products.init({
     primaryKey: true,
     autoIncrement: true,
   },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  type: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  price: {
-    type: DataTypes.DECIMAL,
-    allowNull: false,
-  },
-  quantity: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  url_image: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
+  name: { type: DataTypes.STRING, allowNull: false },
+  type: { type: DataTypes.STRING, allowNull: false },
+  price: { type: DataTypes.DECIMAL, allowNull: false },
+  quantity: { type: DataTypes.INTEGER, allowNull: false },
+  url_image: { type: DataTypes.STRING, allowNull: false },
 }, {
   underscored: true,
   sequelize: db,
