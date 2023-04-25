@@ -10,17 +10,21 @@ class App {
         this.app = express();
         this.debugLog = (0, debug_1.default)('app');
         this.config();
+        this.routesConfig();
     }
     config() {
         const accessControl = (_req, res, next) => {
             res.header('Access-Control-Allow-Origin', '*');
-            res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT, PATCH');
+            res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
             res.header('Access-Control-Allow-Headers', '*');
             next();
         };
         this.app.use(express.json());
         this.app.use(accessControl);
         this.app.use(cors());
+    }
+    routesConfig() {
+        this.app.get('/hello', (_req, res) => res.status(200).send('hello'));
     }
     start(PORT) {
         this.app.listen(PORT, () => {
