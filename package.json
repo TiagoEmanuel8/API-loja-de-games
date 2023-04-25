@@ -8,7 +8,9 @@
     "dev": "tsc && ts-node ./src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "nodemon --watch \"./src/**\" --ext \"ts,js\" --ignore \"src/**/*.spec.ts,src/**/*.json\" --exec \"ts-node src/server.ts\"",
-    "start": "node ."
+    "start": "node .",
+    "sequelize:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+
   },
   "keywords": [],
   "author": "",
