@@ -25,15 +25,6 @@ Sales.init({
   timestamps: false,
 });
 
-// Sale.associate = (models) => {
-//   Sale.belongsTo(models.User, { foreignKey: 'userId', as: 'user_id' });
-  // Sale.belongsTo(models.User,
-  //   { foreignKey: 'userId', as: 'users' },
-  //   { foreignKey: 'sellerId', as: 'users' }
-  // );
-// };
-
-//   User.hasMany(models.Sale, { foreignKey: 'id', as: 'user_id' });
 Users.hasMany(Sales, {
   foreignKey: 'id',
   as: 'user_id'
@@ -43,18 +34,5 @@ Sales.belongsTo(Users, {
   foreignKey: 'userId',
   as: 'user_id'
 })
-
-// import Clubs from './Club';
-// Matchs.init({})
-
-// Clubs.hasMany(Matchs, {
-//   foreignKey: 'homeTeam',
-//   as: 'homeMatchs',
-// });
-
-// Matchs.belongsTo(Clubs, {
-//   foreignKey: 'homeTeam',
-//   as: 'homeClub',
-// });
 
 export default Sales;
