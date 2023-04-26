@@ -1,4 +1,4 @@
-import Products from '../database/models/products'
+import Products from '../database/models/products.model'
 import { IproductsDTO, Iproducts } from '../interfaces'
 
 class ProductService {

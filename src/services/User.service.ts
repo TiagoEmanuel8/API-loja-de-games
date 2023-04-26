@@ -1,5 +1,6 @@
-import Users from '../database/models/users'
-import { Iusers, IusersDTO } from '../interfaces'
+import Users from '../database/models/users.model';
+import { Iusers, IusersDTO } from '../interfaces';
+import { NotFound } from '../errors';
 
 class UserService {
   private Users = Users;
@@ -11,6 +12,9 @@ class UserService {
 
   public async getUser(id: number): Promise<Iusers | null> {
     const getUser = await this.Users.findOne({ where: { id }});
+    if (!getUser) {
+      throw new NotFound('User not found');
+    }
     return getUser
   }
 

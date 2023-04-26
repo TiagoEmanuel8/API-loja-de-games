@@ -1,5 +1,5 @@
-import { ProductsController } from './Product';
-import { UsersController } from './Users'
+import { ProductsController } from './Product.controller';
+import { UsersController } from './Users.controller'
 
 export {
   ProductsController,

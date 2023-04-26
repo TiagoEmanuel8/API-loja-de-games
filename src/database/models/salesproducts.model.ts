@@ -1,8 +1,8 @@
 import { DataTypes, Model } from 'sequelize';
-import db from '.';
-import Users from './users';
-import Products from './products';
-import Sales from './sales';
+import db from './index.model';
+import Users from './users.model';
+import Products from './products.model';
+import Sales from './sales.model';
 
 class SalesProducts extends Model {
   declare saleId: number;

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { UserService } from "../services";
 import { StatusCodes } from 'http-status-codes';
 
@@ -19,10 +19,14 @@ class UsersController {
     res.status(StatusCodes.OK).json(users)
   }
 
-  public async getUser(req: Request, res: Response) {
-    const { id } = req.params;
-    const user = await this.UserService.getUser(Number(id));
-    res.status(StatusCodes.OK).json(user)
+  public async getUser(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const user = await this.UserService.getUser(Number(id));
+      res.status(StatusCodes.OK).json(user)
+    } catch (error) {
+      next(error);
+    }
   }
 
   public async createUser(req: Request, res: Response) {
