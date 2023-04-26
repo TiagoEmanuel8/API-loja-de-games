@@ -1,5 +1,6 @@
 import * as cors from 'cors';
 import * as express from 'express';
+import { ProductsRoutes } from './routes';
 import debug from 'debug';
 
 require('express-async-errors');
@@ -28,7 +29,7 @@ class App {
   }
 
   routesConfig() {
-    this.app.get('/hello', (_req, res) => res.status(200).send('hello'));
+    this.app.use(new ProductsRoutes().router);
   }
 
   public start(PORT: string | number):void {
@@ -40,5 +41,4 @@ class App {
 
 export { App };
 
-// A execução dos testes de cobertura depende dessa exportação
 export const { app } = new App();
