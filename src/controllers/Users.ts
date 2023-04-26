@@ -9,6 +9,7 @@ class UsersController {
     this.UserService = new UserService();
     this.getUsers = this.getUsers.bind(this);
     this.getUser = this.getUser.bind(this);
+    this.createUser = this.createUser.bind(this);
   }
 
   public async getUsers(_req: Request, res: Response) {
@@ -19,6 +20,11 @@ class UsersController {
   public async getUser(req: Request, res: Response) {
     const { id } = req.params;
     const user = await this.UserService.getUser(Number(id));
+    res.status(StatusCodes.OK).json(user)
+  }
+  public async createUser(req: Request, res: Response) {
+    const dataUser = req.body;
+    const user = await this.UserService.createUser(dataUser);
     res.status(StatusCodes.OK).json(user)
   }
 }

@@ -1,5 +1,4 @@
-interface Iusers {
-  id: number;
+interface IusersDTO {
   name: number;
   email: number;
   password: number;
@@ -15,4 +14,11 @@ interface Iusers {
   role: number;
 }
 
-export { Iusers }
+interface Iusers extends IusersDTO {
+  id: number;
+}
+
+export {
+  Iusers,
+  IusersDTO
+}

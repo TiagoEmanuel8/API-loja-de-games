@@ -1,7 +1,8 @@
 import { Iproducts } from './Iproducts';
-import { Iusers } from './Iusers';
+import { Iusers, IusersDTO } from './Iusers';
 
 export {
   Iproducts,
-  Iusers
+  Iusers,
+  IusersDTO
 }
