@@ -8,11 +8,18 @@ class UsersController {
   constructor() {
     this.UserService = new UserService();
     this.getUsers = this.getUsers.bind(this);
+    this.getUser = this.getUser.bind(this);
   }
 
   public async getUsers(_req: Request, res: Response) {
     const users = await this.UserService.getUsers();
     res.status(StatusCodes.OK).json(users)
+  }
+
+  public async getUser(req: Request, res: Response) {
+    const { id } = req.params;
+    const user = await this.UserService.getUser(Number(id));
+    res.status(StatusCodes.OK).json(user)
   }
 }
 

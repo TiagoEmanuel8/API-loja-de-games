@@ -12,6 +12,7 @@ class UsersRoutes extends CommonRoutesConfig {
 
   configureRoutes() {
     this.router.get('/users', this.UsersController.getUsers);
+    this.router.get('/users/:id', this.UsersController.getUser);
   }
 }
 
