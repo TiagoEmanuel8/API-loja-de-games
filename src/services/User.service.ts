@@ -44,6 +44,11 @@ class UserService {
   }
 
   public async excludeUser(id: number): Promise<boolean> {
+    const data = await this.Users.findByPk(id);
+    if(!data) {
+      throw new NotFound('User not found');
+    }
+    
     await this.Users.destroy({ where: { id } });
     return true;
   }
