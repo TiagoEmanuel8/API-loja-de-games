@@ -9,6 +9,7 @@ class ProductsController {
      this.ProductService = new ProductService();
      this.getProducts = this.getProducts.bind(this);
      this.getProduct = this.getProduct.bind(this);
+     this.createProduct = this.createProduct.bind(this);
      this.editProduct = this.editProduct.bind(this);
      this.excludeProduct = this.excludeProduct.bind(this);
   }
@@ -24,10 +25,16 @@ class ProductsController {
     res.status(StatusCodes.OK).json(product);
   }
 
+  public async createProduct(req: Request, res: Response) {
+    const createProduct = req.body;
+    const product = await this.ProductService.getProduct(createProduct);
+    res.status(StatusCodes.OK).json(product);
+  }
+
   public async editProduct(req: Request, res: Response) {
     const { id } = req.params;
-    const { name, type, price, quantity } = req.body;
-    const edited = await this.ProductService.editProduct(Number(id), name, type, Number(price), Number(quantity))
+    const dataProduct = req.body;
+    const edited = await this.ProductService.editProduct(Number(id), dataProduct)
     res.status(StatusCodes.OK).json(edited);
   }
 

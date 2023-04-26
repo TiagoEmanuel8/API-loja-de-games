@@ -1,5 +1,5 @@
 import Products from '../database/models/products'
-import { Iproducts } from '../interfaces'
+import { IproductsDTO, Iproducts } from '../interfaces'
 
 class ProductService {
   private Products = Products;
@@ -14,9 +14,14 @@ class ProductService {
     return product;
   }
 
-  public async editProduct(
-    id: number, name: string, type: string, price: number, quantity: number
-  ): Promise<Iproducts | null> {
+  public async createProduct(createProduct: IproductsDTO): Promise<Iproducts> {
+    const { name, type, price, quantity } = createProduct;
+    const newProduct = await this.Products.create({ name, type, price, quantity });
+    return newProduct;
+  }
+
+  public async editProduct(id: number, dataProduct: IproductsDTO): Promise<Iproducts | null> {
+    const { name, type, price, quantity } = dataProduct;
     await this.Products.update({ name, type, price, quantity }, { where: { id } });
     const edited = await this.Products.findOne({ where: { id }});
     return edited;
