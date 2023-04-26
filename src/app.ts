@@ -1,6 +1,9 @@
 import * as cors from 'cors';
 import * as express from 'express';
-import { ProductsRoutes } from './routes';
+import {
+  ProductsRoutes,
+  UsersRoutes
+} from './routes';
 import debug from 'debug';
 
 require('express-async-errors');
@@ -30,6 +33,7 @@ class App {
 
   routesConfig() {
     this.app.use(new ProductsRoutes().router);
+    this.app.use(new UsersRoutes().router);
   }
 
   public start(PORT: string | number):void {

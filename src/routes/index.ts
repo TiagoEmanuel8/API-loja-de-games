@@ -1,3 +1,7 @@
 import { ProductsRoutes } from './products.routes';
+import { UsersRoutes } from './users.routes'
 
-export { ProductsRoutes }
+export {
+  ProductsRoutes,
+  UsersRoutes
+}

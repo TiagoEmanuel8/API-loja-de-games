@@ -4,17 +4,17 @@ import { Iproducts } from '../interfaces'
 class ProductService {
   private Products = Products;
 
-  async getProducts(): Promise<Iproducts[]> {
+  public async getProducts(): Promise<Iproducts[]> {
     const products = await this.Products.findAll();
     return products;
   }
 
-  async getProduct(id: number): Promise<Iproducts | null> {
+  public async getProduct(id: number): Promise<Iproducts | null> {
     const product = await this.Products.findOne({ where: { id }});
     return product;
   }
 
-  async editProduct(
+  public async editProduct(
     id: number, name: string, type: string, price: number, quantity: number
   ): Promise<Iproducts | null> {
     await this.Products.update({ name, type, price, quantity }, { where: { id } });
@@ -22,7 +22,7 @@ class ProductService {
     return edited;
   } 
 
-  async excludeProduct(id: number): Promise<boolean | null> {
+  public async excludeProduct(id: number): Promise<boolean | null> {
     await this.Products.destroy({ where: { id } });
     return true;
   }
