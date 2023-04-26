@@ -5,8 +5,8 @@ class Products extends Model {
   declare id: number;
   declare name: string;
   declare type: string;
-  declare price: string;
-  declare quantity: string;
+  declare price: number;
+  declare quantity: number;
   declare url_image: string;
 }
 
@@ -19,7 +19,7 @@ Products.init({
   },
   name: { type: DataTypes.STRING, allowNull: false },
   type: { type: DataTypes.STRING, allowNull: false },
-  price: { type: DataTypes.DECIMAL, allowNull: false },
+  price: { type: DataTypes.INTEGER, allowNull: false },
   quantity: { type: DataTypes.INTEGER, allowNull: false },
   url_image: { type: DataTypes.STRING, allowNull: false },
 }, {
