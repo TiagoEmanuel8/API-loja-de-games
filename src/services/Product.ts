@@ -13,6 +13,11 @@ class ProductService {
     const product = await this.Products.findByPk(id);
     return product;
   }
+
+  async excludeProduct(id: number): Promise<boolean | null> {
+    await this.Products.destroy({ where: { id } });
+    return true;
+  }
 }
 
 export { ProductService };

@@ -13,6 +13,7 @@ class ProductsRoutes extends CommonRoutesConfig {
   configureRoutes() {
       this.router.get('/products', this.ProductsController.getProducts);
       this.router.get('/products/:id', this.ProductsController.getProduct);
+      this.router.delete('/products/:id', this.ProductsController.excludeProduct);
   }
 }
 
