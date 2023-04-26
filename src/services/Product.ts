@@ -8,6 +8,11 @@ class ProductService {
     const products = await this.Products.findAll();
     return products;
   }
+
+  async getProduct(id: number): Promise<Iproducts | null> {
+    const product = await this.Products.findByPk(id);
+    return product;
+  }
 }
 
 export { ProductService };
