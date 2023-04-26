@@ -31,6 +31,11 @@ class UserService {
     const { name, email, password, cpf, mobileNumber, address,
       addressNumber, district, city, state, country, cep, role } = dataUser;
     
+    const data = await this.Users.findByPk(id);
+    if(!data) {
+      throw new NotFound('User not found');
+    }
+  
     await this.Users.update({ name, email, password, cpf, mobileNumber, address,
       addressNumber, district, city, state, country, cep, role }, { where: { id } });
 
