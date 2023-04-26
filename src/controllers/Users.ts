@@ -10,6 +10,7 @@ class UsersController {
     this.getUsers = this.getUsers.bind(this);
     this.getUser = this.getUser.bind(this);
     this.createUser = this.createUser.bind(this);
+    this.editUser = this.editUser.bind(this);
   }
 
   public async getUsers(_req: Request, res: Response) {
@@ -22,9 +23,17 @@ class UsersController {
     const user = await this.UserService.getUser(Number(id));
     res.status(StatusCodes.OK).json(user)
   }
+
   public async createUser(req: Request, res: Response) {
     const dataUser = req.body;
     const user = await this.UserService.createUser(dataUser);
+    res.status(StatusCodes.OK).json(user)
+  }
+
+  public async editUser(req: Request, res: Response) {
+    const { id } = req.params;
+    const dataUser = req.body;
+    const user = await this.UserService.editUser(Number(id), dataUser);
     res.status(StatusCodes.OK).json(user)
   }
 }

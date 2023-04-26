@@ -22,6 +22,17 @@ class UserService {
     const newUser = await this.Users.create({ name, email, password, cpf, mobileNumber, address, addressNumber, district, city, state, country, cep, role });
     return newUser;
   }
+
+  public async editUser(id: number, dataUser: IusersDTO): Promise<Iusers | null> {
+    const { name, email, password, cpf, mobileNumber, address,
+      addressNumber, district, city, state, country, cep, role } = dataUser;
+    
+    await this.Users.update({ name, email, password, cpf, mobileNumber, address,
+      addressNumber, district, city, state, country, cep, role }, { where: { id } });
+
+      const edited = await this.Users.findOne({ where: { id }});
+      return edited;
+  }
 }
 
 export { UserService }

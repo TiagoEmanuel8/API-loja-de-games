@@ -14,6 +14,7 @@ class UsersRoutes extends CommonRoutesConfig {
     this.router.get('/users', this.UsersController.getUsers);
     this.router.get('/users/:id', this.UsersController.getUser);
     this.router.post('/users', this.UsersController.createUser);
+    this.router.put('/users/:id', this.UsersController.editUser);
   }
 }
 
