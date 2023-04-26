@@ -33,6 +33,11 @@ class UserService {
       const edited = await this.Users.findOne({ where: { id }});
       return edited;
   }
+
+  public async excludeUser(id: number): Promise<boolean> {
+    await this.Users.destroy({ where: { id } });
+    return true;
+  }
 }
 
 export { UserService }

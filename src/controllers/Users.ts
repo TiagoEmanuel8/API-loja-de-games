@@ -11,6 +11,7 @@ class UsersController {
     this.getUser = this.getUser.bind(this);
     this.createUser = this.createUser.bind(this);
     this.editUser = this.editUser.bind(this);
+    this.excludeUser = this.excludeUser.bind(this);
   }
 
   public async getUsers(_req: Request, res: Response) {
@@ -34,6 +35,12 @@ class UsersController {
     const { id } = req.params;
     const dataUser = req.body;
     const user = await this.UserService.editUser(Number(id), dataUser);
+    res.status(StatusCodes.OK).json(user)
+  }
+
+  public async excludeUser(req: Request, res: Response) {
+    const { id } = req.params;
+    const user = await this.UserService.excludeUser(Number(id));
     res.status(StatusCodes.OK).json(user)
   }
 }
