@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { UserService } from "../services/index.service";
 import { StatusCodes } from 'http-status-codes';
+import { IRequest, Iusers } from '../interfaces';
 
 class UsersController {
   private UserService: UserService;
@@ -14,15 +15,18 @@ class UsersController {
     this.excludeUser = this.excludeUser.bind(this);
   }
 
-  public async getUsers(_req: Request, res: Response) {
-    const users = await this.UserService.getUsers();
+  public async getUsers(req: IRequest, res: Response) {
+    const role = req.user as unknown as string;
+    const users = await this.UserService.getUsers(role);
     res.status(StatusCodes.OK).json(users)
   }
 
-  public async getUser(req: Request, res: Response, next: NextFunction) {
+  public async getUser(req: IRequest, res: Response, next: NextFunction) {
+    const { id } = req.params;
+    const role = req.user as unknown as string;
+
     try {
-      const { id } = req.params;
-      const user = await this.UserService.getUser(Number(id));
+      const user = await this.UserService.getUser(Number(id), role);
       res.status(StatusCodes.OK).json(user)
     } catch (error) {
       next(error);

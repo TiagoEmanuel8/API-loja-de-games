@@ -2,9 +2,7 @@ import * as chai from 'chai';
 import chaiHttp from 'chai-http';
 import { app } from '../app';
 import { Response } from 'superagent';
-import Token from '../auth/createTokenJWT';
-import * as sinon from 'sinon';
-import * as jwt from 'jsonwebtoken';
+import { Token } from '../helpers/createTokenJWT';
 
 chai.use(chaiHttp);
 
@@ -23,24 +21,24 @@ describe('Testa endpoint /login', () => {
     let chaiHttpResponse: Response;
 
     const loginCorrect = {
-      email: "admin@admin.com",
-      password: "secret_admin"
+      email: "filipebernardoeduardocosta@gmail.com",
+      password: "nOg96hbb05"
     }
 
     const loginIncorrect = {
-      email: "erro@admin.com",
-      password: "err_admin"
+      email: "filipebernardoeduardocosta@gmail.com",
+      password: "nOg96hb"
     }
 
     const loginPasswordEmpty = {
-      email: "admin@admin.com"
+      email: "filipebernardoeduardocosta@gmail.com"
     }
 
     const loginEmailEmpty = {
-      password: "secret_admin"
+      password: "nOg96hbb05"
     }
 
-    it('estiver com credenciais erradas, retorna uma messagem de "Incorrect email or password" e status 401', async () => {
+    it('has wrong credentials, returns an "Incorrect email or password" message and status 401', async () => {
       chaiHttpResponse = await chai
       .request(app)
       .post('/login')
@@ -51,7 +49,7 @@ describe('Testa endpoint /login', () => {
       }) as Response;
     });
 
-    it('estiver com "email" vazio, retorna uma messagem de "All fields must be filled" e status 401', async () => {
+    it('If the "email" is empty, return a message "All fields must be filled" and status 401', async () => {
       chaiHttpResponse = await chai
       .request(app)
       .post('/login')
@@ -62,7 +60,7 @@ describe('Testa endpoint /login', () => {
       }) as Response;
     });
 
-    it('estiver com "password" vazio, retorna uma messagem de "All fields must be filled" e status 401', async () => {
+    it('If the "password" is empty, return a message "All fields must be filled" and status 401', async () => {
       chaiHttpResponse = await chai
       .request(app)
       .post('/login')
@@ -73,8 +71,8 @@ describe('Testa endpoint /login', () => {
       }) as Response;
     });
 
-  describe('caso o metodo getLogin retornar com sucesso', async () => {
-    it('a resposta e 200', async () => {
+  describe('If the getLogin method returns successfully', async () => {
+    it('The response is 200', async () => {
       chaiHttpResponse = await chai
         .request(app)
         .post('/login')
@@ -86,7 +84,7 @@ describe('Testa endpoint /login', () => {
       }) as Response;
     });
 
-    it('e um objeto não vazio', async () => {
+    it('It is a non-empty object', async () => {
       chaiHttpResponse = await chai
         .request(app)
         .post('/login')
@@ -97,7 +95,7 @@ describe('Testa endpoint /login', () => {
       }) as Response;
     });
 
-    it('e um objeto', async () => {
+    it('It is an object', async () => {
       chaiHttpResponse = await chai
         .request(app)
         .post('/login')
@@ -107,7 +105,7 @@ describe('Testa endpoint /login', () => {
       }) as Response;
     });
 
-    it('e um objeto user onde tem "id, username, role e email"', async () => {
+    it('It is a user object where it has "id, name, role, and email"', async () => {
       chaiHttpResponse = await chai
         .request(app)
         .post('/login')
@@ -117,7 +115,7 @@ describe('Testa endpoint /login', () => {
       }) as Response;
     });
 
-    it('e um objeto user onde "id e um numero, username, role e email são strings"', async () => {
+    it('It is a user object where "id" is a number, "username", "role", and "email" are strings.', async () => {
       chaiHttpResponse = await chai
         .request(app)
         .post('/login')
@@ -127,7 +125,7 @@ describe('Testa endpoint /login', () => {
       }) as Response;
     });
 
-      it('existe as propriedade "user e token"', async () => {
+      it('There are the properties "user" and "token"', async () => {
         chaiHttpResponse = await chai
           .request(app)
           .post('/login')
@@ -137,7 +135,7 @@ describe('Testa endpoint /login', () => {
         }) as Response;
       });
 
-        it('o user e um objeto', async () => {
+        it('The user is an object', async () => {
           chaiHttpResponse = await chai
             .request(app)
             .post('/login')
@@ -147,7 +145,7 @@ describe('Testa endpoint /login', () => {
           }) as Response;
         });
 
-        it('o token e uma string', async () => {
+        it('The token is a string', async () => {
           chaiHttpResponse = await chai
             .request(app)
             .post('/login')
@@ -160,8 +158,8 @@ describe('Testa endpoint /login', () => {
   })
 })
 
-describe('testa o endpoint /login/validate', () => {
-  describe('caso o metodo getUser retornar com sucesso', async () => {
+describe('Test the endpoint /login/validate', () => {
+  describe('If the getUser method returns successfully', async () => {
     let chaiHttpResponse: Response;
 
     const loginCorrect = {
@@ -169,7 +167,7 @@ describe('testa o endpoint /login/validate', () => {
       password: "secret_admin"
     }
 
-    it('retorna resposta 200 e a role "admin"', async () => {
+    it('return response 200 and the role "admin"', async () => {
       chaiHttpResponse = await chai
         .request(app)
         .post('/login')

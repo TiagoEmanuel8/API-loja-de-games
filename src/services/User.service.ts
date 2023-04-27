@@ -1,18 +1,25 @@
 import Users from '../database/models/users.model';
 import { Iusers, IusersDTO } from '../interfaces';
-import { NotFound, BadRequest } from '../errors/index.error';
+import { NotFound, BadRequest, Forbidden } from '../errors/index.error';
 import { createHashPassword } from '../helpers/bcrypt';
 
 class UserService {
   private Users = Users;
   private createHashPassword = createHashPassword;
 
-  public async getUsers(): Promise<Iusers[]> {
+  public async getUsers(role: string): Promise<Iusers[]> {
+    if (role === 'client') {
+      throw new Forbidden('Only admins or sellers can listen users');
+    };
     const users = await this.Users.findAll();
     return users
   }
 
-  public async getUser(id: number): Promise<Iusers | null> {
+  public async getUser(id: number, role: string): Promise<Iusers | null> {
+    if (role === 'client') {
+      throw new Forbidden('Only admins or sellers can listen users');
+    };
+
     const user = await this.Users.findOne({ where: { id }});
     if (!user) {
       throw new NotFound('User not found');

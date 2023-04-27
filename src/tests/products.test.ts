@@ -7,13 +7,13 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('testando o endpoint /products', () => {
+describe('Testing the endpoint /products', () => {
   describe('', async () => {
-    describe('testando o endpoint /products com o metodo getProducts', async () => {
+    describe('Testing the endpoint /products with the method getProducts', async () => {
 
       let chaiHttpResponse: Response;
 
-      it('A aplicação deve ter o endpoint GET `/products` para listar produtos', async () => {
+      it('The application must have the GET endpoint /products to list products', async () => {
         chaiHttpResponse = await chai
         .request(app)
         .get('/products')
@@ -22,7 +22,7 @@ describe('testando o endpoint /products', () => {
         }) as Response;
       });
 
-      it('A aplicação deve ter o endpoint GET `/products/:id` para listar um produto', async () => {
+      it('The application must have the GET endpoint /products/:id to list a product', async () => {
         chaiHttpResponse = await chai
         .request(app)
         .get('/products')

@@ -6,7 +6,7 @@ import {
   LoginRoutes
 } from './routes/index.routes';
 import debug from 'debug';
-import errorMiddleware from './middlewares/error.middleware'
+import { errorMiddleware } from './middlewares/error.middleware';
 
 require('express-async-errors');
 

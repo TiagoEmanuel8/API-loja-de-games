@@ -1,5 +1,6 @@
 import { UsersController } from '../controllers/index.controller';
 import CommonRoutesConfig from './common.routes.config';
+import { valitadeToken } from '../middlewares/index.middleware';
 
 class UsersRoutes extends CommonRoutesConfig {
   private UsersController: UsersController
@@ -11,7 +12,7 @@ class UsersRoutes extends CommonRoutesConfig {
   }
 
   configureRoutes() {
-    this.router.get('/users', this.UsersController.getUsers);
+    this.router.get('/users', valitadeToken, this.UsersController.getUsers);
     this.router.get('/users/:id', this.UsersController.getUser);
     this.router.post('/users', this.UsersController.createUser);
     this.router.put('/users/:id', this.UsersController.editUser);

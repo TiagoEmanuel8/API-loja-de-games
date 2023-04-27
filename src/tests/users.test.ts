@@ -1,5 +1,5 @@
 import * as chai from 'chai';
-import chaiHttp = require('chai-http');
+import chaiHttp from 'chai-http';
 import { app } from '../app';
 import { Response } from 'superagent';
 
@@ -7,13 +7,13 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('testando o endpoint /users', () => {
-  describe('testando o endpoint /users com o metodo getUsers', async () => {
-    describe('retorna com sucesso', async () => {
+describe('Testing the endpoint /users', () => {
+  describe('Testing the endpoint /users with the method getUsers', async () => {
+    describe('returns successfully', async () => {
 
       let chaiHttpResponse: Response;
 
-      it('A aplicação deve ter o endpoint GET `/users` para listar usuarios', async () => {
+      it('The application must have the GET endpoint /users to list users', async () => {
         chaiHttpResponse = await chai
         .request(app)
         .get('/users')
@@ -22,7 +22,7 @@ describe('testando o endpoint /users', () => {
         }) as Response;
       });
 
-      it('A aplicação deve ter o endpoint GET `/users/:id` para listar um usuario', async () => {
+      it('The application must have the GET endpoint /users/:id to list a user', async () => {
         chaiHttpResponse = await chai
         .request(app)
         .get('/users')
