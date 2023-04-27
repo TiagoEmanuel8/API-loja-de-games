@@ -1,7 +1,7 @@
 import Users from '../database/models/users.model';
 import { Iusers, IusersDTO } from '../interfaces';
 import { NotFound, BadRequest } from '../errors/index.error';
-import { createHashPassword } from '../helpers';
+import { createHashPassword } from '../helpers/bcrypt';
 
 class UserService {
   private Users = Users;

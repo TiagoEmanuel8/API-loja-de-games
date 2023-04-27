@@ -7,6 +7,16 @@ const createHashPassword = async(password: string) => {
   return encrypt;
 };
 
+const isPasswordEqual = async (password: string, hashPassword: string) => {
+  try {
+    const result = await bcryptjs.compare(password, hashPassword);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export {
   createHashPassword,
+  isPasswordEqual
 };
