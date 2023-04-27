@@ -1,21 +1,21 @@
 import { DataTypes, Model } from 'sequelize';
-import db from '.';
+import db from './index.model';
 
 class Users extends Model {
   declare id: number;
-  declare name: number;
-  declare email: number;
-  declare password: number;
+  declare name: string;
+  declare email: string;
+  declare password: string;
   declare cpf: number;
-  declare mobileNumber: boolean;
-  declare address: number;
-  declare addressNumber: number;
-  declare district: number;
-  declare city: number;
-  declare state: boolean;
-  declare country: number;
+  declare mobileNumber: number;
+  declare address: string;
+  declare addressNumber: string;
+  declare district: string;
+  declare city: string;
+  declare state: string;
+  declare country: string;
   declare cep: number;
-  declare role: number;
+  declare role: string;
 }
 
 Users.init({

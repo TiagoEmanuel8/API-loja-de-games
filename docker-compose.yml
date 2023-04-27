@@ -3,9 +3,11 @@ services:
   backend:
     build: ./
     container_name: api-store
+    # command: npm run dev
+    restart: 'on-failure'
+    # restart: 'always'
     ports:
       - 3001:3001
-    restart: always
     # ...
     depends_on:
       db:
@@ -28,10 +30,12 @@ services:
       - 3002:3306
     environment:
       - MYSQL_ROOT_PASSWORD=123456
-    restart: 'always'
+    restart: 'on-failure'
+    # restart: 'always'
+
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"] # Deve aguardar o banco ficar operacional
       timeout: 10s
       retries: 5
     cap_add:
-      - SYS_NICE # Deve omitir alertas menores
+      - SYS_NICE

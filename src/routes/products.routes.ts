@@ -1,4 +1,4 @@
-import { ProductsController } from '../controllers';
+import { ProductsController } from '../controllers/index.controller';
 import CommonRoutesConfig from './common.routes.config';
 
 class ProductsRoutes extends CommonRoutesConfig {
@@ -13,8 +13,10 @@ class ProductsRoutes extends CommonRoutesConfig {
   configureRoutes() {
       this.router.get('/products', this.ProductsController.getProducts);
       this.router.get('/products/:id', this.ProductsController.getProduct);
+      this.router.post('/products', this.ProductsController.createProduct);
+      this.router.put('/products/:id', this.ProductsController.editProduct);
       this.router.delete('/products/:id', this.ProductsController.excludeProduct);
   }
 }
 
-export  { ProductsRoutes };
+export { ProductsRoutes };

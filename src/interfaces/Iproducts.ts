@@ -1,5 +1,4 @@
-interface Iproducts {
-  id: number;
+interface IproductsDTO {
   name: string;
   type: string;
   price: number;
@@ -7,4 +6,8 @@ interface Iproducts {
   url_image: string;
 }
 
-export { Iproducts }
+interface Iproducts extends IproductsDTO {
+  id: number;
+}
+
+export { IproductsDTO, Iproducts }

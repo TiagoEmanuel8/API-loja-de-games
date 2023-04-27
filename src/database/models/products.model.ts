@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import db from '.';
+import db from './index.model';
 
 class Products extends Model {
   declare id: number;
@@ -21,7 +21,7 @@ Products.init({
   type: { type: DataTypes.STRING, allowNull: false },
   price: { type: DataTypes.INTEGER, allowNull: false },
   quantity: { type: DataTypes.INTEGER, allowNull: false },
-  url_image: { type: DataTypes.STRING, allowNull: false },
+  url_image: { type: DataTypes.STRING, allowNull: true },
 }, {
   underscored: true,
   sequelize: db,
