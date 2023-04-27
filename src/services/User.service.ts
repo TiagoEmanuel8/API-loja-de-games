@@ -8,20 +8,19 @@ class UserService {
   private createHashPassword = createHashPassword;
 
   public async getUsers(): Promise<Iusers[]> {
-    const getUsers = await this.Users.findAll();
-    return getUsers
+    const users = await this.Users.findAll();
+    return users
   }
 
   public async getUser(id: number): Promise<Iusers | null> {
-    const getUser = await this.Users.findOne({ where: { id }});
-    if (!getUser) {
+    const user = await this.Users.findOne({ where: { id }});
+    if (!user) {
       throw new NotFound('User not found');
     }
-    return getUser
+    return user
   }
 
   public async createUser(dataUser: IusersDTO): Promise<Iusers | null> {
-    // desestruturação para futuras validações
     const { name, email, password, cpf, mobileNumber, address,
       addressNumber, district, city, state, country, cep, role } = dataUser;
     
@@ -54,9 +53,13 @@ class UserService {
     if(!data) {
       throw new NotFound('User not found');
     }
+
+    if (role) {
+      throw new NotFound('Role cannot be edited');
+    }
   
     await this.Users.update({ name, email, password, cpf, mobileNumber, address,
-    addressNumber, district, city, state, country, cep, role }, { where: { id } });
+    addressNumber, district, city, state, country, cep }, { where: { id } });
 
     const edited = await this.Users.findOne({ where: { id }});
     return edited;

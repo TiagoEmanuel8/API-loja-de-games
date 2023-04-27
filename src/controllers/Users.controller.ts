@@ -29,23 +29,35 @@ class UsersController {
     }
   }
 
-  public async createUser(req: Request, res: Response) {
-    const dataUser = req.body;
-    const user = await this.UserService.createUser(dataUser);
-    res.status(StatusCodes.OK).json(user)
+  public async createUser(req: Request, res: Response, next: NextFunction) {
+    try {
+      const dataUser = req.body;
+      const user = await this.UserService.createUser(dataUser);
+      res.status(StatusCodes.OK).json(user)
+    } catch (error) {
+      next(error);
+    }
   }
 
-  public async editUser(req: Request, res: Response) {
-    const { id } = req.params;
-    const dataUser = req.body;
-    const user = await this.UserService.editUser(Number(id), dataUser);
-    res.status(StatusCodes.OK).json(user)
+  public async editUser(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const dataUser = req.body;
+      const user = await this.UserService.editUser(Number(id), dataUser);
+      res.status(StatusCodes.OK).json(user)
+    } catch (error) {
+      next(error);
+    }
   }
 
-  public async excludeUser(req: Request, res: Response) {
-    const { id } = req.params;
-    const user = await this.UserService.excludeUser(Number(id));
-    res.status(StatusCodes.OK).json(user)
+  public async excludeUser(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const user = await this.UserService.excludeUser(Number(id));
+      res.status(StatusCodes.OK).json(user)
+    } catch (error) {
+      next(error);
+    }
   }
 }
 
