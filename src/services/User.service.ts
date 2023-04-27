@@ -1,9 +1,11 @@
 import Users from '../database/models/users.model';
 import { Iusers, IusersDTO } from '../interfaces';
-import { NotFound } from '../errors';
+import { NotFound, BadRequest } from '../errors';
+import { createHashPassword } from '../helpers';
 
 class UserService {
   private Users = Users;
+  private createHashPassword = createHashPassword;
 
   public async getUsers(): Promise<Iusers[]> {
     const getUsers = await this.Users.findAll();
@@ -23,7 +25,24 @@ class UserService {
     const { name, email, password, cpf, mobileNumber, address,
       addressNumber, district, city, state, country, cep, role } = dataUser;
     
-    const newUser = await this.Users.create({ name, email, password, cpf, mobileNumber, address, addressNumber, district, city, state, country, cep, role });
+    const findUser = await this.Users.findOne({ where: { email }});
+    if (findUser) {
+      throw new BadRequest('User already registered');
+    }
+
+    const verifyLengthPassword = password.length >= 6 && password.length <= 10;
+    if(!verifyLengthPassword) {
+      throw new BadRequest('password must contain between 6 and 10 characters');
+    }
+    
+    const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
+    if (!emailRegex) {
+      throw new BadRequest('"email" must be a valid email');
+    }
+
+    const encryptPassword = await this.createHashPassword(password)
+
+    const newUser = await this.Users.create({ name, email, password: encryptPassword, cpf, mobileNumber, address, addressNumber, district, city, state, country, cep, role });
     return newUser;
   }
 
@@ -37,10 +56,10 @@ class UserService {
     }
   
     await this.Users.update({ name, email, password, cpf, mobileNumber, address,
-      addressNumber, district, city, state, country, cep, role }, { where: { id } });
+    addressNumber, district, city, state, country, cep, role }, { where: { id } });
 
-      const edited = await this.Users.findOne({ where: { id }});
-      return edited;
+    const edited = await this.Users.findOne({ where: { id }});
+    return edited;
   }
 
   public async excludeUser(id: number): Promise<boolean> {
@@ -48,7 +67,7 @@ class UserService {
     if(!data) {
       throw new NotFound('User not found');
     }
-    
+
     await this.Users.destroy({ where: { id } });
     return true;
   }

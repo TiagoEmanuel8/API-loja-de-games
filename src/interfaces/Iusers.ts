@@ -1,17 +1,17 @@
 interface IusersDTO {
-  name: number;
-  email: number;
-  password: number;
+  name: string;
+  email: string;
+  password: string;
   cpf: number;
-  mobileNumber: boolean;
-  address: number;
-  addressNumber: number;
-  district: number;
-  city: number;
-  state: boolean;
-  country: number;
+  mobileNumber: number;
+  address: string;
+  addressNumber: string;
+  district: string;
+  city: string;
+  state: string;
+  country: string;
   cep: number;
-  role: number;
+  role: string;
 }
 
 interface Iusers extends IusersDTO {
