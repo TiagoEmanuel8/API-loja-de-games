@@ -5,8 +5,11 @@ import { IPayload } from '../interfaces'
 class Token {
   static createToken(payload: IPayload) {
     const { secret } = jwtConfig.jwt;
+    const configs:object = {
+      algorithm: 'HS256', expiresIn: '30d'
+    };
 
-    const token = jwt.sign(payload, secret, { algorithm: 'HS256', expiresIn: '30d' });
+    const token = jwt.sign({ data: payload }, secret, configs);
 
     return token;
   }

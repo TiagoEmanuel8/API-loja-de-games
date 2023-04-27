@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { UserService } from "../services/index.service";
 import { StatusCodes } from 'http-status-codes';
-import { IRequest, Iusers } from '../interfaces';
+import { IRequest, IReqUsers } from '../interfaces';
 
 class UsersController {
   private UserService: UserService;
@@ -16,17 +16,17 @@ class UsersController {
   }
 
   public async getUsers(req: IRequest, res: Response) {
-    const role = req.user as unknown as string;
-    const users = await this.UserService.getUsers(role);
+    const dataUserReq = req.user as unknown as IReqUsers;
+    const users = await this.UserService.getUsers(dataUserReq);
     res.status(StatusCodes.OK).json(users)
   }
 
   public async getUser(req: IRequest, res: Response, next: NextFunction) {
     const { id } = req.params;
-    const role = req.user as unknown as string;
+    const dataUserReq = req.user as unknown as IReqUsers;
 
     try {
-      const user = await this.UserService.getUser(Number(id), role);
+      const user = await this.UserService.getUser(Number(id), dataUserReq);
       res.status(StatusCodes.OK).json(user)
     } catch (error) {
       next(error);
@@ -43,21 +43,25 @@ class UsersController {
     }
   }
 
-  public async editUser(req: Request, res: Response, next: NextFunction) {
+  public async editUser(req: IRequest, res: Response, next: NextFunction) {
+    const { id } = req.params;
+    const dataUser = req.body;
+    const dataUserReq = req.user as unknown as IReqUsers;
+
     try {
-      const { id } = req.params;
-      const dataUser = req.body;
-      const user = await this.UserService.editUser(Number(id), dataUser);
+      const user = await this.UserService.editUser(Number(id), dataUser, dataUserReq);
       res.status(StatusCodes.OK).json(user)
     } catch (error) {
       next(error);
     }
   }
 
-  public async excludeUser(req: Request, res: Response, next: NextFunction) {
+  public async excludeUser(req: IRequest, res: Response, next: NextFunction) {
+    const { id } = req.params;
+    const dataUserReq = req.user as unknown as IReqUsers;
+
     try {
-      const { id } = req.params;
-      const user = await this.UserService.excludeUser(Number(id));
+      const user = await this.UserService.excludeUser(Number(id), dataUserReq);
       res.status(StatusCodes.OK).json(user)
     } catch (error) {
       next(error);

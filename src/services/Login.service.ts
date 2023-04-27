@@ -23,8 +23,8 @@ class LoginService {
       throw new Unauthorized('Incorrect email or password');
     }
 
-    const payload = { id: searchUser.id, role: searchUser.role };
-    const token = this.Token(payload);
+    // const payload = { id: searchUser.id, role: searchUser.role };
+    const token = this.Token({ id: searchUser.id, role: searchUser.role });
 
     const { id, name, role } = searchUser;
     return { id, name, email, role, token };

@@ -2,7 +2,7 @@ import { Iproducts, IproductsDTO } from './Iproducts';
 import { Iusers, IusersDTO } from './Iusers';
 import { ILoginDTO } from './Ilogin';
 import { IPayload } from './Ipayload';
-import { IRequest } from './Irequest';
+import { IRequest, IReqUsers } from './Irequest';
 
 export {
   Iproducts,
@@ -11,5 +11,6 @@ export {
   IusersDTO,
   ILoginDTO,
   IPayload,
-  IRequest
+  IRequest,
+  IReqUsers
 }
