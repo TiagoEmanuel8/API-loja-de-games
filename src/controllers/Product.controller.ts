@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { ProductService } from '../services';
+import { ProductService } from '../services/index.service';
 import { StatusCodes } from 'http-status-codes';
 
 class ProductsController {

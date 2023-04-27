@@ -1,4 +1,4 @@
-import { ProductsController } from '../controllers';
+import { ProductsController } from '../controllers/index.controller';
 import CommonRoutesConfig from './common.routes.config';
 
 class ProductsRoutes extends CommonRoutesConfig {

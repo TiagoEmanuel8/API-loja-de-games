@@ -1,4 +1,4 @@
-import { UsersController } from '../controllers';
+import { UsersController } from '../controllers/index.controller';
 import CommonRoutesConfig from './common.routes.config';
 
 class UsersRoutes extends CommonRoutesConfig {

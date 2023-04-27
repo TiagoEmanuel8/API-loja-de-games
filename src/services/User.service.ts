@@ -1,6 +1,6 @@
 import Users from '../database/models/users.model';
 import { Iusers, IusersDTO } from '../interfaces';
-import { NotFound, BadRequest } from '../errors';
+import { NotFound, BadRequest } from '../errors/index.error';
 import { createHashPassword } from '../helpers';
 
 class UserService {

@@ -3,7 +3,7 @@ import * as express from 'express';
 import {
   ProductsRoutes,
   UsersRoutes
-} from './routes';
+} from './routes/index.routes';
 import debug from 'debug';
 import errorMiddleware from './middlewares/error.middleware'
 

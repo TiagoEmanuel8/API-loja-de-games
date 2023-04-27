@@ -1,6 +1,6 @@
 import Products from '../database/models/products.model';
 import { IproductsDTO, Iproducts } from '../interfaces';
-import { NotFound, BadRequest } from '../errors';
+import { NotFound, BadRequest } from '../errors/index.error';
 
 class ProductService {
   private Products = Products;
