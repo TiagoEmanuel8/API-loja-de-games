@@ -2,10 +2,11 @@ import * as cors from 'cors';
 import * as express from 'express';
 import {
   ProductsRoutes,
-  UsersRoutes
+  UsersRoutes,
+  LoginRoutes
 } from './routes/index.routes';
 import debug from 'debug';
-import errorMiddleware from './middlewares/error.middleware'
+import { errorMiddleware } from './middlewares/error.middleware';
 
 require('express-async-errors');
 
@@ -35,6 +36,7 @@ class App {
   routesConfig() {
     this.app.use(new ProductsRoutes().router);
     this.app.use(new UsersRoutes().router);
+    this.app.use(new LoginRoutes().router);
     this.app.use(errorMiddleware);
   }
 

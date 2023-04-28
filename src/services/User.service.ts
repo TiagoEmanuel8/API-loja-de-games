@@ -1,19 +1,30 @@
 import Users from '../database/models/users.model';
-import { Iusers, IusersDTO } from '../interfaces';
-import { NotFound, BadRequest } from '../errors/index.error';
-import { createHashPassword } from '../helpers';
+import { Iusers, IusersDTO, IReqUsers } from '../interfaces';
+import { NotFound, BadRequest, Forbidden, Unauthorized } from '../errors/index.error';
+import { createHashPassword } from '../helpers/bcrypt';
 
 class UserService {
   private Users = Users;
   private createHashPassword = createHashPassword;
 
-  public async getUsers(): Promise<Iusers[]> {
-    const users = await this.Users.findAll();
+  public async getUsers(dataUserReq: IReqUsers): Promise<Iusers[]> {
+    if (dataUserReq.role === 'client') {
+      throw new Forbidden('Only admins or sellers can listen users');
+    };
+    const users = await this.Users.findAll({ attributes: { exclude: ['password'] } });
     return users
   }
 
-  public async getUser(id: number): Promise<Iusers | null> {
-    const user = await this.Users.findOne({ where: { id }});
+  public async getUser(id: number, dataUserReq: IReqUsers): Promise<Iusers | null> {
+    if (dataUserReq.role === 'client') {
+      throw new Forbidden('Only admins or sellers can listen users');
+    };
+
+    const user = await this.Users.findOne({
+      where: { id },
+      attributes: { exclude: ['password'] }
+    });
+  
     if (!user) {
       throw new NotFound('User not found');
     }
@@ -45,18 +56,22 @@ class UserService {
     return newUser;
   }
 
-  public async editUser(id: number, dataUser: IusersDTO): Promise<Iusers | null> {
+  public async editUser(id: number, dataUser: IusersDTO, dataUserReq: IReqUsers): Promise<Iusers | null> {
     const { name, email, password, cpf, mobileNumber, address,
       addressNumber, district, city, state, country, cep, role } = dataUser;
     
-    const data = await this.Users.findByPk(id);
-    if(!data) {
+    const userById = await this.Users.findByPk(id);
+    if(!userById) {
       throw new NotFound('User not found');
     }
 
     if (role) {
-      throw new NotFound('Role cannot be edited');
+      throw new Forbidden('Role cannot be edited');
     }
+
+    if(Number(userById.id) !== Number(dataUserReq.id)) {
+      throw new Unauthorized('Unauthorized user');
+    };
   
     await this.Users.update({ name, email, password, cpf, mobileNumber, address,
     addressNumber, district, city, state, country, cep }, { where: { id } });
@@ -65,9 +80,9 @@ class UserService {
     return edited;
   }
 
-  public async excludeUser(id: number): Promise<boolean> {
-    const data = await this.Users.findByPk(id);
-    if(!data) {
+  public async excludeUser(id: number, dataUserReq: IReqUsers): Promise<boolean> {
+    const userById = await this.Users.findByPk(id);
+    if(!userById) {
       throw new NotFound('User not found');
     }
 

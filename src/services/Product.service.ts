@@ -1,6 +1,6 @@
 import Products from '../database/models/products.model';
-import { IproductsDTO, Iproducts } from '../interfaces';
-import { NotFound, BadRequest } from '../errors/index.error';
+import { IproductsDTO, Iproducts, IReqUsers } from '../interfaces';
+import { NotFound, Forbidden, BadRequest } from '../errors/index.error';
 
 class ProductService {
   private Products = Products;
@@ -18,15 +18,33 @@ class ProductService {
     return product;
   }
 
-  public async createProduct(createProduct: IproductsDTO): Promise<Iproducts> {
+  public async createProduct(createProduct: IproductsDTO, dataUserReq: IReqUsers): Promise<Iproducts> {
+    if (dataUserReq.role === 'client') {
+      throw new Forbidden('Only admins or sellers can create products');
+    };
+
     const { name, type, price, quantity } = createProduct;
+
+    const checkFieldsNotNull = name && type && price;
+    if (!checkFieldsNotNull) {
+      throw new BadRequest('the fields "name", "type", "price" need to be filled');
+    }
+
+    if(typeof price !== 'number') {
+      throw new BadRequest('the "price" field must be a number');
+    }
+
     const newProduct = await this.Products.create({ name, type, price, quantity });
     return newProduct;
   }
 
-  public async editProduct(id: number, dataProduct: IproductsDTO): Promise<Iproducts | null> {
+  public async editProduct(id: number, dataProduct: IproductsDTO, dataUserReq: IReqUsers): Promise<Iproducts | null> {
     const { name, type, price, quantity } = dataProduct;
 
+    if (dataUserReq.role === 'client') {
+      throw new Forbidden('Only admins or sellers can create products');
+    };
+  
     const product = await this.Products.findOne({ where: { id }});
     if (!product) {
       throw new NotFound('Product not found');
@@ -37,7 +55,11 @@ class ProductService {
     return edited;
   } 
 
-  public async excludeProduct(id: number): Promise<boolean | null> {
+  public async excludeProduct(id: number, dataUserReq: IReqUsers): Promise<boolean | null> {
+    if (dataUserReq.role === 'client') {
+      throw new Forbidden('Only admins or sellers can delete products');
+    };
+
     const product = await this.Products.findOne({ where: { id }});
     if (!product) {
       throw new NotFound('Product not found');

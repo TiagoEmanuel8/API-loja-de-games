@@ -1,0 +1,6 @@
+const mockTokenAdm = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJyb2xlIjoiYWRtaW5pc3RyYXRvciJ9LCJpYXQiOjE2ODI2NTEwMzksImV4cCI6MTcxNDIwODYzOX0.Wm4hv9sjUB236nmOvLAv5ZXL07x0igxphsxB7xDyBh8';
+
+const mockTockenClient = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjozLCJyb2xlIjoiY2xpZW50In0sImlhdCI6MTY4MjY1MDcxNiwiZXhwIjoxNzE0MjA4MzE2fQ.jLVKqdtboIO6R8h4UVfJ1we8sERrSCphEl4iDBgaIdU';
+
+
+export { mockTokenAdm, mockTockenClient };
