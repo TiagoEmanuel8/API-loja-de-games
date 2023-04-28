@@ -11,7 +11,7 @@ class UserService {
     if (dataUserReq.role === 'client') {
       throw new Forbidden('Only admins or sellers can listen users');
     };
-    const users = await this.Users.findAll();
+    const users = await this.Users.findAll({ attributes: { exclude: ['password'] } });
     return users
   }
 
@@ -20,7 +20,10 @@ class UserService {
       throw new Forbidden('Only admins or sellers can listen users');
     };
 
-    const user = await this.Users.findOne({ where: { id }});
+    const user = await this.Users.findOne({
+      where: { id },
+      attributes: { exclude: ['password'] }
+    });
     if (!user) {
       throw new NotFound('User not found');
     }
@@ -67,6 +70,8 @@ class UserService {
 
     if(Number(userById.id) !== Number(dataUserReq.id)) {
       throw new Unauthorized('Unauthorized user');
+    };    if (dataUserReq.role === 'client') {
+      throw new Forbidden('Only admins or sellers can create products');
     };
   
     await this.Users.update({ name, email, password, cpf, mobileNumber, address,

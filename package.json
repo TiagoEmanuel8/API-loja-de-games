@@ -30,6 +30,7 @@
     "mocha": "^10.2.0",
     "mysql2": "^3.2.4",
     "sequelize": "^6.31.0",
+    "shelljs": "^0.8.5",
     "sinon": "^15.0.4"
   },
   "devDependencies": {
@@ -39,6 +40,7 @@
     "@types/jest": "^29.5.1",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/mocha": "^10.0.1",
+    "@types/shelljs": "^0.8.12",
     "@types/sinon": "^10.0.14",
     "eslint": "^8.39.0",
     "eslint-config-airbnb-base": "^15.0.0",

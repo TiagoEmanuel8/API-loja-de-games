@@ -10,7 +10,6 @@ const { expect } = chai;
 describe('Testing the endpoint /users', () => {
   describe('Testing the endpoint /users with the method getUsers', async () => {
     describe('returns successfully', async () => {
-
       let chaiHttpResponse: Response;
 
       it('The application must have the GET endpoint /users to list users', async () => {
