@@ -24,6 +24,7 @@ class UserService {
       where: { id },
       attributes: { exclude: ['password'] }
     });
+  
     if (!user) {
       throw new NotFound('User not found');
     }
@@ -70,8 +71,6 @@ class UserService {
 
     if(Number(userById.id) !== Number(dataUserReq.id)) {
       throw new Unauthorized('Unauthorized user');
-    };    if (dataUserReq.role === 'client') {
-      throw new Forbidden('Only admins or sellers can create products');
     };
   
     await this.Users.update({ name, email, password, cpf, mobileNumber, address,
@@ -86,10 +85,6 @@ class UserService {
     if(!userById) {
       throw new NotFound('User not found');
     }
-
-    if(Number(userById.id) !== Number(dataUserReq.id)) {
-      throw new Unauthorized('Unauthorized user');
-    };
 
     await this.Users.destroy({ where: { id } });
     return true;

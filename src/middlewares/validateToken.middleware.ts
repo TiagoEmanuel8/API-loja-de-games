@@ -13,10 +13,9 @@ const valitadeToken = async (req: IRequest, _res: Response, next: NextFunction) 
     }
 
     const validToken = jwt.verify(authorization, secret) as jwt.JwtPayload;
+    const { data } = validToken;
 
-    const { id, role } = validToken;
-
-    req.user = { id, role };
+    req.user = data;
 
     next();
   } catch (err) {

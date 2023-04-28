@@ -62,7 +62,7 @@ class UsersController {
 
     try {
       const user = await this.UserService.excludeUser(Number(id), dataUserReq);
-      res.status(StatusCodes.OK).json(user)
+      res.status(StatusCodes.NO_CONTENT).json(user)
     } catch (error) {
       next(error);
     }

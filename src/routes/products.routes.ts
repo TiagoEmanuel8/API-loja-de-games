@@ -15,7 +15,7 @@ class ProductsRoutes extends CommonRoutesConfig {
       this.router.get('/products', this.ProductsController.getProducts);
       this.router.get('/products/:id', this.ProductsController.getProduct);
       this.router.post('/products', valitadeToken, this.ProductsController.createProduct);
-      this.router.put('/products/:id', valitadeToken, this.ProductsController.editProduct);
+      this.router.patch('/products/:id', valitadeToken, this.ProductsController.editProduct);
       this.router.delete('/products/:id', valitadeToken, this.ProductsController.excludeProduct);
   }
 }
