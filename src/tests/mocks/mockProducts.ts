@@ -74,4 +74,4 @@ const mockProduct =
 	}
 ]
 
-export default mockProduct;
+export { mockProduct };
