@@ -13,6 +13,10 @@ class LoginService {
   public async login(loginData: ILoginDTO) {
     const { email, password } = loginData;
 
+    if(!email || !password) {
+      throw new Unauthorized('All fields must be filled');
+    }
+
     const searchUser = await this.Users.findOne({ where: { email } });
     if (!searchUser) {
       throw new Unauthorized('Incorrect email or password');
