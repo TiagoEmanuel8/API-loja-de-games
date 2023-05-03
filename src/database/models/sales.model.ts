@@ -21,7 +21,7 @@ Sales.init({
 }, {
   underscored: true,
   sequelize: db,
-  modelName: 'products',
+  modelName: 'sales',
   timestamps: false,
 });
 

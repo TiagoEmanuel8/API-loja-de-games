@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import db from './index.model';
+import Sales from './sales.model';
 
 class Users extends Model {
   declare id: number;
@@ -35,24 +36,5 @@ Users.init({
   role: { type: DataTypes.STRING, allowNull: false },
 
 }, { sequelize: db, timestamps: false, modelName: 'users', underscored: true });
-
-
-// User.associate = (models) => {
-//   User.hasMany(models.Sale, { foreignKey: 'id', as: 'user_id' });
-  // User.hasMany(models.Sale,
-  //   { foreignKey: 'user_id', as: 'sales' },
-  //   { foreignKey: 'seller_id', as: 'sales' }
-  // );
-// };
-
-// Clubs.hasMany(Matchs, {
-//   foreignKey: 'homeTeam',
-//   as: 'homeMatchs',
-// });
-
-// Matchs.belongsTo(Clubs, {
-//   foreignKey: 'homeTeam',
-//   as: 'homeClub',
-// });
 
 export default Users;

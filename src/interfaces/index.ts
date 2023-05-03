@@ -3,6 +3,7 @@ import { Iusers, IusersDTO } from './Iusers';
 import { ILoginDTO } from './Ilogin';
 import { IPayload } from './Ipayload';
 import { IRequest, IReqUsers } from './Irequest';
+import { Isales, IsalesDTO } from './Isales';
 
 export {
   Iproducts,
@@ -12,5 +13,7 @@ export {
   ILoginDTO,
   IPayload,
   IRequest,
-  IReqUsers
+  IReqUsers,
+  Isales,
+  IsalesDTO
 }
