@@ -4,7 +4,6 @@
 
 - [Comentários sobre o projeto](#comentários-sobre-o-projeto)
 - [O que é a Api loja de games?](#o-que-é-a-api-loja-de-games)
-- [Deploy](#deploy)
 - [Tecnologias envolvidas](#tecnologias-envolvidas)
 - [Funcionalidades](#funcionalidades)
 - [Documentação API](#documentação-api)
@@ -31,13 +30,6 @@ procure me através do email: tiago.emanuel.n@gmail.com
 # O que é a Api Loja de Games?
 
 Uma aplicação Back end onde é possível registrar, listar, editar e deletar (fazer o famoso CRUD) de usuários, produtos e vendas relacionadas ao contexto de uma loja virtual de games, a api também possui um sistema de login, encriptação de senha no banco de dados e permite a visualização dos produtos.
-
----
-
-# Deploy
-Acesse https://api-store-game.herokuapp.com/ e veja a API rodando em tempo real em sua máquina.
-
-**obs: tentei fazer o deploy do banco de dados mysql, porém o heroku exige cadastro de cartão de crédito internacional mesmo que seja no plano free, como não tenho cartão de crédito internacional não consegui fazer deploy do banco de dados, até onde pesquisei existiria o serviço da AWS, mas também eu não iria conseguir o deploy do banco de dados, pois existe a mesma exige de cadastro de cartão de crédito internacional mesmo que fosse usar o plano free de deploy do banco de dados. No dia que tiver um cartão de crédito internacional pretendo finalizar essa parte da API**
 
 ---
 
