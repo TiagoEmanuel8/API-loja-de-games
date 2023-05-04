@@ -13,6 +13,7 @@ class SalesRoutes extends CommonRoutesConfig {
 
   configureRoutes() {
     this.router.get('/sales', this.SalesController.getSales);
+    this.router.get('/sales/:id', this.SalesController.getSale);
   }
 }
 

@@ -16,6 +16,17 @@ class SaleService {
     );
     return sales;
   }
+
+  public async getSale(id: number) {
+    const sales =  await this.Sales.findByPk(id,
+      {
+        include: [
+          { model: this.Users, as: 'user_id', attributes: { exclude: ['password'] } }
+        ]
+      }
+    );
+    return sales;
+  }
 }
 
 export { SaleService }
