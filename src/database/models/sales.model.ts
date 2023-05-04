@@ -1,6 +1,8 @@
 import { DataTypes, Model } from 'sequelize';
 import db from './index.model';
 import Users from './users.model';
+import Products from './products.model';
+import SalesProducts from './salesproducts.model';
 
 class Sales extends Model {
   declare id: number;
@@ -25,9 +27,9 @@ Sales.init({
   timestamps: false,
 });
 
-Users.hasMany(Sales, {
+Users.hasMany(Products, {
   foreignKey: 'id',
-  as: 'user_id'
+  as: 'saleId'
 })
 
 Sales.belongsTo(Users, {

@@ -5,16 +5,14 @@ import Products from '../database/models/products.model';
 class SaleService {
   private Sales = Sales;
   private Users = Users;
-  private Products = Products;
 
   public async getSales() {
     const sales =  await this.Sales.findAll(
       {
         include: [
-          { model: this.Users, as: 'user_id', attributes: { exclude: ['password'] } },
-          { model: this.Products, as: 'product', through: { attributes: [] } }
+          { model: this.Users, as: 'user_id', attributes: { exclude: ['password'] } }
         ]
-    }
+      }
     );
     return sales;
   }
