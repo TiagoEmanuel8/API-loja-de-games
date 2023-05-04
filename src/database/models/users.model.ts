@@ -34,25 +34,11 @@ Users.init({
   cep: { type: DataTypes.BIGINT, allowNull: false },
   role: { type: DataTypes.STRING, allowNull: false },
 
-}, { sequelize: db, timestamps: false, modelName: 'users', underscored: true });
-
-
-// User.associate = (models) => {
-//   User.hasMany(models.Sale, { foreignKey: 'id', as: 'user_id' });
-  // User.hasMany(models.Sale,
-  //   { foreignKey: 'user_id', as: 'sales' },
-  //   { foreignKey: 'seller_id', as: 'sales' }
-  // );
-// };
-
-// Clubs.hasMany(Matchs, {
-//   foreignKey: 'homeTeam',
-//   as: 'homeMatchs',
-// });
-
-// Matchs.belongsTo(Clubs, {
-//   foreignKey: 'homeTeam',
-//   as: 'homeClub',
-// });
+}, {
+  sequelize: db,
+  timestamps: false,
+  modelName: 'users',
+  underscored: true
+});
 
 export default Users;

@@ -3,7 +3,8 @@ import * as express from 'express';
 import {
   ProductsRoutes,
   UsersRoutes,
-  LoginRoutes
+  LoginRoutes,
+  SalesRoutes
 } from './routes/index.routes';
 import debug from 'debug';
 import { errorMiddleware } from './middlewares/error.middleware';
@@ -37,6 +38,7 @@ class App {
     this.app.use(new ProductsRoutes().router);
     this.app.use(new UsersRoutes().router);
     this.app.use(new LoginRoutes().router);
+    this.app.use(new SalesRoutes().router);
     this.app.use(errorMiddleware);
   }
 
