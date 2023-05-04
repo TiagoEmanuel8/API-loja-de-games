@@ -1,4 +1,4 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, Sequelize } from 'sequelize';
 import db from './index.model';
 import Products from './products.model';
 import Sales from './sales.model';
@@ -18,57 +18,43 @@ SalesProducts.init({
   },
   saleId: {
     type: DataTypes.INTEGER,
-    // allowNull: false,
-    // references: { model: 'sales', key: 'id' },
-    // onUpdate: 'CASCADE',
-    // onDelete: 'CASCADE',
-    // field: 'sale_id',
-    // foreignKey: true,
+    allowNull: false,
+    references: { model: 'sales', key: 'id' },
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+    field: 'sale_id',
   },
   productId: {
     type: DataTypes.INTEGER,
-    // allowNull: false,
-    // references: { model: 'products', key: 'id' },
-    // onUpdate: 'CASCADE',
-    // onDelete: 'CASCADE',
-    // field: 'product_id',
-    // foreignKey: true,
+    allowNull: false,
+    references: { model: 'products', key: 'id' },
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+    field: 'product_id',
   },
   quantity: DataTypes.INTEGER
 }, {
-  underscored: true,
   sequelize: db,
+  underscored: true,
   modelName: 'salesProducts',
   timestamps: false,
 });
 
-// Products.belongsToMany(Sales, {
-//   as: 'sale',
-//   through: SalesProducts,
-//   foreignKey: 'productId',
-//   otherKey: 'saleId',
-// });
 
-// Sales.belongsToMany(Products, {
-//   as: 'products',
-//   through: SalesProducts,
-//   foreignKey: 'saleId',
-//   otherKey: 'productId',
-// });
-
-
+const associate = () => {
   Products.belongsToMany(Sales, {
-    as: 'sales',
     through: SalesProducts,
     foreignKey: 'productId',
     otherKey: 'saleId',
   });
 
   Sales.belongsToMany(Products, {
-    as: 'products',
     through: SalesProducts,
     foreignKey: 'saleId',
     otherKey: 'productId',
   });
+}
+
+SalesProducts.associate = associate;
 
 export default SalesProducts;

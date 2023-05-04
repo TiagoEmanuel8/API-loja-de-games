@@ -11,6 +11,7 @@ class Sales extends Model {
   declare totalPrice: number;
   declare saleDate: Date;
   declare statusSale: string;
+  static associate: () => void;
 }
 
 Sales.init({
@@ -27,7 +28,8 @@ Sales.init({
   timestamps: false,
 });
 
-Users.hasMany(Products, {
+const associate = () => {
+  Users.hasMany(Sales, {
   foreignKey: 'id',
   as: 'saleId'
 })
@@ -35,6 +37,15 @@ Users.hasMany(Products, {
 Sales.belongsTo(Users, {
   foreignKey: 'userId',
   as: 'user_id'
-})
+});
+
+Sales.belongsToMany(Products, {
+  through: SalesProducts,
+  foreignKey: 'saleId',
+  otherKey: 'productId',
+});
+}
+
+Sales.associate = associate;
 
 export default Sales;
