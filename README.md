@@ -1,5 +1,3 @@
-# O projeto encontra-se em atualização, estou adicionando typescript, nestjs, swagger e docker.
-
 # Boas vindas ao projeto API-loja-de-games
 
 # Sumário
@@ -44,15 +42,16 @@ Acesse https://api-store-game.herokuapp.com/ e veja a API rodando em tempo real 
 ---
 
 # Tecnologias envolvidas:
- - Javascript
+ - Typescript
  - NodeJs
  - Mysql
- - Jest
+ - Mocha
+ - Chai
  - Sequelize
  - Jwt
  - Bcrypt
  - Multer
- - Heroku
+ - Docker
 
 ---
 
