@@ -9,24 +9,40 @@ class SalesController {
     this.SaleService = new SaleService();
     this.getSales = this.getSales.bind(this);
     this.getSale = this.getSale.bind(this);
+    this.createSale = this.createSale.bind(this);
   }
 
   public async getSales(_req: Request, res: Response) {
-    // try {
+    try {
       const sales = await this.SaleService.getSales();
       res.status(StatusCodes.OK).json(sales);
-    // } catch(error) {
-      // console.log(error);
-      // return res.status(500).json({ message: 'internal error' });
-    // }
+    } catch(error) {
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error });
+    }
   }
 
   public async getSale(req: Request, res: Response) {
-    const { id } = req.params;
-    const sales = await this.SaleService.getSale(Number(id));
-    res.status(StatusCodes.OK).json(sales);
+    try {
+      const { id } = req.params;
+      const sales = await this.SaleService.getSale(Number(id));
+      res.status(StatusCodes.OK).json(sales);
+    } catch(error) {
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error });
+    }
+  }
+
+  public async createSale(req: Request, res: Response) {
+    try {
+      const dataSales = req.body;
+      const newSale = await this.SaleService.createSale(dataSales);
+      return res.status(StatusCodes.CREATED).json(newSale);
+    } catch(error) {
+      console.log(error)
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error });
+    }
   }
 
 }
+
 
 export { SalesController };

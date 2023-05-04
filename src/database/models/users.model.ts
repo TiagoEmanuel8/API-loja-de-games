@@ -1,8 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
 import db from './index.model';
-import Sales from './sales.model';
-import Products from './products.model';
-import SalesProducts from './salesproducts.model';
 
 class Users extends Model {
   declare id: number;
@@ -19,7 +16,6 @@ class Users extends Model {
   declare country: string;
   declare cep: number;
   declare role: string;
-  static associate: () => void;
 }
 
 Users.init({
@@ -38,15 +34,11 @@ Users.init({
   cep: { type: DataTypes.BIGINT, allowNull: false },
   role: { type: DataTypes.STRING, allowNull: false },
 
-}, { sequelize: db, timestamps: false, modelName: 'users', underscored: true });
-
-const associate = () => {
-  Users.hasMany(Products, {
-    foreignKey: 'id',
-    as: 'saleId'
-  });
-}
-
-Users.associate = associate;
+}, {
+  sequelize: db,
+  timestamps: false,
+  modelName: 'users',
+  underscored: true
+});
 
 export default Users;

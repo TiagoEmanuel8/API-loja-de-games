@@ -1,6 +1,6 @@
 import { SalesController } from '../controllers/Sales.controller';
 import CommonRoutesConfig from './common.routes.config';
-import { valitadeToken } from '../middlewares/index.middleware';
+// import { valitadeToken } from '../middlewares/index.middleware';
 
 class SalesRoutes extends CommonRoutesConfig {
   private SalesController: SalesController
@@ -14,6 +14,7 @@ class SalesRoutes extends CommonRoutesConfig {
   configureRoutes() {
     this.router.get('/sales', this.SalesController.getSales);
     this.router.get('/sales/:id', this.SalesController.getSale);
+    this.router.post('/sales', this.SalesController.createSale);
   }
 }
 

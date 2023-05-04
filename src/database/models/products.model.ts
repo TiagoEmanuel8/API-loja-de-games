@@ -1,6 +1,6 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import db from './index.model';
-import Sales from './sales.model';
+import Users from './users.model';
 import SalesProducts from './salesproducts.model';
 
 class Products extends Model {
@@ -10,7 +10,6 @@ class Products extends Model {
   declare price: number;
   declare quantity: number;
   declare url_image: string;
-  static associate: () => void;
 }
 
 Products.init({
@@ -26,20 +25,10 @@ Products.init({
   quantity: { type: DataTypes.INTEGER, allowNull: false },
   url_image: { type: DataTypes.STRING, allowNull: true },
 }, {
-  sequelize: db,
   underscored: true,
+  sequelize: db,
   modelName: 'products',
   timestamps: false,
 });
-
-const associate = () => {
-    Products.belongsToMany(Sales, {
-    through: SalesProducts,
-    foreignKey: 'productId',
-    otherKey: 'saleId',
-  });
-}
-
-Products.associate = associate;
 
 export default Products;

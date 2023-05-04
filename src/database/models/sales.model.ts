@@ -2,7 +2,6 @@ import { DataTypes, Model } from 'sequelize';
 import db from './index.model';
 import Users from './users.model';
 import Products from './products.model';
-import SalesProducts from './salesproducts.model';
 
 class Sales extends Model {
   declare id: number;
@@ -11,7 +10,6 @@ class Sales extends Model {
   declare totalPrice: number;
   declare saleDate: Date;
   declare statusSale: string;
-  static associate: () => void;
 }
 
 Sales.init({
@@ -28,8 +26,7 @@ Sales.init({
   timestamps: false,
 });
 
-const associate = () => {
-  Users.hasMany(Sales, {
+Users.hasMany(Products, {
   foreignKey: 'id',
   as: 'saleId'
 })
@@ -37,15 +34,6 @@ const associate = () => {
 Sales.belongsTo(Users, {
   foreignKey: 'userId',
   as: 'user_id'
-});
-
-Sales.belongsToMany(Products, {
-  through: SalesProducts,
-  foreignKey: 'saleId',
-  otherKey: 'productId',
-});
-}
-
-Sales.associate = associate;
+})
 
 export default Sales;
