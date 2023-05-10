@@ -1,14 +1,21 @@
+# docker-compose up -d && docker exec -it api_store bash
+# docker-compose down --rmi local --volumes --remove-orphans
+
 version: '3.9'
 services:
-  backend:
+  node:
+    image: node:16.14
+    container_name: api_store
     build: ./
-    container_name: api-store
-    # command: npm run dev
-    restart: 'on-failure'
-    # restart: 'always'
+    tty: true
+    stdin_open: true
+    command: bash
+    restart: always
+    working_dir: /app
+    volumes:
+      - ./:/app
     ports:
       - 3001:3001
-    # ...
     depends_on:
       db:
         condition: service_healthy
@@ -20,22 +27,27 @@ services:
       - DB_NAME=app-storeGame
       - DB_PORT=3306
     healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3001"] # Caso utilize outra porta interna para o back, altere ela aqui também
+      test: ["CMD", "lsof", "-t", "-i:3001"]
       timeout: 10s
       retries: 5
+
   db:
     image: mysql:8.0.21
     container_name: db
+    volumes:
+      - ./:/app
     ports:
-      - 3002:3306
+      - 3003:3306
     environment:
       - MYSQL_ROOT_PASSWORD=123456
-    restart: 'on-failure'
-    # restart: 'always'
-
+    restart: 'always'
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"] # Deve aguardar o banco ficar operacional
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 10s
       retries: 5
     cap_add:
       - SYS_NICE
+
+networks:
+  default:
+    name: game_store_net
