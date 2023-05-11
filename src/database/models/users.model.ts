@@ -33,7 +33,6 @@ Users.init({
   country: { type: DataTypes.STRING, allowNull: false },
   cep: { type: DataTypes.BIGINT, allowNull: false },
   role: { type: DataTypes.STRING, allowNull: false },
-
 }, {
   sequelize: db,
   timestamps: false,
