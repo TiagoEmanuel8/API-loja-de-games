@@ -11,6 +11,8 @@ class ProductService {
   }
 
   public async getProduct(id: number): Promise<Iproducts | null> {
+    console.log(id)
+    console.log(typeof id)
     const product = await this.Products.findOne({ where: { id }});
     if (!product) {
       throw new NotFound('Product not found');

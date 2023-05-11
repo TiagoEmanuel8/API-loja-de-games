@@ -1,0 +1,192 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Game Store",
+    "description": "Documentação geral para entender o comportamento da API",
+    "contact": { "email": "tiago.emanuel.n@gmail.com" },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001",
+      "description": "Documentação com a api rodando localmente"
+    },
+    {
+      "url": "http://localhost:3001",
+      "description": "Documentação com a api rodando em produção"
+    }
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "summary": "Login no sistema",
+        "description": "Essa rota é responsável pelo login de usuário no sistema",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              },
+              "examples": {
+                "login": {
+                  "value": {
+                    "email": "reginastellabarbosa_@gmail.com",
+                    "password": "p9iBFXc3wf"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {}
+      }
+    },
+    "/products": {
+      "post": {
+        "summary": "Cadastro de produto",
+        "description": "Essa rota é responsável por cadastrar um novo produto",
+        "tags": ["Products"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              },
+              "examples": {
+                "product": {
+                  "value": {
+                    "name": "Elden Ring",
+                    "type": "Playstation 5",
+                    "price": 200,
+                    "quantity": 50
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": { "description": "the fields 'name', 'type', 'price' need to be filled" },
+          "403": { "description": "Only admins or sellers can create products" },
+          "404": { "description": "Token not found" },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": "#/components/schemas/CreatedProduct"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "description": "Busca de um produto",
+        "summary": "Busca de um produto pelo id",
+        "tags": ["Products"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "busca do produto por id",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": "#/components/schemas/findProduct"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "put": {
+      "description": "Alterar um produto pelo id",
+      "summary": "Altera o produto pelo id",
+      "tags": ["Products"],
+      "security": [{ "bearerAuth": [] }],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Nome do produto pelo ID",
+          "required": true
+        }
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Product"
+            },
+            "examples": {
+              "product": {
+                "value": {
+                  "name": "Elden Ring GOTY",
+                  "type": "Playstation 5",
+                  "price": 250,
+                  "quantity": 50
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {}
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Login": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+      "CreatedProduct": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "price": { "type": "integer" },
+          "quantity": { "type": "integer" }
+        }
+      },
+      "findProduct": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "price": { "type": "integer" },
+          "quantity": { "type": "integer" },
+          "url_image": { "type": "string" }
+        }
+      }
+    },
+
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
