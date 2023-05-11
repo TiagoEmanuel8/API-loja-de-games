@@ -11,5 +11,3 @@ RUN ["npm", "i"]
 COPY . .
 
 CMD ["npm", "run", "dev"]
-
-RUN chown -R node:node /root/.npm
