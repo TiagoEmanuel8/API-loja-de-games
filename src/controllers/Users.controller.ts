@@ -37,7 +37,7 @@ class UsersController {
     try {
       const dataUser = req.body;
       const user = await this.UserService.createUser(dataUser);
-      res.status(StatusCodes.OK).json(user)
+      res.status(StatusCodes.CREATED).json(user)
     } catch (error) {
       next(console.log(error));
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error });

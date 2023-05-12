@@ -50,7 +50,7 @@ describe('Testing the product routes', () => {
       .set('authorization', mockTokenAdm)
       .send(newProduct)
       .then((res) => {
-        expect(res.status).to.be.equal(200);
+        expect(res.status).to.be.equal(201);
       }) as Response;
     });
 

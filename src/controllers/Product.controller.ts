@@ -36,7 +36,7 @@ class ProductsController {
 
     try {
       const product = await this.ProductService.createProduct(createProduct, dataUserReq);
-      res.status(StatusCodes.OK).json(product);
+      res.status(StatusCodes.CREATED).json(product);
     } catch (error) {
       next(error);
     }
