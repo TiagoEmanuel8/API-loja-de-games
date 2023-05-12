@@ -11,8 +11,6 @@ class ProductService {
   }
 
   public async getProduct(id: number): Promise<Iproducts | null> {
-    console.log(id)
-    console.log(typeof id)
     const product = await this.Products.findOne({ where: { id }});
     if (!product) {
       throw new NotFound('Product not found');
@@ -44,7 +42,7 @@ class ProductService {
     const { name, type, price, quantity } = dataProduct;
 
     if (dataUserReq.role === 'client') {
-      throw new Forbidden('Only admins or sellers can create products');
+      throw new Forbidden('Only admins or sellers can updated products');
     };
   
     const product = await this.Products.findOne({ where: { id }});
