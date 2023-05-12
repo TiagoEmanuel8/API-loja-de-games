@@ -20,16 +20,190 @@
     }
   ],
   "paths": {
-    "/login": {
+    "/users": {
+      "get": {
+        "description": "Exibe Usuários",
+        "summary": "Exibe todos os usuários cadastrados no sistema",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "401": { "description": "Invalid token" },
+          "403": { "description": "Only admins or sellers can list users" },
+          "404": { "description": "Token not found" },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/components/schemas/findUser"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
-        "summary": "Login no sistema",
-        "description": "Essa rota é responsável pelo login de usuário no sistema",
+        "summary": "Cadastro de novos usuários",
+        "description": "Cadastrar novos usuários",
         "tags": ["Users"],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Login"
+                "$ref": "#/components/schemas/createUser"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Paulo Kaique da Cunha",
+                    "email": "paulokaiquedc@gmail.com.br",
+                    "password": "4Pfcqz4OC",
+                    "cpf": 96470365582,
+                    "mobile_number": 95994540894,
+                    "address": "Rua Nova Geração",
+                    "address_number": 189,
+                    "district": "Kaikan Sul",
+                    "city": "Teixeira de Freitas",
+                    "state": "BA",
+                    "country": "BR",
+                    "cep": 69315325,
+                    "role": "seller"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": { "description": "User already registered" },
+          "401-B": { "description": "password must contain between 6 and 10 characters" },
+          "401-C": { "description": "'email' must be a valid email" },
+          "401-D": { "description": "Invalid token" },
+          "404": { "description": "Token not found" },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/findUser"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "description": "Exibe um usuário",
+        "summary": "Exibe um usuário pelo seu id",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "busca do usuário por id",
+          "required": true
+        }],
+        "responses": {
+          "401": { "description": "Invalid token" },
+          "404": { "description": "User not found" },
+          "404-B": { "description": "Token not found" },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/findUser"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Altera o usuário pelo id",
+        "summary": "Altera o usuário pelo seu id",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Atualiza dadaos de usuário pelo ID",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/findUser",
+                "example": 4
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "email": "alexandremdc@gmail.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": { "description": "the fields 'name', 'type', 'price' need to be filled" },
+          "401": { "description": "Invalid token" },
+          "403": { "description": "Only admins or sellers can updated products" },
+          "404": { "description": "Product not found" },
+          "404-B": { "description": "Token not found" },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/findUser"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta um usuário",
+        "summary": "Deletar um usuário pelo seu id",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "description": "Id do usuário a ser deletado",
+          "required": true
+        }],
+        "responses": {
+          "401": { "description": "Unauthorized user" },
+          "401-B": { "description": "Invalid token" },
+          "404": { "description": "User not found" },
+          "404-B": { "description": "Token not found" },
+          "204": { "description": "" }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Login no sistema",
+        "description": "login de usuário no sistema",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/login"
               },
               "examples": {
                 "login": {
@@ -42,7 +216,20 @@
             }
           }
         },
-        "responses": {}
+        "responses": {
+          "401": { "description": "Incorrect email or password" },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/logged"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/products": {
@@ -55,7 +242,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreatedProduct"
+                "$ref": "#/components/schemas/createdProduct"
               },
               "examples": {
                 "product": {
@@ -72,6 +259,7 @@
         },
         "responses": {
           "400": { "description": "the fields 'name', 'type', 'price' need to be filled" },
+          "401": { "description": "Invalid token" },
           "403": { "description": "Only admins or sellers can create products" },
           "404": { "description": "Token not found" },
           "200": {
@@ -80,7 +268,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/CreatedProduct"
+                  "$ref": "#/components/schemas/findProduct"
                 }
               }
             }
@@ -108,16 +296,14 @@
     },
     "/products/{id}": {
       "get": {
-        "description": "Busca de um produto",
-        "summary": "Busca de um produto pelo id",
+        "description": "Busca um produto",
+        "summary": "Busca de um produto pelo seu id",
         "tags": ["Products"],
         "parameters": [{
           "name": "id",
           "in": "path",
           "description": "busca do produto por id",
-          "required": true,
-          "type": "integer",
-          "format": "int64"
+          "required": true
         }],
         "responses": {
           "404": { "description": "Product not found" },
@@ -127,7 +313,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "items": "#/components/schemas/findProduct"
+                  "$ref": "#/components/schemas/findProduct"
                 }
               }
             }
@@ -135,8 +321,8 @@
         }
       },
       "patch": {
-        "description": "Alterar o produto pelo id",
-        "summary": "Altera o produto pelo id",
+        "description": "Altera o produto pelo id",
+        "summary": "Altera o produto pelo seu id",
         "tags": ["Products"],
         "security": [{ "bearerAuth": [] }],
         "parameters": [
@@ -152,7 +338,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "items": "#/components/schemas/CreatedProduct"
+                "$ref": "#/components/schemas/createdProduct"
               },
               "examples": {
                 "product": {
@@ -169,15 +355,17 @@
         },
         "responses": {
           "400": { "description": "the fields 'name', 'type', 'price' need to be filled" },
+          "401": { "description": "Invalid token" },
           "403": { "description": "Only admins or sellers can updated products" },
           "404": { "description": "Product not found" },
+          "404-B": { "description": "Token not found" },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "items": "#/components/schemas/findProduct"
+                  "$ref": "#/components/schemas/findProduct"
                 }
               }
             }
@@ -185,8 +373,8 @@
         }
       },
       "delete": {
-        "description": "Deletar um produto",
-        "summary": "Deleta um produto pelo id",
+        "description": "Deleta um produto",
+        "summary": "Deletar um produto pelo seu id",
         "tags": ["Products"],
         "security": [{ "bearerAuth": [] }],
         "parameters": [{
@@ -196,8 +384,10 @@
           "required": true
         }],
         "responses": {
+          "401": { "description": "Invalid token" },
           "403": { "description": "Only admins or sellers can delete products" },
           "404": { "description": "Product not found" },
+          "404-B": { "description": "Token not found" },
           "204": { "description": "" }
         }
       }
@@ -205,14 +395,59 @@
   },
   "components": {
     "schemas": {
-      "Login": {
+      "findUser": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "name": { "type": "string" },
+          "email": { "type": "string" },
+          "cpf": { "type": "integer" },
+          "mobileNumber": { "type": "integer" },
+          "address": { "type": "string" },
+          "addressNumber": { "type": "integer" },
+          "district": { "type": "string" },
+          "city": { "type": "string" },
+          "state": { "type": "string" },
+          "country": { "type": "string" },
+          "cep": { "type": "integer" },
+          "role": { "type": "string" }
+        }
+      },
+      "createUser": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "email": { "type": "string" },
+          "cpf": { "type": "integer" },
+          "mobileNumber": { "type": "integer" },
+          "address": { "type": "string" },
+          "addressNumber": { "type": "integer" },
+          "district": { "type": "string" },
+          "city": { "type": "string" },
+          "state": { "type": "string" },
+          "country": { "type": "string" },
+          "cep": { "type": "integer" },
+          "role": { "type": "string" }
+        }
+      },
+      "login": {
         "type": "object",
         "properties": {
           "email": { "type": "string" },
           "password": { "type": "string" }
         }
       },
-      "CreatedProduct": {
+      "logged": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "name": { "type": "string" },
+          "email": { "type": "string" },
+          "role": { "type": "string" },
+          "token": { "type": "string" }
+        }
+      },
+      "createdProduct": {
         "type": "object",
         "properties": {
           "name": { "type": "string" },

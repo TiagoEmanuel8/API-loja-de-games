@@ -86,6 +86,10 @@ class UserService {
       throw new NotFound('User not found');
     }
 
+    if(Number(userById.id) !== Number(dataUserReq.id)) {
+      throw new Unauthorized('Unauthorized user');
+    };
+
     await this.Users.destroy({ where: { id } });
     return true;
   }

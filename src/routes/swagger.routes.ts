@@ -1,6 +1,4 @@
 import CommonRoutesConfig from './common.routes.config';
-import * as swaggerUi from 'swagger-ui-express';
-const swaggerDocument = require('../docs/swagger.json');
 
 class SwaggerRoutes extends CommonRoutesConfig {
   constructor() {
