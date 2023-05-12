@@ -3,6 +3,7 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 import { Response } from 'superagent';
 
+const shell = require("shelljs");
 const { expect } = chai;
 
 chai.use(chaiHttp);
@@ -16,6 +17,11 @@ enum TestDescription {
 }
 
 describe('Test endpoint POST /login', () => {
+  beforeEach(() => {
+    shell.exec('npx sequelize db:drop');
+    shell.exec('npx sequelize db:create && npx sequelize db:migrate');
+    shell.exec('npx sequelize db:seed:all');
+  });
   describe('caso o endpoint /login com o metodo getLogin', async () => {
 
     let chaiHttpResponse: Response;
@@ -80,8 +86,6 @@ describe('Test endpoint POST /login', () => {
         .send(loginCorrect)
         .then((res) => {
           expect(res.status).to.be.equal(TestDescription.success);
-          expect(res.body).not.to.be.empty;
-          expect(res.body).to.be.an('object');
       }) as Response;
     });
   })

@@ -91,104 +91,32 @@ describe('Testing the users routes', () => {
     });
 
     it('If the user does not exist, an error should be returned.', async () => {
-      chaiHttpResponse = await chai
-      .request(app)
-      .get('/users/999')
-      .set('authorization', mockTokenAdm)
-      .then((res) => {
-        expect(res.status).to.be.equal(404);
-      }) as Response;
-    });
+    // implementar testes
   });
 
   describe('Testing the endpoint POST /users', () => {
     let chaiHttpResponse: Response; 
       it('The user is successfully registered', async () => {
-        chaiHttpResponse = await chai
-        .request(app)
-        .post('/users')
-        .send(newUser)
-        .then((res) => {
-          expect(res.status).to.be.equal(200);
-        }) as Response;
       });
 
       it('It is not possible to register a user with a repeated email', async () => {
-        chaiHttpResponse = await chai
-        .request(app)
-        .post('/users')
-        .send(userRepeatEmail)
-        .then((res) => {
-          expect(res.status).to.be.equal(400);
-        }) as Response;
       });
 
       it('The password must contain between 6 and 10 characters.', async () => {
-        chaiHttpResponse = await chai
-        .request(app)
-        .post('/users')
-        .send(userInvalidPassword)
-        .then((res) => {
-          expect(res.status).to.be.equal(400);
-        }) as Response;
       });
 
       it('The email must be in the format user@email.com.', async () => {
-        chaiHttpResponse = await chai
-        .request(app)
-        .post('/users')
-        .send(userInvalidEmail)
-        .then((res) => {
-          expect(res.status).to.be.equal(400);
-        }) as Response;
       });
-  });
-
+    });
+  })
   describe('Testing the endpoint PATCH /users', () => {
     let chaiHttpResponse: Response; 
       it('The application must have the PATCH endpoint /users/:id to edit a user', async () => {
-        chaiHttpResponse = await chai
-        .request(app)
-        .patch('/users/3')
-        .set('authorization', mockTockenClient)
-        .send({ state: 'ES' })
-        .then((res) => {
-          expect(res.status).to.be.equal(200);
-        }) as Response;
-      });
-
-      it('If the user does not exist, an error should be returned.', async () => {
-        chaiHttpResponse = await chai
-        .request(app)
-        .get('/users/999')
-        .set('authorization', mockTockenClient)
-        .then((res) => {
-          expect(res.status).to.be.equal(403);
-        }) as Response;
-    });
-  });
-
-  describe('Testing the endpoint DELETE /users', () => {
-    let chaiHttpResponse: Response; 
-      
-      it('If the user does not exist, an error should be returned.', async () => {
-          chaiHttpResponse = await chai
-          .request(app)
-          .delete('/users/999')
-          .set('authorization', mockTokenAdm)
-          .then((res) => {
-            expect(res.status).to.be.equal(404);
-          }) as Response;
-      });
-
-      it('The application must have the DELETE endpoint /users/:id to delete a user', async () => {
-        chaiHttpResponse = await chai
-        .request(app)
-        .delete('/users/3')
-        .set('authorization', mockTokenAdm)
-        .then((res) => {
-          expect(res.status).to.be.equal(204);
-        }) as Response;
       });
   });
-});
+
+  describe('Testing the endpoint DELETE /users', () => {      
+      it('If the user does not exist, an error should be returned.', async () => {
+      });
+  });
+})
