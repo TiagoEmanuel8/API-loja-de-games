@@ -22,8 +22,8 @@
   "paths": {
     "/users": {
       "get": {
-        "description": "Exibe Usuários",
-        "summary": "Exibe todos os usuários cadastrados no sistema",
+        "description": "Exibe todos os usuários cadastrados no sistema",
+        "summary": "Listar usuários",
         "tags": ["Users"],
         "security": [{ "bearerAuth": [] }],
         "responses": {
@@ -44,8 +44,8 @@
         }
       },
       "post": {
-        "summary": "Cadastro de novos usuários",
-        "description": "Cadastrar novos usuários",
+        "summary": "Cadastrar novo usuário",
+        "description": "Cadastrar novos usuários no sistema",
         "tags": ["Users"],
         "requestBody": {
           "content": {
@@ -97,8 +97,8 @@
     },
     "/users/{id}": {
       "get": {
-        "description": "Exibe um usuário",
-        "summary": "Exibe um usuário pelo seu id",
+        "description": "Lista um usuário pelo seu id",
+        "summary": "Listar um usuário pelo seu id",
         "tags": ["Users"],
         "security": [{ "bearerAuth": [] }],
         "parameters": [{
@@ -125,8 +125,8 @@
         }
       },
       "patch": {
-        "description": "Altera o usuário pelo id",
-        "summary": "Altera o usuário pelo seu id",
+        "description": "Altera o usuário pelo seu id",
+        "summary": "Alterar dados de usuário",
         "tags": ["Users"],
         "security": [{ "bearerAuth": [] }],
         "parameters": [
@@ -175,8 +175,8 @@
         }
       },
       "delete": {
-        "description": "Deleta um usuário",
-        "summary": "Deletar um usuário pelo seu id",
+        "description": "Deleta um usuário pelo seu id",
+        "summary": "Deletar um usuário",
         "tags": ["Users"],
         "security": [{ "bearerAuth": [] }],
         "parameters": [{
@@ -196,9 +196,9 @@
     },
     "/login": {
       "post": {
-        "summary": "Login no sistema",
+        "summary": "Login",
         "description": "login de usuário no sistema",
-        "tags": ["Users"],
+        "tags": ["Login"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -234,7 +234,7 @@
     },
     "/products": {
       "post": {
-        "summary": "Cadastro de produto",
+        "summary": "Cadastrar novo produto",
         "description": "Essa rota é responsável por cadastrar um novo produto",
         "tags": ["Products"],
         "security": [{ "bearerAuth": [] }],
@@ -276,8 +276,8 @@
         }
       },
       "get": {
-        "description": "Exibe produtos",
-        "summary": "Exibe todos os produtos cadastrados",
+        "summary": "Listar produtos",
+        "description": "Listar todos os produtos cadastrados",
         "tags": ["Products"],
         "responses": {
           "200": {
@@ -296,8 +296,8 @@
     },
     "/products/{id}": {
       "get": {
-        "description": "Busca um produto",
-        "summary": "Busca de um produto pelo seu id",
+        "summary": "Listar produto",
+        "description": "Listar um produto pelo seu id",
         "tags": ["Products"],
         "parameters": [{
           "name": "id",
@@ -321,8 +321,8 @@
         }
       },
       "patch": {
-        "description": "Altera o produto pelo id",
-        "summary": "Altera o produto pelo seu id",
+        "summary": "Alterar dados do produto",
+        "description": "Alterar dados do produto pelo id",
         "tags": ["Products"],
         "security": [{ "bearerAuth": [] }],
         "parameters": [
@@ -373,8 +373,8 @@
         }
       },
       "delete": {
-        "description": "Deleta um produto",
-        "summary": "Deletar um produto pelo seu id",
+        "description": "Deletar um produto pelo seu id",
+        "summary": "Deletar um produto",
         "tags": ["Products"],
         "security": [{ "bearerAuth": [] }],
         "parameters": [{
@@ -389,6 +389,94 @@
           "404": { "description": "Product not found" },
           "404-B": { "description": "Token not found" },
           "204": { "description": "" }
+        }
+      }
+    },
+    "/sales": {
+      "post": {
+        "summary": "Criar novas vendas",
+        "description": "Criar novas vendas",
+        "tags": ["Sales"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createSale"
+              },
+              "examples": {
+                "sale": {
+                    "value": {
+                      "userId": 3,
+                      "sellerId": 2,
+                      "totalPrice": 150,
+                      "statusSale": "pedido enviado",
+                      "products": {
+                        "productId": 4,
+                        "quantity": 1
+                      }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/createSale"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Exibe todas as vendas",
+        "summary": "Exibir todas as vendas",
+        "tags": ["Sales"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/components/schemas/findSale"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sales/{id}": {
+      "get": {
+        "description": "Exibe uma venda pelo seu id",
+        "summary": "Exibir uma venda",
+        "tags": ["Sales"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "busca de vendas por id",
+          "required": true
+        }],
+        "responses": {
+          "404": { "description": "Sale not found" },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/findSale"
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -466,9 +554,53 @@
           "quantity": { "type": "integer" },
           "url_image": { "type": "string" }
         }
+      },
+      "createSale": {
+        "type": "object",
+        "properties": {
+          "userId": { "type": "integer" },
+          "sellerId": { "type": "integer" },
+          "totalPrice": { "type": "integer" },
+          "statusSale": { "type": "string" },
+          "products": {
+            "type": "object",
+            "properties": {
+              "productId": { "type": "integer" },
+              "quantity": { "type": "integer" }
+            }
+          }
+        }
+      },
+      "findSale": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "userId": { "type": "integer" },
+          "sellerId": { "type": "integer" },
+          "totalPrice": { "type": "integer" },
+          "saleDate": {  "type": "string", "format": "date-time" },
+          "statusSale": { "type": "string" },
+          "user_id": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "integer" },
+              "name": { "type": "string" },
+              "email": { "type": "string" },
+              "cpf": { "type": "integer" },
+              "mobileNumber": { "type": "integer" },
+              "address": { "type": "string" },
+              "addressNumber": { "type": "integer" },
+              "district": { "type": "string" },
+              "city": { "type": "string" },
+              "state": { "type": "string" },
+              "country": { "type": "string" },
+              "cep": { "type": "integer" },
+              "role": { "type": "string" }
+            }
+          }
+        }
       }
     },
-
     "securitySchemes": {
       "bearerAuth": {
         "description": "Autenticação utilizando o token JWT",

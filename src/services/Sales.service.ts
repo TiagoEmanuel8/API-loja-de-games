@@ -1,6 +1,7 @@
 import Sales from '../database/models/sales.model';
 import Users from '../database/models/users.model';
 import Products from '../database/models/products.model';
+import { NotFound } from '../errors/index.error';
 // import SalesProducts from '../database/models/salesproducts.model';
 
 
@@ -23,23 +24,28 @@ class SaleService {
   }
 
   public async getSale(id: number) {
-    const sales =  await this.Sales.findByPk(id,
+    const sale =  await this.Sales.findByPk(id,
       {
         include: [
           { model: this.Users, as: 'user_id', attributes: { exclude: ['password'] } }
         ]
       }
     );
-    return sales;
+
+    if (!sale) {
+      throw new NotFound('Sale not found');
+    }
+  
+    return sale;
   }
 
-    public async createSale(dataSales: any) {
-      const { userId, sellerId, totalPrice, statusSale  } = dataSales;
+  public async createSale(dataSales: any) {
+    const { userId, sellerId, totalPrice, statusSale  } = dataSales;
 
-      const addSale = await this.Sales.create({ userId, sellerId, totalPrice, statusSale });
+    const addSale = await this.Sales.create({ userId, sellerId, totalPrice, statusSale });
 
-      return addSale;
-    }
+    return addSale;
+  }
 }
 
 export { SaleService }
