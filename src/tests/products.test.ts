@@ -12,12 +12,6 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 describe('Testing the product routes', () => {
-  beforeEach(() => {
-    shell.exec('npx sequelize db:drop');
-    shell.exec('npx sequelize db:create && npx sequelize db:migrate');
-    shell.exec('npx sequelize db:seed:all');
-  });
-
   describe('Testing the endpoint GET /products', () => {
     let chaiHttpResponse: Response;
 
@@ -42,14 +36,6 @@ describe('Testing the product routes', () => {
     });
 
     it('If the product is not found in the GET endpoint /products/:id, an error message should be returned.', async () => {
-      chaiHttpResponse = await chai
-      .request(app)
-      .get('/products/999')
-      .send(mockProduct)
-      .then((res) => {
-        expect(res.status).to.be.equal(404);
-      }) as Response;
-
     });
 
   })

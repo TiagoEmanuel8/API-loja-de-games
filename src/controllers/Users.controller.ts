@@ -39,7 +39,8 @@ class UsersController {
       const user = await this.UserService.createUser(dataUser);
       res.status(StatusCodes.OK).json(user)
     } catch (error) {
-      next(error);
+      next(console.log(error));
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error });
     }
   }
 
@@ -52,7 +53,8 @@ class UsersController {
       const user = await this.UserService.editUser(Number(id), dataUser, dataUserReq);
       res.status(StatusCodes.OK).json(user)
     } catch (error) {
-      next(error);
+      next(console.log(error));
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error });
     }
   }
 
@@ -64,7 +66,8 @@ class UsersController {
       const user = await this.UserService.excludeUser(Number(id), dataUserReq);
       res.status(StatusCodes.NO_CONTENT).json(user)
     } catch (error) {
-      next(error);
+      next(console.log(error));
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error });
     }
   }
 }

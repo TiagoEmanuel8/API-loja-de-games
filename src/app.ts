@@ -4,7 +4,9 @@ import {
   ProductsRoutes,
   UsersRoutes,
   LoginRoutes,
-  SalesRoutes
+  SalesRoutes,
+  DocsRoutes,
+  SwaggerRoutes
 } from './routes/index.routes';
 import debug from 'debug';
 import { errorMiddleware } from './middlewares/error.middleware';
@@ -35,6 +37,8 @@ class App {
   }
 
   routesConfig() {
+    this.app.use(new SwaggerRoutes().router);
+    this.app.use(new DocsRoutes().router);
     this.app.use(new ProductsRoutes().router);
     this.app.use(new UsersRoutes().router);
     this.app.use(new LoginRoutes().router);

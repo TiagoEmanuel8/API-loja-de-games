@@ -1,6 +1,6 @@
 const newUser = {
 	name: 'Bruna Almada',
-  email: 'bruna2@hotmail.com.br',
+  email: 'bruna.2@hotmail.com.br',
   password: 'p2GImGg',
   cpf: 96470365582,
   mobile_number: 95994540894,

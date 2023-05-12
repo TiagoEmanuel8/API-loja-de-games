@@ -42,7 +42,7 @@ class ProductService {
     const { name, type, price, quantity } = dataProduct;
 
     if (dataUserReq.role === 'client') {
-      throw new Forbidden('Only admins or sellers can create products');
+      throw new Forbidden('Only admins or sellers can updated products');
     };
   
     const product = await this.Products.findOne({ where: { id }});

@@ -22,13 +22,9 @@ class SalesController {
   }
 
   public async getSale(req: Request, res: Response) {
-    try {
       const { id } = req.params;
       const sales = await this.SaleService.getSale(Number(id));
       res.status(StatusCodes.OK).json(sales);
-    } catch(error) {
-      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error });
-    }
   }
 
   public async createSale(req: Request, res: Response) {
