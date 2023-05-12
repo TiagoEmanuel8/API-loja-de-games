@@ -26,7 +26,7 @@ module.exports = {
         {
           id: 2,
           name: "Regina Stella Barbosa",
-          email: "reginastellabarbosa_@gmail.com",
+          email: "reginastellabarbosa@gmail.com",
           password:
             "$2a$10$gzJJXz9uIk0zCFR7tTLODO/QfMhq5LJTU0JqPQkDX/UeJx9CtkT9W", //senha: p9iBFXc3wf
           cpf: 56318473025,
