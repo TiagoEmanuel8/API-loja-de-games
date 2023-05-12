@@ -9,7 +9,7 @@ class DocsRoutes extends CommonRoutesConfig {
   }
 
   configureRoutes() {
-      this.router.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+      this.router.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   }
 }
 

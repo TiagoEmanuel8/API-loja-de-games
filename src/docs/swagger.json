@@ -4,7 +4,10 @@
     "title": "API Game Store",
     "description": "Documentação geral para entender o comportamento da API game store",
     "contact": { "email": "tiago.emanuel.n@gmail.com" },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-logo": {
+      "url": "https://www.logolynx.com/images/logolynx/d3/d3287bc5c651f738e1df7f42ac9f97c0.jpeg"
+    }
   },
   "servers": [
     {
