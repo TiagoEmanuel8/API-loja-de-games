@@ -8,7 +8,6 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-
 enum TestDescription {
   unauthorizedError = 401,
   success = 200,
@@ -22,7 +21,6 @@ describe('Test endpoint POST /login', () => {
     shell.exec('npx sequelize db:create && npx sequelize db:migrate');
     shell.exec('npx sequelize db:seed:all');
   });
-  describe('caso o endpoint /login com o metodo getLogin', async () => {
 
     let chaiHttpResponse: Response;
 
@@ -89,4 +87,3 @@ describe('Test endpoint POST /login', () => {
       }) as Response;
     });
   })
-})
