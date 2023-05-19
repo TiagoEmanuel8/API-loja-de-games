@@ -15,7 +15,7 @@
       "description": "Documentação com a api rodando localmente"
     },
     {
-      "url": "https://gamestore.up.railway.app/docs",
+      "url": "https://gamestore.up.railway.app",
       "description": "Documentação com a api rodando em produção"
     }
   ],
