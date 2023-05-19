@@ -4,7 +4,8 @@
   "description": "# Boas vindas ao projeto API-loja-de-games",
   "main": "./build/server.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run copy-swagger",
+    "copy-swagger": "node -e \"require('fs-extra').copySync('src/docs/swagger.json', 'build/docs/swagger.json')\"",
     "dev": "tsc && ts-node ./src/server.ts",
     "nodemon": "nodemon --watch \"./src/**\" --ext \"ts,js\" --ignore \"src/**/*.spec.ts,src/**/*.json\" --exec \"ts-node src/server.ts\"",
     "start": "node .",
@@ -50,6 +51,7 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-mocha": "^10.1.0",
     "eslint-plugin-sonarjs": "^0.19.0",
+    "fs-extra": "^11.1.1",
     "nodemon": "^2.0.22",
     "sequelize-cli": "^6.6.0",
     "ts-node": "^10.9.1",
