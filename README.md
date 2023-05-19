@@ -1,5 +1,5 @@
 
-# Boas vindas ao projeto API loja de games
+# Boas vindas ao projeto API loja de games.
 
 # Sumário
 
