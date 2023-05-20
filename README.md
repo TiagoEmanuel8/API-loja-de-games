@@ -39,17 +39,21 @@ Uma aplicação Back end onde é possível registrar, listar, editar e deletar (
 # Tecnologias envolvidas:
 <div>
   <a href="https://www.typescriptlang.org/">
-    <img src="https://img.shields.io/badge/typescript-339933?style=for-the-badge&logo=typescript&color=gray" />
+    	<img src="https://img.shields.io/badge/typescript-339933?style=for-the-badge&logo=typescript&color=gray" />
   </a>
   <a href="https://javascript.info/">
-    <img src="https://img.shields.io/badge/javascript-339933?style=for-the-badge&logo=javascript&color=gray" />
+    	<img src="https://img.shields.io/badge/javascript-339933?style=for-the-badge&logo=javascript&color=gray" />
   </a>
-    <a href="https://www.docker.com/">
-    <img src="https://img.shields.io/badge/docker-339933?style=for-the-badge&logo=docker&color=gray" />  </a>
-    <a href="https://docs.npmjs.com/">
-  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&color=gray" />
+  <a href="https://docs.npmjs.com/">
+  	<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&color=gray" />
   </a>
-    <a href="https://expressjs.com/pt-br/">
+  <a href="https://www.docker.com/">
+	<img src="https://img.shields.io/badge/docker-339933?style=for-the-badge&logo=docker&color=gray" />
+  </a>
+  <a href="https://railway.app/">
+  	<img src="https://img.shields.io/badge/railway-339933?style=for-the-badge&logo=railway&color=gray" />
+  </a>
+  <a href="https://pt.wikipedia.org/wiki/Programa%C3%A7%C3%A3o_orientada_a_objetos">
     <img src="https://img.shields.io/badge/Poo-339933?style=for-the-badge&logo=Poo&color=gray" /> 
   </a>
   <a href="https://expressjs.com/pt-br/">
@@ -99,7 +103,9 @@ Uma aplicação Back end onde é possível registrar, listar, editar e deletar (
 ---
 # Deploy
 
-Acesse site.com e use a aplicação em tempo real em sua máquina
+Acesse [gamestore.up.railway.app/docs](https://gamestore.up.railway.app/docs) e use a aplicação em tempo real em sua máquina
+
+Para usar em uma aplicação frontend basta utilizar a url [gamestore.up.railway.app](https://gamestore.up.railway.app) 
 
 ---
 
